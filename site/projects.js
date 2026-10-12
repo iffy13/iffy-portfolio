@@ -11,8 +11,8 @@
 window.CATEGORIES = [
   { id: "agents",     title: "AI Agents",            meta: "LLM agents · Chatbots · Receptionists", blurb: "Assistants that answer customers, research, write and take action in your tools." },
   { id: "automation", title: "AI Automation",        meta: "n8n · Zapier · APIs",                    blurb: "Workflows that create content, move data and publish on autopilot." },
-  { id: "video",      title: "AI Video",             meta: "Shorts · Ads · Trailers",              blurb: "Scroll-stopping video made with AI generation and editing." },
-  { id: "3d",         title: "3D Design & Renders", meta: "Product design · Characters · Renders", blurb: "Product enclosures, stylised characters and photoreal renders." },
+  { id: "video",      title: "AI Video & Animation", meta: "UGC ads · Product spots · Shorts",    blurb: "Scroll-stopping ads and animated stories made with AI generation and editing." },
+  { id: "3d",         title: "3D Characters & Design", meta: "Blender · Game-ready · Product design", blurb: "Rigged game characters, product enclosures and renders." },
   { id: "2d",         title: "2D Art & Motion",      meta: "Illustration · Motion graphics",       blurb: "Characters, illustrations and animated explainers." },
   { id: "saas",       title: "SaaS & Web Apps",      meta: "MVPs · Dashboards · Extensions",       blurb: "Products with logins, payments and real users." },
   { id: "games",      title: "Games",                meta: "Three.js · Mobile-first",              blurb: "Playable 3D browser and mobile games." },
@@ -141,6 +141,85 @@ window.PROJECTS = [
     result: "Self-serve lead lists: add a row to a sheet and get organised leads back."
   },
   {
+    title: "AI UGC Product Ads",
+    category: "video",
+    client: "DTC and e-commerce brands (spec ads)",
+    tagline: "Creator-style ads with AI presenters: hook, demo, benefit and call to action, ready for TikTok, Reels and Meta.",
+    images: ["assets/video/ugc-watch.webp"],
+    videos: [
+      { src: "assets/video/ugc-watch.mp4", poster: "assets/video/ugc-watch.webp", tall: true, label: "Smartwatch · 10s" },
+      { src: "assets/video/ugc-icecream.mp4", poster: "assets/video/ugc-icecream.webp", tall: true, label: "Ice cream tub · 16s" },
+      { src: "assets/video/ugc-yogurt.mp4", poster: "assets/video/ugc-yogurt.webp", tall: true, label: "Breakfast bowl · 40s" },
+      { src: "assets/video/ugc-bottle.mp4", poster: "assets/video/ugc-bottle.webp", tall: false, label: "Fitness water bottle · 40s" }
+    ],
+    url: "",
+    stack: ["AI video generation", "AI voice", "Script writing", "Editing & captions"],
+    challenge: "Brands need a steady flow of fresh UGC-style creatives to test, but booking real creators for every variation is slow and expensive.",
+    work: [
+      "Wrote hook-first scripts for each product and audience",
+      "Generated consistent AI presenters and product shots across multiple scenes",
+      "Added voice, pacing, close-ups of the product in use, and on-screen text",
+      "Exported in vertical 9:16 for Reels and TikTok, plus landscape cuts"
+    ],
+    result: "Ad-ready creatives in days, so brands can test many angles without booking a shoot."
+  },
+  {
+    title: "VoltX Fuel Product Spot",
+    category: "video",
+    client: "Energy drink concept",
+    tagline: "A moody 10-second hero spot for a pre-workout can, with electric effects and a closing tagline.",
+    images: ["assets/video/voltx.webp"],
+    videos: [{ src: "assets/video/voltx.mp4", poster: "assets/video/voltx.webp", tall: false, label: "VoltX Fuel · 10s" }],
+    url: "",
+    stack: ["AI video generation", "Motion graphics", "Sound design"],
+    challenge: "Create a premium product reveal for a new drink brand without a studio shoot.",
+    work: [
+      "Designed the can and a gym-floor setting with dramatic rim light",
+      "Built the reveal around the lightning logo: sparks, glow and a push-in",
+      "Closed on the line \"Unleash the Surge.\" for social and pre-roll"
+    ],
+    result: "A studio-quality product spot made without a camera crew."
+  },
+  {
+    title: "Animated Story Shorts",
+    category: "video",
+    client: "Brands and storytellers",
+    tagline: "3D-style animated scenes with expressive characters, warm lighting and story beats.",
+    images: ["assets/video/anim-breakfast.webp"],
+    videos: [
+      { src: "assets/video/anim-breakfast.mp4", poster: "assets/video/anim-breakfast.webp", tall: false, label: "Morning routine · 10s" },
+      { src: "assets/video/anim-terrace.mp4", poster: "assets/video/anim-terrace.webp", tall: false, label: "Terrace proposal · 38s" }
+    ],
+    url: "",
+    stack: ["AI animation", "Character consistency", "Editing"],
+    challenge: "Tell short, emotional stories in an animated-film style for social media and brand content.",
+    work: [
+      "Designed original characters and kept them consistent from shot to shot",
+      "Planned each scene as a mini storyboard: setup, reaction, payoff",
+      "Graded and cut the shots into a smooth sequence"
+    ],
+    result: "Shareable animated shorts with a big-studio look on a small budget."
+  },
+  {
+    title: "Naija Life: 3D Game Characters",
+    category: "3d",
+    client: "Mobile life-sim game (in development)",
+    tagline: "Six Nigerian city characters on one shared rig, with 10 animations each, light enough for budget phones.",
+    images: ["assets/naija-lineup.webp"],
+    videos: [{ src: "assets/video/naija-cast.mp4", poster: "assets/video/naija-cast.webp", tall: false, label: "The cast in motion · 6s" }],
+    url: "",
+    stack: ["Blender (Python)", "glTF / GLB", "Three.js", "Rigging & animation"],
+    challenge: "A phone-first 3D life-sim set in Lagos, Abuja, Port Harcourt, Ibadan, Kano and Enugu needed a cast that looks local and still runs smoothly on low-end Android.",
+    work: [
+      "Built six characters: a Lagos danfo conductor, a Yaba tech designer, an Ibadan market trader, a Kano textile trader, a Port Harcourt oil technician and an Abuja NYSC corps member",
+      "Put every character on the same 22-bone skeleton, so all clips and future outfits fit every body",
+      "Animated 10 shared clips: idle, walk, run, wave, talk, dance, celebrate, wahala, phone call and greet",
+      "Kept each model to about 7–8k triangles, around 500 KB, and a single draw call",
+      "Built a Three.js viewer so the team can preview every character and animation in the browser"
+    ],
+    result: "A game-ready cast that a crowd of 30 can share on a budget phone."
+  },
+  {
     title: "PCB Enclosure Design",
     category: "3d",
     client: "Hardware & IoT makers",
@@ -223,4 +302,13 @@ window.PROJECTS = [
     ],
     result: "A cleaner storefront that guides shoppers to the right product faster."
   }
+];
+
+/* Clips that auto-play in the "AI video" strip on the home page. project must match a project title. */
+window.REEL = [
+  { src: "assets/video/ugc-watch.mp4", poster: "assets/video/ugc-watch.webp", label: "UGC ad · Smartwatch", project: "AI UGC Product Ads" },
+  { src: "assets/video/voltx.mp4", poster: "assets/video/voltx.webp", label: "Product spot · VoltX Fuel", project: "VoltX Fuel Product Spot" },
+  { src: "assets/video/ugc-icecream.mp4", poster: "assets/video/ugc-icecream.webp", label: "UGC ad · Ice cream", project: "AI UGC Product Ads" },
+  { src: "assets/video/anim-breakfast.mp4", poster: "assets/video/anim-breakfast.webp", label: "Animated short", project: "Animated Story Shorts" },
+  { src: "assets/video/ugc-yogurt.mp4", poster: "assets/video/ugc-yogurt.webp", label: "UGC ad · Breakfast bowl", project: "AI UGC Product Ads" }
 ];
