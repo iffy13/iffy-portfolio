@@ -9,18 +9,20 @@
 */
 
 window.CATEGORIES = [
-  { id: "shopify",    title: "Shopify Stores",        meta: "Themes · Liquid · Store builds",  blurb: "Custom Shopify themes and store builds tuned for speed and conversion." },
-  { id: "hydrogen",   title: "Headless Commerce",     meta: "Hydrogen · Oxygen · Storefront API", blurb: "React-powered Shopify storefronts with headless architecture." },
-  { id: "wordpress",  title: "WordPress Sites",       meta: "Custom themes · WooCommerce",     blurb: "Custom WordPress builds, plugins and WooCommerce stores." },
-  { id: "automation", title: "AI Automation",         meta: "n8n · AI agents · APIs",           blurb: "Workflows that create content, move data and publish on autopilot." },
-  { id: "webapps",    title: "Web Apps",              meta: "React · Node.js · TypeScript",     blurb: "Bespoke web applications and internal tools." }
+  { id: "agents",     title: "AI Agents",            meta: "LLM agents · Chatbots · Receptionists", blurb: "Assistants that answer customers, research, write and take action in your tools." },
+  { id: "automation", title: "AI Automation",        meta: "n8n · Make · APIs",                    blurb: "Workflows that create content, move data and publish on autopilot." },
+  { id: "video",      title: "AI Video",             meta: "Shorts · Ads · Trailers",              blurb: "Scroll-stopping video made with AI generation and editing." },
+  { id: "3d",         title: "3D Characters & Renders", meta: "Blender · Low-poly · Game-ready",   blurb: "Stylised characters, rigs, animations and product renders." },
+  { id: "2d",         title: "2D Art & Motion",      meta: "Illustration · Motion graphics",       blurb: "Characters, illustrations and animated explainers." },
+  { id: "saas",       title: "SaaS & Web Apps",      meta: "MVPs · Dashboards · Extensions",       blurb: "Products with logins, payments and real users." },
+  { id: "games",      title: "Games",                meta: "Three.js · Mobile-first",              blurb: "Playable 3D browser and mobile games." },
+  { id: "web",        title: "Shopify & Websites",   meta: "Shopify · Hydrogen · WordPress",       blurb: "Fast storefronts and sites when the product needs a home." }
 ];
 
 window.PROJECTS = [
   {
     title: "Copper State Tackle",
-    category: "hydrogen",
-    featured: true,
+    category: "web",
     client: "Fishing tackle retailer · USA",
     tagline: "A fast headless Shopify storefront on Hydrogen and Oxygen.",
     images: ["assets/copperstate.webp"],
@@ -37,7 +39,7 @@ window.PROJECTS = [
   },
   {
     title: "BagUps",
-    category: "shopify",
+    category: "web",
     client: "Eco trash-bag brand · USA",
     tagline: "Theme customisation and UX polish for a subscription-style Shopify store.",
     images: ["assets/bagups.webp"],
@@ -54,6 +56,7 @@ window.PROJECTS = [
   {
     title: "AI Content & Video Pipeline",
     category: "automation",
+    featured: true,
     client: "Content creator · Social media",
     tagline: "Ideas to published short videos on three platforms with no manual steps.",
     images: ["assets/n8n-video-automation.webp"],
