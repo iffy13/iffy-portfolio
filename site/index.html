@@ -122,6 +122,10 @@ section.block { padding-block: clamp(64px, 9vw, 112px); }
 .feat-side p { color: var(--muted); font-size: .95rem; }
 .feat-side hr { border: 0; border-top: 1px solid var(--line); margin: 4px 0; width: 100%; }
 @media (max-width: 860px) { .featured { grid-template-columns: 1fr; } }
+.shot-in.fit img { object-fit: contain; object-position: center; }
+.case .shot-in { aspect-ratio: auto; }
+.case .shot-in img { height: auto; object-fit: contain; }
+
 
 /* Services */
 .svc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
@@ -401,6 +405,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
     game: '<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/>'
   };
   function ico(k) { return '<span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + I[k] + '</svg></span>'; }
+  window.iffyFit = function (img) { var r = img.naturalWidth / img.naturalHeight; if (r > 2.1 || r < 1.2) img.parentNode.classList.add('fit'); };
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   // Services
@@ -430,7 +435,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
   var F = (window.PROJECTS || []).find(function (p) { return p.featured; }) || (window.PROJECTS || [])[0];
   if (F) {
     document.getElementById('featured-slot').innerHTML =
-      '<button class="panel shot" type="button" data-open="' + esc(F.title) + '" aria-label="Open ' + esc(F.title) + ' case study" style="font:inherit;color:inherit;cursor:pointer"><div class="shot-in"><img src="' + esc(F.images[0]) + '" alt="' + esc(F.title) + ' homepage"></div></button>' +
+      '<button class="panel shot" type="button" data-open="' + esc(F.title) + '" aria-label="Open ' + esc(F.title) + ' case study" style="font:inherit;color:inherit;cursor:pointer"><div class="shot-in"><img src="' + esc(F.images[0]) + '" alt="' + esc(F.title) + ' screenshot" onload="iffyFit(this)"></div></button>' +
       '<div class="panel feat-side"><span class="pill">★ Featured build</span><h3>' + esc(F.title) + '</h3><p>' + esc(F.tagline) + ' ' + esc(F.result) + '</p><hr>' +
       '<ul class="chips">' + F.stack.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>' +
       '<div class="cta-row"><button class="btn btn-rose" type="button" data-open="' + esc(F.title) + '">View case study ' + ARROW + '</button></div></div>';
@@ -462,7 +467,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
   var state = { cat: null, proj: null }, lastFocus = null;
   function projCard(p) {
     var c = CATS.find(function (x) { return x.id === p.category; });
-    return '<button class="panel proj" type="button" data-open="' + esc(p.title) + '"><div class="shot-in"><img src="' + esc(p.images[0]) + '" alt="" loading="lazy"></div>' +
+    return '<button class="panel proj" type="button" data-open="' + esc(p.title) + '"><div class="shot-in"><img src="' + esc(p.images[0]) + '" alt="" loading="lazy" onload="iffyFit(this)"></div>' +
       '<div class="txt"><span class="meta">' + esc(c ? c.title : '') + ' · ' + esc(p.client) + '</span><h3>' + esc(p.title) + '</h3><p>' + esc(p.tagline) + '</p></div></button>';
   }
   function showCat(id) {
