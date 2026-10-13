@@ -135,7 +135,7 @@
   function localReply(q) {
     q = q.toLowerCase();
     function list(cat) { return PROJECTS.filter(function (p) { return p.category === cat; }).map(function (p) { return '[[' + p.title + ']]'; }).join(' '); }
-    if (/hire|quote|price|cost|budget|start|project for me|work with/.test(q)) return 'Sure. Starting prices: WhatsApp API setup from $150, AI agents and chatbots from $150, n8n or Make workflows from $100, voice agents from $250, CRM integrations from $200. I quote a flat price once I see the details. Message me on WhatsApp at ' + (P.whatsapp || '') + ' and tell me what you need.';
+    if (/hire|quote|price|cost|budget|start|project for me|work with/.test(q)) return 'Sure. Starting prices: WhatsApp API setup from $150, Meta verification help from $80, AI agents and chatbots from $150, n8n or Make workflows from $100, voice agents from $250, CRM integrations from $200. Send me the details and I will give you a flat quote. Message me on WhatsApp at ' + (P.whatsapp || '') + ' and tell me what you need.';
     if (/agent|chatbot|whatsapp|receptionist|assistant/.test(q)) return 'I build AI agents that answer customers, book meetings and take action in your tools. Have a look: ' + list('agents');
     if (/automat|n8n|zapier|make|workflow|crm|lead/.test(q)) return 'Yes, automation is a big part of what I do: n8n, Zapier and APIs wired together. Some examples: ' + list('automation');
     if (/video|ugc|ad|animation|reel/.test(q)) return 'I make AI video: UGC-style ads, product spots and animated shorts. ' + list('video');

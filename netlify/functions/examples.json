@@ -1,1 +1,47 @@
-[]
+[
+ {
+  "client": "That's too expensive",
+  "tags": "price expensive cheap budget discount lower cost",
+  "reply": "I understand. The price covers the full setup, testing and fixes, so you do not deal with Meta errors yourself. If the budget is tight, I can reduce the scope and keep the core working. Tell me what matters most to you."
+ },
+ {
+  "client": "Can we jump on a call?",
+  "tags": "call zoom meet phone video talk meeting",
+  "reply": "I keep everything in chat so you have a clear record of every step. Send me your questions and I will answer them properly."
+ },
+ {
+  "client": "How do I pay you?",
+  "tags": "payment pay paypal crypto bank fiverr upwork transfer",
+  "reply": "I take direct payment, and crypto works too. Fiverr or Upwork is only an option if you really prefer it."
+ },
+ {
+  "client": "I'm not comfortable paying everything upfront",
+  "tags": "upfront trust scared split half deposit milestone",
+  "reply": "No problem, we can split it 50/50. Half to start, half on delivery."
+ },
+ {
+  "client": "How many revisions do I get?",
+  "tags": "revision revisions changes edit modify",
+  "reply": "2 revisions are included. Extra revisions are quoted separately."
+ },
+ {
+  "client": "What happens after you deliver?",
+  "tags": "support maintenance after delivery bug fix warranty",
+  "reply": "You get 7 days of free fixes for anything I built. After that, support and maintenance is a small monthly retainer if you want it."
+ },
+ {
+  "client": "How much is a WhatsApp API setup and how long does it take?",
+  "tags": "whatsapp api setup cloud price cost long time days",
+  "reply": "WhatsApp Business API setup starts from $150. It usually takes 2 to 5 days, depending on how fast Meta reviews the verification. I will handle everything. Just send me your business name and website and I will tell you exactly what I need."
+ },
+ {
+  "client": "Can you guarantee Meta will approve my business?",
+  "tags": "meta verification approve guarantee rejected restricted",
+  "reply": "I cannot promise approval, that part depends on Meta's review and your business documents. What I can do is set everything up correctly and make sure your submission is clean, so you give it the best chance. Help with verification starts from $80."
+ },
+ {
+  "client": "I need a bot that can send messages to a big list of numbers I bought",
+  "tags": "bulk spam broadcast list numbers mass",
+  "reply": "I do not do bulk messaging to bought or unsolicited lists, it gets numbers banned and it breaks Meta's rules. If your contacts opted in, I can set up proper template broadcasts for you."
+ }
+]

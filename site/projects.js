@@ -344,4 +344,4 @@ window.PROFILE = {
 };
 
 /* First message shown when the chat opens. The AI's persona and pricing rules live privately in netlify/functions/persona.md. */
-window.VOICE = { greeting: "Hello! What do you need built? WhatsApp API, AI agents, automations, voice agents, I handle all of it. Tell me about your project." };
+window.VOICE = { greeting: "Hello, thanks for reaching out. Tell me what you want to set up and I will tell you exactly how I can help." };
