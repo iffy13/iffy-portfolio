@@ -1,4 +1,4 @@
-/* Iffy's AI assistant: floating chat that talks to /api/chat (Netlify Function + Gemini). */
+/* Chat with Iffy (AI trained on his replies): floating chat that talks to /api/chat (Netlify Function + Gemini). */
 (function () {
   var P = window.PROFILE || {};
   var PROJECTS = window.PROJECTS || [];
@@ -20,6 +20,8 @@
   .ic-head { display: flex; align-items: center; gap: 12px; padding: 14px 14px 14px 16px; border-bottom: 1px solid var(--line); background: var(--card-hi); }
   .ic-ava { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); flex: none; }
   .ic-ava svg { width: 20px; height: 20px; }
+  .ic-photo { overflow: hidden; background: linear-gradient(160deg, #1E4B4D, #0B1D1E); align-items: end; }
+  .ic-photo img { width: 100%; height: auto; margin-top: 4px; }
   .ic-head b { display: block; font: 700 1rem/1.2 var(--f-display); }
   .ic-head small { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .78rem; }
   .ic-head small i { width: 7px; height: 7px; border-radius: 50%; background: #2fbf71; }
@@ -65,12 +67,12 @@
 
   var panel = document.createElement('section');
   panel.className = 'ic-panel'; panel.id = 'icPanel'; panel.hidden = true;
-  panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Chat with Iffy\'s AI assistant');
+  panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Chat with Iffy');
   panel.innerHTML =
-    '<header class="ic-head"><span class="ic-ava">' + SPARK + '</span><div><b>Iffy\'s AI assistant</b><small><i></i>' + (demo ? 'Preview mode · sample replies' : 'Online · replies instantly') + '</small></div>' +
+    '<header class="ic-head"><span class="ic-ava ic-photo"><img src="assets/profile.png" alt=""></span><div><b>Chat with Iffy</b><small><i></i>' + (demo ? 'Preview mode · sample replies' : 'AI trained on my replies · instant') + '</small></div>' +
     '<button class="ic-x" type="button" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>' +
     '<div class="ic-log" id="icLog" aria-live="polite"></div>' +
-    '<div><div class="ic-chips" id="icChips"></div><p class="ic-note">AI assistant built by Iffy. It can make mistakes; Iffy confirms every quote.</p></div>' +
+    '<div><div class="ic-chips" id="icChips"></div><p class="ic-note">AI that replies like me. I read every lead and confirm quotes personally.</p></div>' +
     '<form class="ic-form" id="icForm"><label for="icInput" style="position:absolute;left:-9999px">Message</label><textarea id="icInput" rows="1" placeholder="Ask about my work or your project…" maxlength="1200"></textarea>' +
     '<button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>';
   document.body.appendChild(launch); document.body.appendChild(panel);
@@ -127,13 +129,13 @@
   function localReply(q) {
     q = q.toLowerCase();
     function list(cat) { return PROJECTS.filter(function (p) { return p.category === cat; }).map(function (p) { return '[[' + p.title + ']]'; }).join(' '); }
-    if (/hire|quote|price|cost|budget|start|project for me|work with/.test(q)) return 'Happy to help! Pricing depends on scope, so Iffy sends a quote once he knows the details. On the live site I collect your name, email and project here. For now, message him on WhatsApp at ' + (P.whatsapp || '') + ' or email ' + (P.email || '') + '.';
-    if (/agent|chatbot|whatsapp|receptionist|assistant/.test(q)) return 'Iffy builds AI agents that answer customers, book meetings and take action in your tools. Have a look: ' + list('agents');
-    if (/automat|n8n|zapier|make|workflow|crm|lead/.test(q)) return 'Automation is a big part of Iffy\'s work: n8n, Zapier and APIs wired together. Some examples: ' + list('automation');
-    if (/video|ugc|ad|animation|reel/.test(q)) return 'Iffy makes AI video: UGC-style ads, product spots and animated shorts. ' + list('video');
-    if (/3d|character|game|blender|enclosure/.test(q)) return 'On the 3D side: game-ready characters and product design. ' + list('3d');
-    if (/shopify|website|store|wordpress|web/.test(q)) return 'Iffy also builds Shopify and WordPress sites when your product needs a storefront: ' + list('web');
-    return 'I can tell you about Iffy\'s AI agents, automations, AI video, 3D work or websites, or help you start a project. What are you working on?';
+    if (/hire|quote|price|cost|budget|start|project for me|work with/.test(q)) return 'Happy to help! Price depends on the details, so I send a proper quote once I understand the project. Message me on WhatsApp at ' + (P.whatsapp || '') + ' or email ' + (P.email || '') + ' and tell me what you need.';
+    if (/agent|chatbot|whatsapp|receptionist|assistant/.test(q)) return 'I build AI agents that answer customers, book meetings and take action in your tools. Have a look: ' + list('agents');
+    if (/automat|n8n|zapier|make|workflow|crm|lead/.test(q)) return 'Yes, automation is a big part of what I do: n8n, Zapier and APIs wired together. Some examples: ' + list('automation');
+    if (/video|ugc|ad|animation|reel/.test(q)) return 'I make AI video: UGC-style ads, product spots and animated shorts. ' + list('video');
+    if (/3d|character|game|blender|enclosure/.test(q)) return 'On the 3D side I do game-ready characters and product design. ' + list('3d');
+    if (/shopify|website|store|wordpress|web/.test(q)) return 'I also build Shopify and WordPress sites when your product needs a storefront: ' + list('web');
+    return 'I can tell you about my AI agents, automations, AI video, 3D work or websites, or help you start a project. What are you working on?';
   }
 
   var busy = false;
@@ -170,7 +172,7 @@
     panel.hidden = false; panel.classList.add('ic-in'); launch.setAttribute('aria-expanded', 'true');
     if (!log.childElementCount) {
       if (history.length) { history.forEach(function (m) { add(m.role, m.text, false); }); chipsEl.hidden = true; }
-      else add('assistant', 'Hi! I\'m Iffy\'s AI assistant. Ask me about his AI agents, automations, AI video or 3D work, or tell me what you\'d like built and I\'ll pass it to him.', true);
+      else add('assistant', (window.VOICE && window.VOICE.greeting) || 'Hey! I\'m Iffy. Ask me anything about my work, or tell me what you want built.', true);
     }
     setTimeout(function () { input.focus(); }, 50);
   }
