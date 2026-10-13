@@ -300,7 +300,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
         <p class="lede">I'm <strong>Iffy</strong>. I build AI agents and automations that run parts of your business for you, SaaS products, 3D and 2D visuals, and AI-generated video. When you need it, I build the store or website too.</p>
         <div class="cta-row">
           <a href="#work" class="btn btn-rose">Explore my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a href="#contact" class="btn">Start a project</a>
+          <button type="button" class="btn" onclick="window.iffyChat && window.iffyChat.open()">✦ Ask my AI</button>
         </div>
         <span class="avail"><i class="pulse" aria-hidden="true"></i>Available for new projects · Remote, worldwide</span>
       </div>
@@ -402,6 +402,11 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
   <div class="wrap" id="ovBody"></div>
 </div>
 
+
+<!-- Hidden form so Netlify Forms registers the AI assistant's leads (submitted from chat.js). -->
+<form name="ai-lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="name"><input name="email"><input name="service"><input name="budget"><input name="timeline"><textarea name="project"></textarea><textarea name="transcript"></textarea><input name="bot-field">
+</form>
 <script src="projects.js"></script>
 <script>
 (function () {
@@ -433,17 +438,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   // Services
-  var SERVICES = [
-    ['bot', 'AI Agents & Assistants', 'Custom agents that research, write, sort data and act inside your tools.'],
-    ['chat', 'AI Receptionist & Chatbots', 'WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.'],
-    ['bolt', 'Workflow Automation', 'n8n, Make and Zapier workflows that connect your apps and run on their own.'],
-    ['film', 'AI Video Production', 'Short-form ads, faceless channels, trailers and UGC-style videos made with AI.'],
-    ['cube', '3D Modeling & Animation', 'Stylised and low-poly characters, rigs, game-ready models and product renders.'],
-    ['pen', '2D Art & Motion', 'Illustrations, character sheets, motion graphics and explainer animation.'],
-    ['layers', 'SaaS Development', 'MVPs, dashboards, browser extensions, auth and payments, built to launch fast.'],
-    ['game', 'Game Development', 'Browser and mobile 3D games built with Three.js, from prototype to playable.'],
-    ['bag', 'Shopify & Web Builds', 'Shopify, Hydrogen and WordPress sites when your product needs a storefront.']
-  ];
+  var SERVICES = window.SERVICES || [];
   document.getElementById('svcGrid').innerHTML = SERVICES.map(function (s) {
     return '<article class="panel svc"><div class="svc-top">' + ico(s[0]) + '</div><h3>' + esc(s[1]) + '</h3><p>' + esc(s[2]) + '</p></article>';
   }).join('');
@@ -562,5 +557,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
   });
 })();
 </script>
+<script src="chat.js" defer></script>
+<script src="fx.js" defer></script>
 </body>
 </html>

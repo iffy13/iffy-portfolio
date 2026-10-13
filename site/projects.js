@@ -312,3 +312,33 @@ window.REEL = [
   { src: "assets/video/anim-breakfast.mp4", poster: "assets/video/anim-breakfast.webp", label: "Animated short", project: "Animated Story Shorts" },
   { src: "assets/video/ugc-yogurt.mp4", poster: "assets/video/ugc-yogurt.webp", label: "UGC ad · Breakfast bowl", project: "AI UGC Product Ads" }
 ];
+
+/* Services shown in the "What I do" grid. Format: [icon, title, one-line description]. */
+window.SERVICES = [
+    ['bot', 'AI Agents & Assistants', 'Custom agents that research, write, sort data and act inside your tools.'],
+    ['chat', 'AI Receptionist & Chatbots', 'WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.'],
+    ['bolt', 'Workflow Automation', 'n8n, Make and Zapier workflows that connect your apps and run on their own.'],
+    ['film', 'AI Video Production', 'Short-form ads, faceless channels, trailers and UGC-style videos made with AI.'],
+    ['cube', '3D Modeling & Animation', 'Stylised and low-poly characters, rigs, game-ready models and product renders.'],
+    ['pen', '2D Art & Motion', 'Illustrations, character sheets, motion graphics and explainer animation.'],
+    ['layers', 'SaaS Development', 'MVPs, dashboards, browser extensions, auth and payments, built to launch fast.'],
+    ['game', 'Game Development', 'Browser and mobile 3D games built with Three.js, from prototype to playable.'],
+    ['bag', 'Shopify & Web Builds', 'Shopify, Hydrogen and WordPress sites when your product needs a storefront.']
+  ];
+
+/*
+  PROFILE: what the AI chat assistant knows about you beyond the projects.
+  Edit freely. The assistant never invents prices; if "pricing" is empty it says
+  the price depends on scope and offers to collect the project details.
+*/
+window.PROFILE = {
+  name: "Iffy (Samuel Gansallo)",
+  brand: "Iffy Dev",
+  location: "Nigeria (works remotely with clients worldwide)",
+  email: "samuelgansallo04@gmail.com",
+  whatsapp: "+234 807 588 9359",
+  availability: "Available for new projects",
+  replyTime: "usually replies within a day",
+  pricing: "",
+  extra: "Works in English. Comfortable with US, UK and EU time zones for calls."
+};

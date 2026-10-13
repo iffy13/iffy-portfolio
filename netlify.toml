@@ -3,6 +3,12 @@
   publish = "site"
   command = ""
 
+# The AI chat assistant (netlify/functions/chat.mjs) reads site/projects.js for its knowledge.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["site/projects.js"]
+
 [[headers]]
   for = "/assets/*"
   [headers.values]
