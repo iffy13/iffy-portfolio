@@ -10,7 +10,9 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
+// Tried in order until one works. GEMINI_MODEL (if set) goes first.
+const MODELS = [process.env.GEMINI_MODEL, "gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"].filter(Boolean);
+let WORKING_MODEL = null; // remembered while the function stays warm
 const MAX_TURNS = 12;          // conversation turns sent to the model
 const MAX_CHARS = 1200;        // per user message
 const RATE = { windowMs: 60_000, max: 12 }; // per IP, best effort
@@ -146,8 +148,26 @@ const validEmail = e => typeof e === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 // ---------- handler ----------
 export default async (req, context) => {
-  if (req.method !== "POST") return json(405, { error: "Use POST" });
   const key = process.env.GEMINI_API_KEY;
+  // Health check: open https://YOUR-SITE/api/chat in a browser to see if the AI is working.
+  if (req.method === "GET") {
+    if (!key) return json(200, { ok: false, problem: "GEMINI_API_KEY is not set in Netlify environment variables (or the site was not redeployed after adding it)." });
+    const results = [];
+    for (const model of MODELS) {
+      try {
+        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+          method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": key },
+          body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "Reply with the word ok" }] }] }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (r.ok) { WORKING_MODEL = model; return json(200, { ok: true, model, tried: results }); }
+        results.push(`${model}: ${r.status} ${d?.error?.message || ""}`.slice(0, 200));
+        if (r.status === 401 || r.status === 403 || /API key/i.test(d?.error?.message || "")) break;
+      } catch (e) { results.push(`${model}: ${e.message}`); }
+    }
+    return json(200, { ok: false, problem: "Gemini rejected every model. See details.", tried: results });
+  }
+  if (req.method !== "POST") return json(405, { error: "Use POST" });
   if (!key) return json(503, { error: "not_configured" });
 
   const ip = context?.ip || req.headers.get("x-nf-client-connection-ip") || "anon";
@@ -162,24 +182,31 @@ export default async (req, context) => {
     systemInstruction: { parts: [{ text: systemPrompt(contents[contents.length - 1].parts[0].text) }] },
     contents,
     tools: TOOLS,
-    generationConfig: { temperature: 0.5, maxOutputTokens: 500 },
+    generationConfig: { temperature: 0.5, maxOutputTokens: 2048 },
   };
 
-  let data;
-  try {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent`, {
-      method: "POST",
-      headers: { "content-type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify(payload),
-    });
-    data = await r.json();
-    if (!r.ok) {
-      console.error("Gemini error", r.status, JSON.stringify(data).slice(0, 500));
-      return json(502, { error: "upstream", reply: "Something went wrong on my side. Message me on WhatsApp and I will reply there." });
+  let data = null, lastErr = "";
+  const order = WORKING_MODEL ? [WORKING_MODEL, ...MODELS.filter(m => m !== WORKING_MODEL)] : MODELS;
+  for (const model of order) {
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-goog-api-key": key },
+        body: JSON.stringify(payload),
+      });
+      const d = await r.json().catch(() => ({}));
+      if (r.ok) { data = d; WORKING_MODEL = model; break; }
+      lastErr = `${model}: ${r.status} ${d?.error?.status || ""} ${d?.error?.message || ""}`.trim();
+      console.error("Gemini error", lastErr.slice(0, 400));
+      // A bad key won't work on any model, so stop early.
+      if (r.status === 401 || r.status === 403 || /API key/i.test(d?.error?.message || "")) break;
+    } catch (e) {
+      lastErr = `${model}: ${e.message}`;
+      console.error("Fetch failed", lastErr);
     }
-  } catch (e) {
-    console.error("Fetch failed", e);
-    return json(502, { error: "upstream", reply: "Something went wrong on my side. Message me on WhatsApp and I will reply there." });
+  }
+  if (!data) {
+    return json(502, { error: "upstream", detail: lastErr.slice(0, 300), reply: "Something went wrong on my side. Message me on WhatsApp and I will reply there." });
   }
 
   const parts = data?.candidates?.[0]?.content?.parts || [];

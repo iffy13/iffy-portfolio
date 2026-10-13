@@ -132,6 +132,23 @@ section.block { padding-block: clamp(64px, 9vw, 112px); }
 .vgrid .tall video { aspect-ratio: 9 / 16; object-fit: cover; }
 .vgrid figcaption { font-size: .8rem; color: var(--muted); }
 .case.is-video { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+
+/* Testimonials */
+.tgrid { columns: 3 280px; column-gap: 14px; }
+.tcard { margin: 0 0 14px; break-inside: avoid; padding: 24px; display: grid; gap: 16px; align-content: start; position: relative; }
+.tcard .stars { color: var(--accent); letter-spacing: 2px; font-size: .95rem; }
+.tcard blockquote { margin: 0; font-size: 1.02rem; line-height: 1.6; }
+.tcard blockquote::before { content: "\201C"; display: block; font: 800 3rem/0.6 var(--f-display); color: color-mix(in srgb, var(--accent) 60%, transparent); margin-bottom: 8px; }
+.tcard footer { display: flex; align-items: center; gap: 12px; margin: 0; padding: 14px 0 0; border-top: 1px solid var(--line); }
+.tcard .ava { width: 38px; height: 38px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 16%, var(--card)); color: var(--accent); font: 800 .95rem/1 var(--f-display); flex: none; }
+.tcard .who { min-width: 0; display: grid; gap: 2px; }
+.tcard .who b { font-weight: 600; }
+.tcard .who small { color: var(--muted); font-size: .8rem; }
+.tcard .src { margin-left: auto; font: 600 .62rem/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; white-space: nowrap; }
+.tcard .proj { justify-self: start; font-size: .82rem; }
+.tcard .trans { margin: -6px 0 0; color: var(--muted); font-size: .86rem; font-style: italic; }
+.tcard.sample { border-style: dashed; opacity: .75; }
+.tcard.sample::after { content: "Sample, add your real review"; position: absolute; top: 12px; right: 12px; font: 600 .6rem/1 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
 /* Reel strip on home */
 .reel { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
 .reel button { position: relative; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #000; cursor: pointer; aspect-ratio: 9 / 16; max-width: 100%; color: #E8F0EE; font: inherit; text-align: left; }
@@ -353,6 +370,13 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
     </div>
   </section>
 
+  <section class="block" id="reviews" hidden>
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Client reviews</p><h2>What clients <em>say</em>.</h2><p>Real feedback from real projects.</p></div>
+      <div class="tgrid" id="tgrid"></div>
+    </div>
+  </section>
+
   <section class="block" id="contact" style="padding-bottom:0">
     <div class="wrap">
       <div class="sec-head"><p class="eyebrow">Start a conversation</p><h2>Let's talk about your project</h2><p>Tell me what you want automated, built or brought to life.</p></div>
@@ -470,6 +494,25 @@ footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: cla
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause(); }); }, { threshold: 0.35 });
     rg.querySelectorAll('video').forEach(function (v) { io.observe(v); });
   }
+
+
+  // Testimonials (only real ones, from window.TESTIMONIALS)
+  (function () {
+    var T = (window.TESTIMONIALS || []).filter(function (t) { return t && t.quote && t.name; });
+    var sample = false;
+    if (!T.length && window.IFFY_PREVIEW) { sample = true; T = [1, 2, 3].map(function () { return { quote: 'Your client\'s review goes here: what you built, how it went, the result they got.', name: 'Client name', role: 'Business, Country', source: 'Upwork', rating: 5 }; }); }
+    if (!T.length) return;
+    document.getElementById('reviews').hidden = false;
+    document.getElementById('tgrid').innerHTML = T.map(function (t) {
+      var r = Math.max(0, Math.min(5, Math.round(t.rating || 0)));
+      return '<figure class="panel tcard' + (sample ? ' sample' : '') + '">' + (r ? '<div class="stars" aria-label="' + r + ' out of 5 stars">' + '★★★★★'.slice(0, r) + '</div>' : '') +
+        '<blockquote>' + esc(t.quote) + '</blockquote>' + (t.translation ? '<p class="trans">Translated: ' + esc(t.translation) + '</p>' : '') +
+        (t.project ? '<button type="button" class="link-arrow proj" data-open="' + esc(t.project) + '" style="background:none;border:0;border-bottom:1px solid currentColor;color:inherit;cursor:pointer;padding:0 0 2px">See the project</button>' : '') +
+        '<footer><span class="ava" aria-hidden="true">' + esc(t.name.trim().charAt(0).toUpperCase()) + '</span><span class="who"><b>' + esc(t.name) + '</b>' + (t.role ? '<small>' + esc(t.role) + '</small>' : '') + '</span>' + (t.source ? '<span class="src">' + esc(t.source) + '</span>' : '') + '</footer></figure>';
+    }).join('');
+    var L = window.REVIEWS_LINK;
+    if (L && L.url && !sample) document.getElementById('tgrid').insertAdjacentHTML('afterend', '<p style="margin-top:22px"><a class="link-arrow" href="' + esc(L.url) + '" target="_blank" rel="noopener">' + esc(L.label || 'See all reviews') + ' ↗</a></p>');
+  })();
 
   // Tabs + category cards
   var tabs = document.getElementById('tabs'), grid = document.getElementById('catGrid');

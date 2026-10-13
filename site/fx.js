@@ -24,7 +24,7 @@
 
   /* 2. Scroll reveal: only things below the first screen start hidden, so the page is complete at rest */
   if (!reduce && 'IntersectionObserver' in window) {
-    var sel = '.sec-head, .featured > *, .svc, .num, .cat, .step, .reel button, .contact';
+    var sel = '.sec-head, .featured > *, .svc, .num, .cat, .step, .reel button, .tcard, .contact';
     var els = Array.prototype.slice.call(document.querySelectorAll(sel));
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {

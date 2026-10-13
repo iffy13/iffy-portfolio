@@ -160,7 +160,8 @@
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); })
       .then(function (res) {
         if (res.ok && res.d.reply) return finish(res.d.reply, res.d.lead, res.d.escalate);
-        if (res.d && res.d.reply) return finish(res.d.reply);
+        if (res.d && res.d.detail && window.console) console.warn('AI chat error:', res.d.detail);
+        if (res.status === 429 && res.d && res.d.reply) return finish(res.d.reply);
         finish(localReply(text));
       })
       .catch(function () { finish(localReply(text)); });

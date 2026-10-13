@@ -345,3 +345,25 @@ window.PROFILE = {
 
 /* First message shown when the chat opens. The AI's persona and pricing rules live privately in netlify/functions/persona.md. */
 window.VOICE = { greeting: "Hello, thanks for reaching out. Tell me what you want to set up and I will tell you exactly how I can help." };
+
+/*
+  TESTIMONIALS: real client reviews only (copy them from Upwork, Fiverr, WhatsApp, email).
+  The "Client reviews" section stays hidden until at least one is added.
+  - quote:   the review text (you can trim it, but don't change the meaning)
+  - name:    how the client is shown, e.g. "Daniel R." (first name + initial is fine)
+  - role:    optional, e.g. "Clinic owner, UK"
+  - source:  optional, e.g. "Upwork", "Fiverr", "WhatsApp"
+  - rating:  optional, 1 to 5 stars
+  - project: optional, the exact title of a project above, adds a "See the project" link
+  Example:
+  { quote: "Set up our WhatsApp API in 3 days and the bot works perfectly.", name: "Daniel R.", role: "Clinic owner, UK", source: "Upwork", rating: 5, project: "WhatsApp Business API Setup" }
+*/
+window.TESTIMONIALS = [
+  { quote: "He completely rescued my WhatsApp automation workflow after another dev walked away. He fixed the data-mapping bugs in minutes and got everything syncing perfectly with my CRM. Super knowledgeable, incredibly fast, and just an awesome guy to work with. I'll definitely be back for order #4 soon!", name: "samuel__brian", role: "United States · repeat client", source: "Fiverr", rating: 5 },
+  { quote: "Absolute pleasure to work with! Samuel was exceptionally communicative, provided accurate business documents promptly, and followed instructions carefully. Navigating Meta verification can be tough, but their cooperation made the process seamless. Looking forward to collaborating on future automation projects!", name: "stanley_j14", role: "United States", source: "Fiverr", rating: 5, project: "WhatsApp Business API Setup" },
+  { quote: "Despite delays in receiving approval from Meta, Samuel was at no point discouraged. He remained professional and communicative. I'm extremely happy with the outcome and would recommend him at any point.", name: "mo_anong", role: "Cameroon", source: "Fiverr", rating: 5, project: "WhatsApp Business API Setup" },
+  { quote: "Samual has been very helpful and is good at communicating. I feel like he is a valuable addition to my team and is there for me when I have any questions.", name: "mitch__waters", role: "United Kingdom", source: "Fiverr", rating: 5 },
+  { quote: "Servicio muy profesional y seguimiento en todo momento. Muy recomendable.", translation: "Very professional service with follow-up at every step. Highly recommended.", name: "marielagrasso", role: "Argentina", source: "Fiverr", rating: 5 }
+];
+/* Link under the reviews. Set to "" to hide it. */
+window.REVIEWS_LINK = { label: "See all reviews on Fiverr", url: "https://www.fiverr.com/samuel_gansallo" };
