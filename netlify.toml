@@ -1,0 +1,9 @@
+# Netlify reads this file and overrides the dashboard build settings.
+[build]
+  publish = "site"
+  command = ""
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
