@@ -7,7 +7,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
-  included_files = ["site/projects.js"]
+  included_files = ["site/projects.js", "netlify/functions/persona.md", "netlify/functions/examples.json"]
 
 [[headers]]
   for = "/assets/*"

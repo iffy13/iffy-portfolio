@@ -69,10 +69,10 @@
   panel.className = 'ic-panel'; panel.id = 'icPanel'; panel.hidden = true;
   panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Chat with Iffy');
   panel.innerHTML =
-    '<header class="ic-head"><span class="ic-ava ic-photo"><img src="assets/profile.png" alt=""></span><div><b>Chat with Iffy</b><small><i></i>' + (demo ? 'Preview mode · sample replies' : 'AI trained on my replies · instant') + '</small></div>' +
+    '<header class="ic-head"><span class="ic-ava ic-photo"><img src="assets/profile.png" alt=""></span><div><b>Chat with Iffy</b><small><i></i>' + (demo ? 'Preview mode · sample replies' : 'Usually replies instantly') + '</small></div>' +
     '<button class="ic-x" type="button" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>' +
     '<div class="ic-log" id="icLog" aria-live="polite"></div>' +
-    '<div><div class="ic-chips" id="icChips"></div><p class="ic-note">AI that replies like me. I read every lead and confirm quotes personally.</p></div>' +
+    '<div><div class="ic-chips" id="icChips"></div><p class="ic-note">Replies by my AI assistant. I personally review every project.</p></div>' +
     '<form class="ic-form" id="icForm"><label for="icInput" style="position:absolute;left:-9999px">Message</label><textarea id="icInput" rows="1" placeholder="Ask about my work or your project…" maxlength="1200"></textarea>' +
     '<button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>';
   document.body.appendChild(launch); document.body.appendChild(panel);
@@ -114,9 +114,15 @@
       (WA ? '<a class="ic-wa" href="' + waLink(msg) + '" target="_blank" rel="noopener">Continue on WhatsApp</a>' : '');
     log.appendChild(d); log.scrollTop = log.scrollHeight;
   }
+  function escCard(text) {
+    if (!WA) return;
+    var d = document.createElement('div'); d.className = 'ic-lead';
+    d.innerHTML = '<a class="ic-wa" href="' + waLink('Hi Iffy, I would like to discuss this: ' + text) + '" target="_blank" rel="noopener">Message me on WhatsApp</a>';
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+  }
   function submitLead(lead) {
     if (demo) return;
-    var data = new URLSearchParams({ 'form-name': 'ai-lead', name: lead.name, email: lead.email, service: lead.service || '', budget: lead.budget || '', timeline: lead.timeline || '', project: lead.project, transcript: history.map(function (m) { return (m.role === 'user' ? 'Visitor: ' : 'AI: ') + m.text; }).join('\n').slice(-6000) });
+    var data = new URLSearchParams({ 'form-name': 'ai-lead', name: lead.name, email: lead.email, service: lead.service || '', budget: lead.budget || '', timeline: lead.timeline || '', project: lead.project, escalate: lead.escalate || '', transcript: history.map(function (m) { return (m.role === 'user' ? 'Visitor: ' : 'AI: ') + m.text; }).join('\n').slice(-6000) });
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() }).catch(function () {});
   }
   var typingEl = null;
@@ -129,7 +135,7 @@
   function localReply(q) {
     q = q.toLowerCase();
     function list(cat) { return PROJECTS.filter(function (p) { return p.category === cat; }).map(function (p) { return '[[' + p.title + ']]'; }).join(' '); }
-    if (/hire|quote|price|cost|budget|start|project for me|work with/.test(q)) return 'Happy to help! Price depends on the details, so I send a proper quote once I understand the project. Message me on WhatsApp at ' + (P.whatsapp || '') + ' or email ' + (P.email || '') + ' and tell me what you need.';
+    if (/hire|quote|price|cost|budget|start|project for me|work with/.test(q)) return 'Sure. Starting prices: WhatsApp API setup from $150, AI agents and chatbots from $150, n8n or Make workflows from $100, voice agents from $250, CRM integrations from $200. I quote a flat price once I see the details. Message me on WhatsApp at ' + (P.whatsapp || '') + ' and tell me what you need.';
     if (/agent|chatbot|whatsapp|receptionist|assistant/.test(q)) return 'I build AI agents that answer customers, book meetings and take action in your tools. Have a look: ' + list('agents');
     if (/automat|n8n|zapier|make|workflow|crm|lead/.test(q)) return 'Yes, automation is a big part of what I do: n8n, Zapier and APIs wired together. Some examples: ' + list('automation');
     if (/video|ugc|ad|animation|reel/.test(q)) return 'I make AI video: UGC-style ads, product spots and animated shorts. ' + list('video');
@@ -143,16 +149,17 @@
     text = (text || '').trim(); if (!text || busy) return;
     add('user', text); input.value = ''; autosize(); chipsEl.hidden = true;
     busy = true; sendBtn.disabled = true; typing(true);
-    var finish = function (reply, lead) {
+    var finish = function (reply, lead, esc) {
       typing(false); add('assistant', reply);
       if (lead) { submitLead(lead); leadCard(lead); }
+      else if (esc) { submitLead({ name: '(not given yet)', email: '', project: text, escalate: esc }); escCard(text); }
       busy = false; sendBtn.disabled = false; input.focus();
     };
     if (demo) { setTimeout(function () { finish(localReply(text)); }, 650); return; }
     fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); })
       .then(function (res) {
-        if (res.ok && res.d.reply) return finish(res.d.reply, res.d.lead);
+        if (res.ok && res.d.reply) return finish(res.d.reply, res.d.lead, res.d.escalate);
         if (res.d && res.d.reply) return finish(res.d.reply);
         finish(localReply(text));
       })
