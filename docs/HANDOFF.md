@@ -41,6 +41,7 @@ Normal flow. Never force push, it would erase the old site and the chat function
 1. Work on a branch: git switch -c my-change, commit, then git push -u origin my-change.
 2. Open a pull request into main. Netlify adds a Deploy Preview link to it. Check the preview on a phone and on desktop.
 3. Merge the pull request. Netlify deploys main to iffystudio.site. To undo, revert the merge on GitHub.
+Previews: Netlify only builds a Deploy Preview for a pull request aimed at main (address https://deploy-preview-N--iffyportfolio.netlify.app/, N is the pull request number). A pull request aimed at any other branch gets no preview. If one pull request is stacked on another, aim it at main anyway, and merge the first one with "Create a merge commit" (not squash) so the second one stays clean.
 The first branch, new-site, replaced the old site. The old files stay in git history (for example site/chat.js and site/fx.js, if the chat is wanted back, TODO 8).
 Large videos (8 mp4, about 8 MB total) are fine on Netlify.
 
