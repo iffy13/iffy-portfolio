@@ -7,7 +7,4 @@ var w=document.createElement('div');w.className='vw';v.parentNode.insertBefore(w
 var b=document.createElement('button');b.type='button';b.className='snd';b.setAttribute('aria-label','Unmute video');b.innerHTML=IM;w.appendChild(b);
 v.addEventListener('volumechange',function(){b.innerHTML=v.muted?IM:IU;b.setAttribute('aria-label',v.muted?'Unmute video':'Mute video')});
 b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();document.querySelectorAll('video[data-vd]').forEach(function(o){if(o!==v&&!o.muted)o.muted=true});if(!v.getAttribute('src'))v.src=M.vd[v.dataset.vd];v.muted=!v.muted;if(v.paused)v.play().catch(function(){})})});
-if(window.lottie){var o={renderer:'svg',loop:true,autoplay:!calm};
-lottie.loadAnimation(Object.assign({container:document.getElementById('lt'),animationData:M.lo},o));
-var c=document.getElementById('cue');if(c)lottie.loadAnimation(Object.assign({container:c,animationData:M.cue},o))}
 })();

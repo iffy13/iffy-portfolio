@@ -1,5 +1,5 @@
 (function(){
-var IMG="assets/img/portrait.jpg",cv=document.getElementById('gl'),still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var IMG="assets/img/portrait.jpg",cv=document.getElementById('gl'),still=matchMedia('(prefers-reduced-motion:reduce)').matches,lost=false;
 var h=document.querySelector('h1');h.setAttribute('aria-label','I build AI agents, automation, 3D, AI video and more.');
 h.innerHTML='<span class="w" aria-hidden="true"><i style="--i:0">I</i></span> <span class="w" aria-hidden="true"><i style="--i:1">build</i></span><br><span class="rwrap" aria-hidden="true"><span class="rw">AI agents</span></span>.';
 var ld=document.getElementById('ld'),ln=document.getElementById('ln'),lb=document.getElementById('lb'),t0=performance.now(),loaded=document.readyState==='complete',fin=false,shown=false;
@@ -9,7 +9,7 @@ function tick(){var p=Math.min(1,(performance.now()-t0)/1900);ln.textContent=Mat
 if(still)show();else{tick();setTimeout(go2,5000);setTimeout(show,10000)}
 
 try{
-var r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+var r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});cv.addEventListener('webglcontextlost',function(e){e.preventDefault();lost=true});cv.addEventListener('webglcontextrestored',function(){var old=env;env=pm0.fromScene(es,.04).texture;sc.traverse(function(o){var m=o.material;if(m&&m.envMap===old){m.envMap=env;m.needsUpdate=true}});lost=false});
 r.setPixelRatio(Math.min(devicePixelRatio,1.5));r.outputEncoding=THREE.sRGBEncoding;
 var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,260);cam.position.z=9;
 var U={uT:{value:0},uA:{value:.3},uC:{value:new THREE.Color(1,.5,.1)},uL:{value:0}};
@@ -77,7 +77,7 @@ function size(){r.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/in
 hw=4.2*cam.aspect;var w=cam.aspect>1.1;
 if(w){var s=Math.min(1,hw/5.6);pg2.scale.setScalar(s);bx=hw*.5;by=0;py=0}else{var s2=Math.min(1,hw*1.6/5.6);pg2.scale.setScalar(s2);bx=0;by=1.7;py=1.7}
 draw()}
-function draw(){var J=window.J||{x:1,y:0,s:1};if(window.JPS&&window.K&&scrollY<window.JPS()-2){var k0=window.K;k0.z=9;k0.fov=50;k0.po=1;k0.vis=1;J.x=1;J.y=0;J.s=1.45}var ho=window.IFFY&&window.IFFY.home,K=(ho&&window.K)||{z:9,fov:50},off=window.IFFY&&window.IFFY.off,wd=cam.aspect>1.1,q=Math.min(1,scrollY/innerHeight);if(!ho)J={x:1,y:0,s:1};
+function draw(){if(lost)return;var J=window.J||{x:1,y:0,s:1};if(window.JPS&&window.K&&scrollY<window.JPS()-2){var k0=window.K;k0.z=9;k0.fov=50;k0.po=1;k0.vis=1;J.x=1;J.y=0;J.s=1.45}var ho=window.IFFY&&window.IFFY.home,K=(ho&&window.K)||{z:9,fov:50},off=window.IFFY&&window.IFFY.off,wd=cam.aspect>1.1,q=Math.min(1,scrollY/innerHeight);if(!ho)J={x:1,y:0,s:1};
 orb.visible=!off&&(ho?J.s>.05:wd);orb.position.set(wd?J.x*hw*.5:J.x*hw*.2,wd?J.y*3:by+J.y*2,-2);orb.scale.setScalar(Math.max(.01,J.s*(wd||!ho?1:.55)));
 if(ho&&J.r!=null)U.uC.value.setRGB(J.r,J.g,J.b);
 pg2.position.set(bx,py,0);pg2.rotation.y=mx*.45;pg2.rotation.x=my*.25;

@@ -14,9 +14,9 @@ Paths below are inside site/ unless a folder is named explicitly. data/, docs/, 
 - js/scroll_journey.js: GSAP ScrollTrigger pinned timeline `jt()` (scrub .4), project 3D ring, hero rotating keyword, progress bar, review marquee.
 - js/loader_name_particles.js: black loader, particles form "Iffy Studio" (canvas 2D).
 - js/media_fill_and_video.js: fills images and videos from MEDIA, unmute buttons (13 of 15 videos have audio).
-- js/planner_form.js: builds the wa.me WhatsApp message from the planner form.
-- vendor/: three r128, gsap 3.12.5 + ScrollTrigger, lenis 1.1.6, lottie 5.12.2 (local copies).
-- assets/: img (webp), video (mp4), lottie (loader.json, scroll_cue.json), og.jpg. The originals are in source/ next to site/ and are not published.
+- js/planner_form.js: builds the wa.me WhatsApp message from the planner form, and holds the Projects 3D ring (it only starts on the first visit to #projects).
+- vendor/: three r128, gsap 3.15.1 + ScrollTrigger 3.15.1, lenis 1.3.27 (local copies). Lottie was removed in Phase 1.
+- assets/: img (webp), video (mp4), fonts (self-hosted woff2 for Unbounded and Manrope), og.jpg. The originals are in source/ next to site/ and are not published.
 - data/: site.json, reviews.json (5 real Fiverr reviews), case_studies.json (16), parked-sections.html (copy blocks not yet on the site: service catalog of 33 services, FAQ, process).
 - history/iffy-portfolio.single-file.html: the previous all in one 10 MB build, kept as a fallback.
 - tests/smoke_test.py: serves site/ and checks errors, missing files, overflow and top on route change at desktop and phone, dark and light. Last run: all 12 checks passed.
@@ -53,4 +53,12 @@ Original build scripts and the old site clone were not preserved in this environ
 - Colours: new variables --field (form fields) and --on-ember (text on orange buttons). Light mode --glow is now #8b4e0a for 4.5:1 contrast. Dark mode buttons use dark text on orange.
 - Router: clicking a link to the page you are already on (logo, Home, a menu entry) closes the menu and scrolls to the top.
 - Housekeeping: the nested iffy_studio/iffy_studio copy was removed. Web files moved into site/, originals into source/. .gitignore keeps history/, source/ and reference/ out of git.
-- Still open from the review: mobile performance (up-front image and script weight, noise overlay), accessibility of the review marquee and videos, service names that differ between pages, planner dropdown grouping, favicon and SEO files, OG image.
+## Phase 1 (speed foundation)
+- GSAP 3.15.1 and Lenis 1.3.27: drop-in builds from toolkit/ (re-create it with node tools/fetch_toolkit.mjs).
+- Fonts are self-hosted (assets/fonts, @font-face at the top of styles.css), so there are no Google requests.
+- Lottie is gone (298 KB). The loader ring and the scroll cue are plain CSS and inline SVG.
+- The Projects ring starts on the first visit to #projects, so its second WebGL context and its 16 card images no longer load up front.
+- Decorative art images on hidden pages are lazy-loaded.
+- Both WebGL canvases pause on context loss and resume on restore.
+- Favicon (svg, ico, apple-touch-icon) and theme-color added. The icon is a simple placeholder (ring and core).
+- Still open from the review: noise overlay on phones, accessibility of the review marquee and videos, service names that differ between pages, planner dropdown grouping, robots.txt and sitemap, OG image.
