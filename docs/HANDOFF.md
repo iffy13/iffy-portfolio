@@ -71,3 +71,7 @@ Original build scripts and the old site clone were not preserved in this environ
 - Phone journey: the camera path ends right after station 05 (scroll length 8.7 screens instead of 10), and the station 04 text gradient starts lower in styles.css so the cast is not dimmed.
 - No 3D model files existed in Downloads. If real GLB files of the cast turn up, load them with a GLTF loader in place of the code-built bodies.
 - Not measured: frame rate on a budget phone.
+## 3D page: live cast
+- site/js/cast_page.js adds a small WebGL canvas (class cast3d, inside #p-3d .stage) the first time the 3D page opens, and draws it only while that page is open and on screen. It reuses cast_3d.js, so the same six characters and the same roll call stand in front of the image cube, which is unchanged.
+- The canvas has its own WebGL context (at most three on the whole site: hero, projects ring, this one). Without WebGL the page keeps just the cube. With reduced motion it draws one still frame.
+- Styles are at the end of css/styles.css (.stage.live, .cast3d). Do not call the canvas class .cc: that is the generic card style.
