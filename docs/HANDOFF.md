@@ -78,6 +78,7 @@ Original build scripts and the old site clone were not preserved in this environ
 ## Samples page (#samples)
 - site/js/samples.js is the page shell: one shared WebGL stage, tabs (shown once there is more than one sample), drag and pinch, pausing when the page is not open or not on screen, lost-context handling. A sample registers with IFFY_SAMPLES.add({ id, tab, mount(ctx) }).
 - site/js/sample_animation.js is sample 1, game animation: the six cast characters with ten clips (idle, walk, run, wave, talk, dance, celebrate, wahala, phone call, greet), one character or all six, and a floor that slides during walk and run. The clips live in cast_3d.js (CLIPS); the viewer drives them with cast.setMode('manual'), cast.play() and cast.solo().
-- More samples (Roblox style, Minecraft style, 3D assets, pixel sprites, a mini game) are planned as one file each that calls IFFY_SAMPLES.add.
+- site/js/sample_roblox.js is sample 2, a Roblox-style animation pack: an original blocky six-part avatar (head, torso, two arms, two legs) with twelve animations (idle, walk, run, jump, climb, sword slash, punch, block, dance, wave, cheer, point), four outfits, a studded baseplate that slides during walk and run, and props (a sword, a ladder) that appear with the animation that needs them. It uses no Roblox logo, face or texture.
+- More samples (Minecraft style, 3D assets, pixel sprites, a mini game) are planned as one file each that calls IFFY_SAMPLES.add.
 - Samples are original work made for this site and labelled as samples. They must not use Roblox or Minecraft logos or textures.
 - The page is in the menu, in the top nav on screens wider than 1100 px, and linked from the last section of the home page.
