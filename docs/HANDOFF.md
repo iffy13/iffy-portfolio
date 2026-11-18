@@ -75,3 +75,9 @@ Original build scripts and the old site clone were not preserved in this environ
 - site/js/cast_page.js adds a small WebGL canvas (class cast3d, inside #p-3d .stage) the first time the 3D page opens, and draws it only while that page is open and on screen. It reuses cast_3d.js, so the same six characters and the same roll call stand in front of the image cube, which is unchanged.
 - The canvas has its own WebGL context (at most three on the whole site: hero, projects ring, this one). Without WebGL the page keeps just the cube. With reduced motion it draws one still frame.
 - Styles are at the end of css/styles.css (.stage.live, .cast3d). Do not call the canvas class .cc: that is the generic card style.
+## Samples page (#samples)
+- site/js/samples.js is the page shell: one shared WebGL stage, tabs (shown once there is more than one sample), drag and pinch, pausing when the page is not open or not on screen, lost-context handling. A sample registers with IFFY_SAMPLES.add({ id, tab, mount(ctx) }).
+- site/js/sample_animation.js is sample 1, game animation: the six cast characters with ten clips (idle, walk, run, wave, talk, dance, celebrate, wahala, phone call, greet), one character or all six, and a floor that slides during walk and run. The clips live in cast_3d.js (CLIPS); the viewer drives them with cast.setMode('manual'), cast.play() and cast.solo().
+- More samples (Roblox style, Minecraft style, 3D assets, pixel sprites, a mini game) are planned as one file each that calls IFFY_SAMPLES.add.
+- Samples are original work made for this site and labelled as samples. They must not use Roblox or Minecraft logos or textures.
+- The page is in the menu, in the top nav on screens wider than 1100 px, and linked from the last section of the home page.

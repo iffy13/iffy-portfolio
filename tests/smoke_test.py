@@ -11,7 +11,7 @@ class Q(http.server.SimpleHTTPRequestHandler):
 srv=socketserver.TCPServer(('127.0.0.1',0),Q);port=srv.server_address[1]
 threading.Thread(target=srv.serve_forever,daemon=True).start()
 URL='http://127.0.0.1:%d/index.html'%port
-ROUTES=['home','services','projects','process','contact','agents','automation','video','3d','web']
+ROUTES=['home','services','projects','process','contact','agents','automation','video','3d','web','samples']
 bad=0
 def check(c,msg):
     global bad

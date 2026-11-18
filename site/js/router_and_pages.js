@@ -1,6 +1,6 @@
 (function(){
 var PG=[
-{id:'services',n:'Services',c:[1,.55,.15]},{id:'projects',n:'Projects',c:[1,.5,.1]},{id:'process',n:'Process',c:[1,.7,.2]},{id:'contact',n:'Contact',c:[1,.45,.2]},
+{id:'services',n:'Services',c:[1,.55,.15]},{id:'projects',n:'Projects',c:[1,.5,.1]},{id:'samples',n:'Samples',h:'Live samples.',p:'Small pieces built in code for this site.',c:[1,.5,.1]},{id:'process',n:'Process',c:[1,.7,.2]},{id:'contact',n:'Contact',c:[1,.45,.2]},
 {id:'agents',n:'AI Agents',h:'AI agents that do the work.',p:'Assistants that qualify leads, answer customers and complete tasks inside your tools.',c:[1,.48,.1]},
 {id:'automation',n:'Automation',h:'Workflows that run themselves.',p:'n8n pipelines that move data between your tools so nobody retypes anything.',c:[1,.7,.2]},
 {id:'3d',n:'3D Visuals',h:'3D that sells the product.',p:'Renders, scenes and product spots built in Blender.',c:[1,.3,.05]},
@@ -22,7 +22,7 @@ function raf2(f){requestAnimationFrame(function(){requestAnimationFrame(f)})}
 function on(el){if(document.body.classList.contains('ready'))raf2(function(){el.classList.add('on');window.RV&&RV(el)});else new MutationObserver(function(m,o){if(document.body.classList.contains('ready')){o.disconnect();el.classList.add('on');window.RV&&RV(el)}}).observe(document.body,{attributes:true})}
 function swap(id){var d=PG.filter(function(x){return x.id===id})[0],el=d?document.getElementById('p-'+id):home;if(!d)id='home';now=id;
 document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('cur','on')});el.classList.add('cur');function top2(){scrollTo(0,0);if(window.LN)LN.scrollTo(0,{immediate:true,force:true})}top2();setTimeout(top2,50);setTimeout(function(){top2();window.ScrollTrigger&&ScrollTrigger.refresh();top2()},120);setTimeout(top2,450);
-if(window.IFFY){IFFY.home=!d;IFFY.off=['agents','automation','video','3d','web','projects'].indexOf(id)>-1;var c=d?d.c:[1,.5,.1];IFFY.U.uC.value.setRGB(c[0],c[1],c[2])}
+if(window.IFFY){IFFY.home=!d;IFFY.off=['agents','automation','video','3d','web','projects','samples'].indexOf(id)>-1;var c=d?d.c:[1,.5,.1];IFFY.U.uC.value.setRGB(c[0],c[1],c[2])}
 document.title=(d?d.n+' | ':'')+'Iffy Studio | AI Agents, Automation and 3D';on(el);window.AFTER&&AFTER(id);window.RESETH&&RESETH(id)}
 function go(){var id=location.hash.slice(1)||'home';if(id===now)return;setMenu(false);
 if(still){swap(id);return}

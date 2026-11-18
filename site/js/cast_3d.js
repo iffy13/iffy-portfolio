@@ -6,7 +6,8 @@
      scene.add(cast.group);                     // origin = floor, about 2.7 units tall
      cast.update(seconds, { x: px, y: py });    // every frame while visible, pointer in -0.5..0.5
      cast.setFit(0.9);                          // scale factor, to keep all six inside a narrow screen
-     cast.restore(pmremGenerator);              // after a lost WebGL context comes back */
+     cast.restore(pmremGenerator);              // after a lost WebGL context comes back
+   Viewer calls: cast.setMode('manual'); cast.play('run', 'all' | index); cast.solo(index | null); cast.clips (names) */
 (function () {
   'use strict';
   var PI = Math.PI, ZERO = [0, 0, 0];
@@ -238,7 +239,7 @@
       } }
     ];
 
-    // ---- poses: each clip edits a copy of the idle pose. Euler angles per bone, radians.
+    // ---- poses: each clip edits a copy of the idle pose. Euler angles per bone (radians), t = seconds since the clip started.
     function idle(t, ph) {
       var b = Math.sin(t * 1.8 + ph);
       return {
@@ -249,19 +250,49 @@
       };
     }
     var CLIPS = {
+      idle: function (P) { return P; },
+      walk: function (P, t) {
+        var ph = t * 6, s = Math.sin(ph), c = Math.cos(ph);
+        P.thighL = [-s * .55, 0, .03]; P.thighR = [s * .55, 0, -.03]; P.shinL = [Math.max(0, c) * .7 + .05, 0, 0]; P.shinR = [Math.max(0, -c) * .7 + .05, 0, 0];
+        P.uarmL = [s * .5, 0, .12]; P.uarmR = [-s * .5, 0, -.12]; P.farmL = [-.3 - Math.max(0, s) * .2, 0, 0]; P.farmR = [-.3 - Math.max(0, -s) * .2, 0, 0];
+        P.hips = [0, s * .12, c * .02]; P.chest = [0, -s * .16, 0]; P.spine = [.05, 0, 0]; P.head = [P.head[0] * .3, P.head[1] * .3, 0]; P.dy = Math.abs(c) * .03 - .015; return P;
+      },
+      run: function (P, t) {
+        var ph = t * 9.5, s = Math.sin(ph), c = Math.cos(ph);
+        P.thighL = [-s * .95 - .1, 0, .02]; P.thighR = [s * .95 - .1, 0, -.02]; P.shinL = [Math.max(0, c) * 1.5 + .2, 0, 0]; P.shinR = [Math.max(0, -c) * 1.5 + .2, 0, 0];
+        P.uarmL = [s * .9 - .2, 0, .1]; P.uarmR = [-s * .9 - .2, 0, -.1]; P.farmL = [-1.45, 0, 0]; P.farmR = [-1.45, 0, 0];
+        P.spine = [.22, 0, 0]; P.chest = [.06, -s * .22, 0]; P.hips = [0, s * .2, 0]; P.head = [-.18, 0, 0]; P.dy = Math.abs(s) * .07 - .02; return P;
+      },
       wave: function (P, t) { var w = Math.sin(t * 9); P.uarmL = [0, 0, 2.2]; P.farmL = [-.25, 0, .35 + w * .5]; P.head = [P.head[0], P.head[1], .14]; P.chest = [P.chest[0], P.chest[1], -.07]; return P; },
-      cheer: function (P, t) {
-        var b = Math.abs(Math.sin(t * 6)); P.uarmL = [0, 0, 2.55]; P.uarmR = [0, 0, -2.55]; P.farmL = [-.08, 0, .2]; P.farmR = [-.08, 0, -.2]; P.dy = b * .08 - .03;
-        P.thighL = [-b * .3, 0, .05]; P.thighR = [-b * .3, 0, -.05]; P.shinL = [b * .5, 0, 0]; P.shinR = [b * .5, 0, 0]; P.head = [-.12, P.head[1], 0]; return P;
+      talk: function (P, t) {
+        var a = Math.sin(t * 3.3), b = Math.sin(t * 2.5 + 1.2), n = Math.sin(t * 5.2), w = Math.sin(t * 1.4);
+        P.uarmL = [-.5 + a * .1, 0, .5]; P.farmL = [-1.15 + a * .38, 0, .15]; P.uarmR = [-.4 + b * .1, 0, -.45]; P.farmR = [-1 + b * .32, 0, -.1];
+        P.head = [n * .045, w * .16, w * .04]; P.chest = [.02, w * .07, 0]; return P;
       },
       dance: function (P, t) {
         var s = Math.sin(t * 7), c = Math.cos(t * 7);
         P.hips = [0, s * .35, c * .05]; P.chest = [0, -s * .25, 0]; P.uarmL = [-.4 + c * .5, 0, 1 + s * .3]; P.uarmR = [-.4 - c * .5, 0, -1 + s * .3];
         P.farmL = [-1, 0, 0]; P.farmR = [-1, 0, 0]; P.dy = Math.abs(s) * .05 - .02; P.thighL = [Math.min(0, -s) * .25, 0, .06]; P.thighR = [Math.min(0, s) * .25, 0, -.06]; P.head = [0, s * .2, s * .1]; return P;
       },
-      greet: function (P, t) { var b = Math.sin(Math.min(1, t / .5) * PI / 2); P.chest = [.32 * b, 0, 0]; P.spine = [.12 * b, 0, 0]; P.head = [.18 * b, 0, 0]; P.uarmR = [-.35, 0, -.3]; P.farmR = [-1.9, 0, 0]; return P; },
+      celebrate: function (P, t) {
+        var b = Math.abs(Math.sin(t * 6)); P.uarmL = [0, 0, 2.55]; P.uarmR = [0, 0, -2.55]; P.farmL = [-.08, 0, .2]; P.farmR = [-.08, 0, -.2]; P.dy = b * .08 - .03;
+        P.thighL = [-b * .3, 0, .05]; P.thighR = [-b * .3, 0, -.05]; P.shinL = [b * .5, 0, 0]; P.shinR = [b * .5, 0, 0]; P.head = [-.12, P.head[1], 0]; return P;
+      },
+      wahala: function (P, t) {   // hands on the head, shaking it: trouble!
+        var s = Math.sin(t * 9);
+        P.uarmL = [-2.36, 0, .85]; P.farmL = [-2.43, 0, -.54]; P.uarmR = [-2.36, 0, -.85]; P.farmR = [-2.43, 0, .54];
+        P.head = [.1, s * .2, s * .05]; P.chest = [.06, 0, s * .03]; P.spine = [.1, 0, 0]; P.dy = -.02; return P;
+      },
+      phone: function (P, t) {    // a phone call: right hand at the ear, nodding along
+        var n = Math.sin(t * 3.1);
+        P.uarmR = [-2.06, 0, -.46]; P.farmR = [-2.31, 0, .24]; P.uarmL = [.15, 0, .4]; P.farmL = [-.5, 0, -.1];
+        P.head = [n * .04, .12, .12]; P.chest = [.02, -.06, 0]; P.hips = [0, Math.sin(t * .9) * .1, 0]; return P;
+      },
+      greet: function (P, t) { var b = Math.sin(((t % 2.6) / 2.6) * PI); P.chest = [.32 * b, 0, 0]; P.spine = [.12 * b, 0, 0]; P.head = [.18 * b, 0, 0]; P.uarmR = [-.35, 0, -.3]; P.farmR = [-1.9, 0, 0]; return P; },
       salute: function (P, t) { P.uarmR = [-.55, 0, -1.2]; P.farmR = [-2.3, .2, 0]; P.head = [-.06, .12, 0]; P.chest = [-.03, .05, 0]; return P; }
     };
+    CLIPS.cheer = CLIPS.celebrate;
+    var CLIP_NAMES = ['idle', 'walk', 'run', 'wave', 'talk', 'dance', 'celebrate', 'wahala', 'phone', 'greet'];
 
     // ---- assemble the characters
     var chars = [], tris = 0, CYCLE, base = opts.scale || 1.45;
@@ -275,37 +306,55 @@
       var g = new THREE.Group(); g.add(mesh);
       var sh = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 1.15).rotateX(-PI / 2), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })); sh.position.y = .012; g.add(sh);
       group.add(g); tris += geo.index.count / 3;
-      chars.push({ name: sp.name, g: g, bones: bones, ph: sp.ph, sig: sp.sig, dur: sp.dur, x: sp.x, z: sp.z, h: sp.h, yaw: sp.yaw, dy: 0, pop: 0, start: 0 });
+      chars.push({ name: sp.name, g: g, bones: bones, ph: sp.ph, sig: sp.sig, dur: sp.dur, x: sp.x, z: sp.z, h: sp.h, yaw: sp.yaw, dy: 0, pop: 0, start: 0, vis: 1, px: sp.x, pz: sp.z, clip: 'idle', clipT0: 0 });
     });
     var acc = 1.2; chars.forEach(function (c) { c.start = acc; acc += c.dur - .5; }); CYCLE = acc + 1.3;
     group.scale.setScalar(base);
 
-    var last = null;
-    function update(t, look) {
-      var dt = last === null ? .033 : Math.min(.06, Math.max(0, t - last)), k = 1 - Math.exp(-dt * 11), lx = look && look.x || 0, ly = look && look.y || 0;
+    var last = null, mode = 'rollcall', soloIdx = null;
+    function setMode(m) { mode = m === 'manual' ? 'manual' : 'rollcall'; }
+    function play(clip, who) {   // manual mode: start a clip on everyone ('all', default) or on one character
+      if (!CLIPS[clip]) return;
+      chars.forEach(function (c, i) {
+        if (who === undefined || who === 'all') { c.clip = clip; c.clipT0 = (last || 0) + i * .12; }
+        else if (who === i) { c.clip = clip; c.clipT0 = last || 0; }
+      });
+    }
+    function solo(i) { soloIdx = (i === null || i === undefined) ? null : i; }
+
+    function update(t, look, dtIn) {
+      var dt = dtIn !== undefined ? Math.min(.06, Math.max(0, dtIn)) : last === null ? .033 : Math.min(.06, Math.max(0, t - last)), k = 1 - Math.exp(-dt * 11), lx = look && look.x || 0, ly = look && look.y || 0;
       last = t;
-      chars.forEach(function (c) {
-        var s = (t - c.start) % CYCLE; if (s < 0) s += CYCLE;
-        var e = s < c.dur ? smooth(Math.min(1, s / .45, (c.dur - s) / .45)) : 0, P = idle(t, c.ph), b;
-        if (e > .001) {
-          var Q = CLIPS[c.sig](idle(t, c.ph), s);
-          for (b in Q) {
-            if (b === 'dy') { P.dy = P.dy * (1 - e) + Q.dy * e; continue; }
-            var a = P[b] || ZERO, z = Q[b]; P[b] = [a[0] + (z[0] - a[0]) * e, a[1] + (z[1] - a[1]) * e, a[2] + (z[2] - a[2]) * e];
+      chars.forEach(function (c, i) {
+        var P, e = 0, b, s;
+        if (mode === 'manual') {
+          P = CLIPS[c.clip](idle(t, c.ph), Math.max(0, t - c.clipT0));
+        } else {
+          s = (t - c.start) % CYCLE; if (s < 0) s += CYCLE;
+          e = s < c.dur ? smooth(Math.min(1, s / .45, (c.dur - s) / .45)) : 0; P = idle(t, c.ph);
+          if (e > .001) {
+            var Q = CLIPS[c.sig](idle(t, c.ph), s);
+            for (b in Q) {
+              if (b === 'dy') { P.dy = P.dy * (1 - e) + Q.dy * e; continue; }
+              var a = P[b] || ZERO, z = Q[b]; P[b] = [a[0] + (z[0] - a[0]) * e, a[1] + (z[1] - a[1]) * e, a[2] + (z[2] - a[2]) * e];
+            }
           }
         }
         P.head = [P.head[0] + clamp(ly * .7, -.3, .3) * (1 - .6 * e), P.head[1] + clamp(lx * 1.3, -.55, .55) * (1 - .6 * e), P.head[2]];
         RIG.forEach(function (d) { var r = c.bones[d[0]].rotation, v = P[d[0]] || ZERO; r.x += (v[0] - r.x) * k; r.y += (v[1] - r.y) * k; r.z += (v[2] - r.z) * k; });
         c.dy += (P.dy - c.dy) * k; c.bones.hips.position.y = .94 + c.dy; c.pop += (e - c.pop) * k * .8;
-        c.g.position.set(c.x, 0, c.z + .4 * c.pop); c.g.scale.setScalar(c.h * (1 + .14 * c.pop)); c.g.rotation.y = c.yaw * (1 - c.pop * .7);
+        var mine = soloIdx === i, tv = (soloIdx === null || mine) ? 1 : 0;
+        c.vis += (tv - c.vis) * k * .7; c.px += ((mine ? 0 : c.x) - c.px) * k * .7; c.pz += ((mine ? .25 : c.z) - c.pz) * k * .7;
+        c.g.visible = c.vis > .01;
+        c.g.position.set(c.px, 0, c.pz + .4 * c.pop); c.g.scale.setScalar(c.h * (1 + .14 * c.pop) * (.02 + .98 * c.vis)); c.g.rotation.y = mine ? 0 : c.yaw * (1 - c.pop * .7);
       });
     }
     function setFit(f) { group.scale.setScalar(base * f); }
     function restore(p) { if (p) pmrem = p; env = makeEnv(); mats.forEach(function (m) { m.envMap = env; m.needsUpdate = true; }); }
-    function info() { return { characters: chars.length, triangles: Math.round(tris), cycleSeconds: Math.round(CYCLE * 10) / 10 }; }
+    function info() { return { characters: chars.length, triangles: Math.round(tris), trianglesEach: Math.round(tris / chars.length), bones: RIG.length, clips: CLIP_NAMES.length, cycleSeconds: Math.round(CYCLE * 10) / 10 }; }
 
     update(0, null);
-    return { group: group, update: update, setFit: setFit, restore: restore, info: info, names: chars.map(function (c) { return c.name; }) };
+    return { group: group, update: update, setFit: setFit, restore: restore, info: info, setMode: setMode, play: play, solo: solo, clips: CLIP_NAMES.slice(), names: chars.map(function (c) { return c.name; }) };
   }
 
   window.IFFY_CAST = { create: create };
