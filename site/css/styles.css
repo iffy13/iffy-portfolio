@@ -282,7 +282,7 @@ html:not(.js) #ld{display:none}
 .smp-stage.drag{cursor:grabbing}
 .smp-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
 .smp-badge{position:absolute;left:16px;top:14px;z-index:2;border:1px solid rgba(255,177,59,.4);border-radius:999px;padding:3px 12px;font:700 .72rem Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#ffb13b;background:rgba(20,8,3,.6);pointer-events:none}
-.smp-hint{position:absolute;right:16px;bottom:12px;z-index:2;font-size:.8rem;color:rgba(255,238,221,.7);pointer-events:none;text-align:right;max-width:70%}
+.smp-hint{position:absolute;right:16px;bottom:12px;z-index:2;font-size:.8rem;color:rgba(255,238,221,.85);text-shadow:0 1px 3px rgba(0,0,0,.8),0 0 10px rgba(0,0,0,.45);pointer-events:none;text-align:right;max-width:70%}
 .smp-off{position:absolute;inset:0;display:grid;place-items:center;margin:0;padding:24px;text-align:center;color:rgba(255,238,221,.8)}
 .smp-ui h3{font:700 1.4rem Unbounded,sans-serif;margin:0 0 8px}
 .smp-ui .tag{margin:0 0 14px;color:var(--muted)}
