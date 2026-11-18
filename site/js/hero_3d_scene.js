@@ -60,7 +60,7 @@ var sh=new THREE.Shape();sh.moveTo(-.35,-.5);sh.lineTo(.6,0);sh.lineTo(-.35,.5);
 var ply=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.25,bevelEnabled:true,bevelSize:.07,bevelThickness:.07,bevelSegments:4}),mq(OR,.15));g2.add(ply);
 var g3=SG(3),tk=new THREE.Mesh(new THREE.TorusKnotGeometry(1.2,.38,220,32),mq(OR,.14)),tw=new THREE.Mesh(new THREE.TorusKnotGeometry(1.2,.38,100,16),new THREE.MeshBasicMaterial({color:GD,wireframe:true,transparent:true,opacity:.35}));tw.scale.setScalar(1.12);g3.add(tk,tw);
 var gr=new THREE.GridHelper(9,18,GD,0x6b3a12);gr.position.y=-2.1;gr.material.transparent=true;gr.material.opacity=.5;g3.add(gr);
-var cast=null,castX=3;function fitCast(w){if(!cast)return;var av=3.73*cam.aspect;if(w){var f=Math.max(.5,Math.min(1,(av-.3)/6.2));cast.setFit(f);castX=Math.min(3,av-.1-3.1*f);tk.position.set(0,2.35,-4.8);tk.scale.setScalar(.7)}else{cast.setFit(.85);castX=0;tk.position.set(0,.4,-6.5);tk.scale.setScalar(.85)}tw.position.copy(tk.position);tw.scale.setScalar(tk.scale.x*1.12)}function mkCast(){if(cast||!window.IFFY_CAST)return;try{cast=IFFY_CAST.create(THREE,{pmrem:pm0});cast.group.position.y=-2.1;g3.add(cast.group);fitCast(cam.aspect>1.1)}catch(e){cast=null}}
+var cast=null,castX=3;function fitCast(w){if(!cast)return;var av=3.73*cam.aspect;if(w){var f=Math.max(.5,Math.min(1,(av-.3)/6.2));cast.setFit(f);castX=Math.min(3,av-.1-3.1*f);tk.position.set(0,2.35,-4.8);tk.scale.setScalar(.7)}else{cast.setFit(Math.max(.85,Math.min(1.15,(av-.2)/2.35)));castX=0;tk.position.set(0,.4,-6.5);tk.scale.setScalar(.85)}tw.position.copy(tk.position);tw.scale.setScalar(tk.scale.x*1.12)}function mkCast(){if(cast||!window.IFFY_CAST)return;try{cast=IFFY_CAST.create(THREE,{pmrem:pm0});cast.group.position.y=-2.1;g3.add(cast.group);fitCast(cam.aspect>1.1&&innerWidth>820)}catch(e){cast=null}}
 function lazyCast(){setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(mkCast,{timeout:4000});else mkCast()},2500)}if(document.readyState==='complete')lazyCast();else addEventListener('load',lazyCast);
 var g4=SG(4);[['bagups',0],['copperstate',-.9],['bagups',-1.8],['copperstate',-2.7]].forEach(function(d,i){var p=new THREE.Mesh(new THREE.PlaneGeometry(3.2,2),new THREE.MeshBasicMaterial({map:IMt(d[0]),transparent:true,opacity:1-i*.2}));p.position.set(i*.25,i*.12,d[1]);g4.add(p);
 var fr=new THREE.Mesh(new THREE.PlaneGeometry(3.4,2.4),new THREE.MeshBasicMaterial({color:0x1a0c06,transparent:true,opacity:1-i*.2}));fr.position.set(i*.25,i*.12+.1,d[1]-.02);g4.add(fr);
@@ -76,10 +76,10 @@ var mx=0,my=0,tx=0,ty=0,sv=0,ly=0,hw=7,bx=3,by=0,py=0,t=0;
 addEventListener('pointermove',function(e){tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5});
 function prog(){var d=document.documentElement.scrollHeight-innerHeight;return d>0?Math.min(1,Math.max(0,scrollY/d)):0}
 function size(){r.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();
-hw=4.2*cam.aspect;var w=cam.aspect>1.1;fitCast(w);
+hw=4.2*cam.aspect;var w=cam.aspect>1.1&&innerWidth>820;fitCast(w);
 if(w){var s=Math.min(1,hw/5.6);pg2.scale.setScalar(s);bx=hw*.5;by=0;py=0}else{var s2=Math.min(1,hw*1.6/5.6);pg2.scale.setScalar(s2);bx=0;by=1.7;py=1.7}
 draw()}
-function draw(){if(lost)return;var J=window.J||{x:1,y:0,s:1};if(window.JPS&&window.K&&scrollY<window.JPS()-2){var k0=window.K;k0.z=9;k0.fov=50;k0.po=1;k0.vis=1;J.x=1;J.y=0;J.s=1.45}var ho=window.IFFY&&window.IFFY.home,K=(ho&&window.K)||{z:9,fov:50},off=window.IFFY&&window.IFFY.off,wd=cam.aspect>1.1,q=Math.min(1,scrollY/innerHeight);if(!ho)J={x:1,y:0,s:1};
+function draw(){if(lost)return;var J=window.J||{x:1,y:0,s:1};if(window.JPS&&window.K&&scrollY<window.JPS()-2){var k0=window.K;k0.z=9;k0.fov=50;k0.po=1;k0.vis=1;J.x=1;J.y=0;J.s=1.45}var ho=window.IFFY&&window.IFFY.home,K=(ho&&window.K)||{z:9,fov:50},off=window.IFFY&&window.IFFY.off,wd=cam.aspect>1.1&&innerWidth>820,q=Math.min(1,scrollY/innerHeight);if(!ho)J={x:1,y:0,s:1};
 orb.visible=!off&&(ho?J.s>.05:wd);orb.position.set(wd?J.x*hw*.5:J.x*hw*.2,wd?J.y*3:by+J.y*2,-2);orb.scale.setScalar(Math.max(.01,J.s*(wd||!ho?1:.55)));
 if(ho&&J.r!=null)U.uC.value.setRGB(J.r,J.g,J.b);
 pg2.position.set(bx,py,0);pg2.rotation.y=mx*.45;pg2.rotation.x=my*.25;
