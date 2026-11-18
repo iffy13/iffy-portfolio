@@ -9,7 +9,7 @@ function tick(){var p=Math.min(1,(performance.now()-t0)/1900);ln.textContent=Mat
 if(still)show();else{tick();setTimeout(go2,5000);setTimeout(show,10000)}
 
 try{
-var r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});cv.addEventListener('webglcontextlost',function(e){e.preventDefault();lost=true});cv.addEventListener('webglcontextrestored',function(){var old=env;env=pm0.fromScene(es,.04).texture;sc.traverse(function(o){var m=o.material;if(m&&m.envMap===old){m.envMap=env;m.needsUpdate=true}});lost=false});
+var r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});cv.addEventListener('webglcontextlost',function(e){e.preventDefault();lost=true});cv.addEventListener('webglcontextrestored',function(){var old=env;env=pm0.fromScene(es,.04).texture;sc.traverse(function(o){var m=o.material;if(m&&m.envMap===old){m.envMap=env;m.needsUpdate=true}});if(cast)cast.restore(pm0);lost=false});
 r.setPixelRatio(Math.min(devicePixelRatio,1.5));r.outputEncoding=THREE.sRGBEncoding;
 var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,260);cam.position.z=9;
 var U={uT:{value:0},uA:{value:.3},uC:{value:new THREE.Color(1,.5,.1)},uL:{value:0}};
@@ -60,6 +60,8 @@ var sh=new THREE.Shape();sh.moveTo(-.35,-.5);sh.lineTo(.6,0);sh.lineTo(-.35,.5);
 var ply=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.25,bevelEnabled:true,bevelSize:.07,bevelThickness:.07,bevelSegments:4}),mq(OR,.15));g2.add(ply);
 var g3=SG(3),tk=new THREE.Mesh(new THREE.TorusKnotGeometry(1.2,.38,220,32),mq(OR,.14)),tw=new THREE.Mesh(new THREE.TorusKnotGeometry(1.2,.38,100,16),new THREE.MeshBasicMaterial({color:GD,wireframe:true,transparent:true,opacity:.35}));tw.scale.setScalar(1.12);g3.add(tk,tw);
 var gr=new THREE.GridHelper(9,18,GD,0x6b3a12);gr.position.y=-2.1;gr.material.transparent=true;gr.material.opacity=.5;g3.add(gr);
+var cast=null,castX=3;function fitCast(w){if(!cast)return;var av=3.73*cam.aspect;if(w){var f=Math.max(.5,Math.min(1,(av-.3)/6.2));cast.setFit(f);castX=Math.min(3,av-.1-3.1*f);tk.position.set(0,2.35,-4.8);tk.scale.setScalar(.7)}else{cast.setFit(.85);castX=0;tk.position.set(0,.4,-6.5);tk.scale.setScalar(.85)}tw.position.copy(tk.position);tw.scale.setScalar(tk.scale.x*1.12)}function mkCast(){if(cast||!window.IFFY_CAST)return;try{cast=IFFY_CAST.create(THREE,{pmrem:pm0});cast.group.position.y=-2.1;g3.add(cast.group);fitCast(cam.aspect>1.1)}catch(e){cast=null}}
+function lazyCast(){setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(mkCast,{timeout:4000});else mkCast()},2500)}if(document.readyState==='complete')lazyCast();else addEventListener('load',lazyCast);
 var g4=SG(4);[['bagups',0],['copperstate',-.9],['bagups',-1.8],['copperstate',-2.7]].forEach(function(d,i){var p=new THREE.Mesh(new THREE.PlaneGeometry(3.2,2),new THREE.MeshBasicMaterial({map:IMt(d[0]),transparent:true,opacity:1-i*.2}));p.position.set(i*.25,i*.12,d[1]);g4.add(p);
 var fr=new THREE.Mesh(new THREE.PlaneGeometry(3.4,2.4),new THREE.MeshBasicMaterial({color:0x1a0c06,transparent:true,opacity:1-i*.2}));fr.position.set(i*.25,i*.12+.1,d[1]-.02);g4.add(fr);
 if(!i)[0xff5f57,0xffbd2e,0x28c840].forEach(function(c,k){var dt=new THREE.Mesh(new THREE.CircleGeometry(.05,16),new THREE.MeshBasicMaterial({color:c}));dt.position.set(-1.5+k*.14,1.2,.02);g4.add(dt)})});
@@ -68,13 +70,13 @@ for(i=0;i<22;i++){var gm=new THREE.Mesh(RG2,new THREE.MeshBasicMaterial({color:i
 var por=new THREE.Mesh(new THREE.CircleGeometry(6,64),new THREE.MeshBasicMaterial({color:GD,transparent:true,opacity:.2,blending:THREE.AdditiveBlending,depthWrite:false}));por.position.z=-152;gtg.add(por);
 function stAnim(t){g0.rotation.y=t*.25;g0.rotation.x=t*.1;pls.forEach(function(p){p.position.copy(p.userData.n.position).multiplyScalar((t*.55+p.userData.o)%1)});
 wfn.forEach(function(n,i){n.scale.setScalar(1+.06*Math.sin(t*3+i))});wpk.forEach(function(p){p.position.copy(p.userData.c.getPoint((t*.35+p.userData.o)%1))});g1.rotation.y=Math.sin(t*.4)*.3;g2.rotation.y=-t*.35;ply.rotation.y=Math.sin(t)*.5;ply.scale.setScalar(1+.07*Math.sin(t*3));
-tk.rotation.set(t*.3,t*.4,0);tw.rotation.copy(tk.rotation);g4.rotation.y=Math.sin(t*.5)*.25-.3;gts.forEach(function(g,i){g.rotation.z=t*.12*(i%2?1:-1)})}
+if(cast&&g3.visible)cast.update(t,{x:mx,y:my});tk.rotation.set(t*.3,t*.4,0);tw.rotation.copy(tk.rotation);g4.rotation.y=Math.sin(t*.5)*.25-.3;gts.forEach(function(g,i){g.rotation.z=t*.12*(i%2?1:-1)})}
 
 var mx=0,my=0,tx=0,ty=0,sv=0,ly=0,hw=7,bx=3,by=0,py=0,t=0;
 addEventListener('pointermove',function(e){tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5});
 function prog(){var d=document.documentElement.scrollHeight-innerHeight;return d>0?Math.min(1,Math.max(0,scrollY/d)):0}
 function size(){r.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();
-hw=4.2*cam.aspect;var w=cam.aspect>1.1;
+hw=4.2*cam.aspect;var w=cam.aspect>1.1;fitCast(w);
 if(w){var s=Math.min(1,hw/5.6);pg2.scale.setScalar(s);bx=hw*.5;by=0;py=0}else{var s2=Math.min(1,hw*1.6/5.6);pg2.scale.setScalar(s2);bx=0;by=1.7;py=1.7}
 draw()}
 function draw(){if(lost)return;var J=window.J||{x:1,y:0,s:1};if(window.JPS&&window.K&&scrollY<window.JPS()-2){var k0=window.K;k0.z=9;k0.fov=50;k0.po=1;k0.vis=1;J.x=1;J.y=0;J.s=1.45}var ho=window.IFFY&&window.IFFY.home,K=(ho&&window.K)||{z:9,fov:50},off=window.IFFY&&window.IFFY.off,wd=cam.aspect>1.1,q=Math.min(1,scrollY/innerHeight);if(!ho)J={x:1,y:0,s:1};
@@ -82,7 +84,7 @@ orb.visible=!off&&(ho?J.s>.05:wd);orb.position.set(wd?J.x*hw*.5:J.x*hw*.2,wd?J.y
 if(ho&&J.r!=null)U.uC.value.setRGB(J.r,J.g,J.b);
 pg2.position.set(bx,py,0);pg2.rotation.y=mx*.45;pg2.rotation.x=my*.25;
 var o=ho?(window.K?K.po:Math.max(0,1-q*1.4)):0;pm.material.opacity=o;halo.material.opacity=o;pg2.visible=o>.01;
-stg.visible=!!ho&&K.z<-6&&(K.vis==null||K.vis>.02);gtg.visible=stg.visible;if(stg.visible)stg.children.forEach(function(g){g.visible=Math.abs(K.z-g.position.z)<22;g.position.x=wd?3:0;g.position.y=wd?0:1.7;g.scale.setScalar(wd?1:.7)});
+stg.visible=!!ho&&K.z<-6&&(K.vis==null||K.vis>.02);gtg.visible=stg.visible;if(stg.visible)stg.children.forEach(function(g){g.visible=Math.abs(K.z-g.position.z)<22;g.position.x=wd?3:0;g.position.y=wd?0:1.7;g.scale.setScalar(wd?1:.7)});if(stg.visible&&cast){if(wd)g3.position.x=castX;else g3.position.y=1.95;cast.group.visible=wd||K.z>g3.position.z+3.2}
 cam.fov=K.fov||50;cam.updateProjectionMatrix();cam.position.set(mx*.6,-my*.4,K.z);cam.lookAt(mx*.15,-my*.1,K.z-9);r.render(sc,cam)}
 addEventListener('resize',size);addEventListener('scroll',function(){if(still)draw()},{passive:true});
 size();

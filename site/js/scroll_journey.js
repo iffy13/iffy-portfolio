@@ -30,13 +30,13 @@ function chap(){if(!document.getElementById('top').classList.contains('cur'))ret
 addEventListener('scroll',chap,{passive:true});chap();act(0)}
 function bn(){gsap.to('.bigname',{xPercent:-10,ease:'none',scrollTrigger:{trigger:'#top .hero',start:'top top',end:'bottom top',scrub:true}})}
 function jt(){var wide=innerWidth>820,sn=gsap.utils.toArray('#jny .stn'),Z=function(i){return -32-i*18},K=window.K={z:9,fov:50,po:1,vis:1};
-var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#jny',start:'top top',end:function(){return '+='+innerHeight*(wide?13:10)},pin:true,scrub:.4,invalidateOnRefresh:true}});window.JPS=function(){return tl.scrollTrigger.start};
+var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#jny',start:'top top',end:function(){return '+='+innerHeight*(wide?13:8.7)},pin:true,scrub:.4,invalidateOnRefresh:true}});window.JPS=function(){return tl.scrollTrigger.start};
 tl.to(J,{x:0,y:0,s:7,duration:1.2,ease:'power2.in'},0).to(K,{po:0,duration:.8},.3).to('#fl',{opacity:1,duration:.5},.8).to(K,{z:Z(0),duration:.8,ease:'power1.inOut'},1).to(J,{s:.01,duration:.01},1.8).to('#fl',{opacity:0,duration:.5},1.8);
 if(!wide){
-tl.to(K,{z:Z(4)-30,duration:7.5,ease:'none'},1.8);
+tl.to(K,{z:Z(4)-16.4,duration:6.5,ease:'none'},1.8);
 sn.forEach(function(el,i){var t=1.8+i*1.32,a=Math.max(t-.5,2);tl.fromTo(el,{autoAlpha:0,y:60},{autoAlpha:1,y:0,duration:.35,ease:'power2.out'},a).to(el,{autoAlpha:0,y:-60,duration:.35,ease:'power2.in'},t+.5);
 tl.to(K,{fov:74,duration:.33,ease:'power1.out'},t+.5).to(K,{fov:50,duration:.33,ease:'power1.in'},t+.83)});
-tl.to(K,{vis:0,duration:.35},9.2);tl.to({},{duration:.2},9.5);return}
+tl.to(K,{vis:0,duration:.35},7.95);tl.to({},{duration:.1},8.3);return}
 sn.forEach(function(el,i){var s=2.3+i*1.8;tl.fromTo(el,{autoAlpha:0,y:50},{autoAlpha:1,y:0,duration:.3,ease:'power2.out'},s).to(el,{autoAlpha:0,y:-50,duration:.3,ease:'power2.in'},s+1);
 if(i<4){tl.to(K,{z:Z(i+1),duration:.6,ease:'power1.inOut'},s+1).to(K,{fov:80,duration:.3,ease:'power2.out'},s+1).to(K,{fov:50,duration:.3,ease:'power2.in'},s+1.3)}else tl.to(K,{z:Z(4)-34,duration:.6,ease:'power1.in'},s+1)});
 tl.to(K,{vis:0,duration:.4},10.7);tl.to({},{duration:.2},9.8)}
