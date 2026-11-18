@@ -68,7 +68,7 @@ Original build scripts and the old site clone were not preserved in this environ
 - site/js/cast_3d.js builds six characters in code (no model files) from the render assets/img/naija-lineup.webp: Lagos danfo conductor, Yaba tech designer, Ibadan market trader, Kano textile trader, Port Harcourt oil technician, Abuja NYSC corps member. One shared 19-bone rig, one skinned mesh per character (1 or 2 draw calls), about 35k triangles in total.
 - A roll call plays in a loop (wave, dance, wave, greet, cheer, salute). Heads follow the pointer. Colours, layout and clips are plain data at the top of the file (SPECS, CLIPS), lighting is makeEnv().
 - hero_3d_scene.js creates the cast shortly after load (idle time), adds it to station 4's group next to the knot and grid, fits it to the screen width (fitCast), hides it when a phone camera is about to fly through it, and rebuilds its lighting after a lost WebGL context.
-- Phone journey: the camera path ends right after station 05 (scroll length 8.7 screens instead of 10), and the station 04 text gradient starts lower in styles.css so the cast is not dimmed.
+- Phone journey: the camera now pauses at each station like on desktop, station 05 stays on screen until the pin releases, and the 3D stage fades out as the Proof section arrives (a scroll-linked fade in scroll_journey.js), so no frame is blank. Scroll length is 9.1 screens (was 10), Proof starts with 6vh of top padding on phones, and the station 04 text gradient starts lower in styles.css so the cast is not dimmed.
 - No 3D model files existed in Downloads. If real GLB files of the cast turn up, load them with a GLTF loader in place of the code-built bodies.
 - Not measured: frame rate on a budget phone.
 ## 3D page: live cast
