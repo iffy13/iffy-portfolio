@@ -291,6 +291,20 @@
       greet: function (P, t) { var b = Math.sin(((t % 2.6) / 2.6) * PI); P.chest = [.32 * b, 0, 0]; P.spine = [.12 * b, 0, 0]; P.head = [.18 * b, 0, 0]; P.uarmR = [-.35, 0, -.3]; P.farmR = [-1.9, 0, 0]; return P; },
       salute: function (P, t) { P.uarmR = [-.55, 0, -1.2]; P.farmR = [-2.3, .2, 0]; P.head = [-.06, .12, 0]; P.chest = [-.03, .05, 0]; return P; }
     };
+    // Two clips for the mini game (js/sample_game.js). They are not in CLIP_NAMES, so the animation viewer does not list them.
+    CLIPS.jump = function (P, t) {   // mid-air leap: one knee up, arms swinging
+      var e = Math.min(1, t * 9);
+      P.thighL = [-1.25 * e, 0, .04]; P.shinL = [1.35 * e, 0, 0]; P.thighR = [.5 * e, 0, -.04]; P.shinR = [.9 * e, 0, 0];
+      P.uarmL = [.9 * e, 0, .25]; P.uarmR = [-1.5 * e, 0, -.25]; P.farmL = [-.6, 0, 0]; P.farmR = [-1.2, 0, 0];
+      P.spine = [.12, 0, 0]; P.chest = [.04, 0, 0]; P.head = [-.12, 0, 0]; P.dy = 0; return P;
+    };
+    CLIPS.slide = function (P, t) {  // slide under a stall: hips low, leaning back, legs out in front
+      var e = Math.min(1, t * 10);
+      P.dy = -.58 * e;
+      P.thighL = [-1.35 * e, 0, .08]; P.thighR = [-1.2 * e, 0, -.08]; P.shinL = [.2, 0, 0]; P.shinR = [.15, 0, 0];
+      P.spine = [-.7 * e, 0, 0]; P.chest = [-.3 * e, 0, 0]; P.head = [.4 * e, 0, 0];
+      P.uarmL = [-.9 * e, 0, .55]; P.uarmR = [-.9 * e, 0, -.55]; P.farmL = [-.5, 0, 0]; P.farmR = [-.5, 0, 0]; return P;
+    };
     CLIPS.cheer = CLIPS.celebrate;
     var CLIP_NAMES = ['idle', 'walk', 'run', 'wave', 'talk', 'dance', 'celebrate', 'wahala', 'phone', 'greet'];
 
