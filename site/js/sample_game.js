@@ -265,7 +265,7 @@
     cast.group.traverse(function (o) { if (o.isMesh && !o.isSkinnedMesh) o.visible = false; });   // the cast's own shadow follows the jump, so use ours
 
     // ---- state
-    var mode = MODES[1][1], modeIdx = clamp(+load('mode', 1) || 1, 0, 2), skin = clamp(+load('skin', 0) || 0, 0, 5), state = 'ready', active = false, lastFrame = 0, aspect = 1.4, dCam = 7, camH = 3.2;
+    var mode = MODES[1][1], modeIdx = clamp(+load('mode', 1) || 1, 0, 2), skin = clamp(+load('skin', 0) || 0, 0, 5), state = 'ready', active = false, aspect = 1.4, dCam = 7, camH = 3.2;
     var D = 0, time = 0, vNow = 0, px = 0, py = 0, vy = 0, lane = 0, airborne = false, slideT = 0, slideOnLand = false, buf = 0, invul = 0, hurtT = 0, shake = 0, ramp = 0, rec = 1;
     var lives = 3, coins = 0, sc = 0, ranD = 0, best = 0, lastRowD = 0, nextD = 40, deadT = 0, tt = 0, ta = 0, curClip = '', newBest = false;
     var snd = load('snd', '0') === '1', ac = null, away = false, pausedBy = '';
@@ -583,7 +583,6 @@
     }
 
     function update(t, dt) {
-      lastFrame = performance.now();
       if (away) { away = false; pauseGame('away'); }   // the stage was hidden, scrolled off screen or lost its graphics context since the last frame
       if (state !== 'paused') { tt += dt; ta += dt * (state === 'play' ? .85 + .45 * clamp(vNow / mode.vmax, 0, 1) : 1); }
       stepGame(dt); clip(desired()); place(dt);
@@ -593,7 +592,7 @@
 
     // ---- input: keys, swipes, taps, buttons
     function onKey(e) {
-      if (!active || e.ctrlKey || e.metaKey || e.altKey || performance.now() - lastFrame > 2500) return;
+      if (!active || e.ctrlKey || e.metaKey || e.altKey) return;
       var tg = e.target, tag = tg && tg.tagName, k = e.key && e.key.length === 1 ? e.key.toLowerCase() : e.key, c = KEYS[k];
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (tg && tg.isContentEditable)) return;
       if (state === 'play') {
@@ -609,25 +608,25 @@
     addEventListener('keydown', onKey);
     addEventListener('keyup', function (e) { if (active && state === 'play' && e.key === ' ' && e.target && e.target.tagName === 'BUTTON') e.preventDefault(); });
     addEventListener('blur', function () { if (state === 'play') pauseGame('blur'); });
-    if (window.IntersectionObserver) new IntersectionObserver(function (e) { if (!e[e.length - 1].isIntersecting) away = true; }).observe(stage);
-    document.addEventListener('visibilitychange', function () { if (document.hidden) away = true; });
+    // leaving the screen (another page, another tab of the browser, scrolled away) pauses a run at once, so keys on other pages are never taken
+    if (window.IntersectionObserver) new IntersectionObserver(function (e) { if (!e[e.length - 1].isIntersecting) { away = true; pauseGame('away'); } }).observe(stage);
+    document.addEventListener('visibilitychange', function () { if (document.hidden) { away = true; pauseGame('away'); } });
     var sw = null;
     stage.addEventListener('pointerdown', function (e) {
       if (!active || (e.pointerType === 'mouse' && e.button !== 0)) return;
-      sw = { id: e.pointerId, x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now(), moved: false };
+      sw = { id: e.pointerId, x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: e.timeStamp, moved: false };   // event times, not "now": a slow frame must not turn a tap into a long press
     });
     stage.addEventListener('pointermove', function (e) {
-      if (!sw || sw.id !== e.pointerId || state !== 'play') return;
+      if (!sw || sw.id !== e.pointerId || sw.moved || state !== 'play') return;
       var dx = e.clientX - sw.x, dy = e.clientY - sw.y, th = Math.max(26, Math.min(stage.clientWidth, stage.clientHeight) * .07);
       if (Math.abs(dx) < th && Math.abs(dy) < th) return;
-      sw.moved = true;
+      sw.moved = true;   // one move per swipe: lift the finger for the next one
       if (Math.abs(dx) > Math.abs(dy)) cmd(dx < 0 ? 'left' : 'right'); else cmd(dy < 0 ? 'jump' : 'slide');
-      sw.x = e.clientX; sw.y = e.clientY;
     });
     function swEnd(e) {
       var s = sw; if (!s || s.id !== e.pointerId) return; sw = null;
       if (!active || e.type === 'pointercancel' || s.moved) return;
-      if (Math.hypot(e.clientX - s.x0, e.clientY - s.y0) > 14 || performance.now() - s.t > 450) return;
+      if (Math.hypot(e.clientX - s.x0, e.clientY - s.y0) > 14 || e.timeStamp - s.t > 450) return;
       if (state === 'play') cmd('jump'); else if (state === 'ready' || state === 'over') startRun(); else if (state === 'paused') resumeGame();
     }
     stage.addEventListener('pointerup', swEnd); stage.addEventListener('pointercancel', swEnd);
