@@ -10,7 +10,9 @@
     { id: 'ahsoka', name: 'Ahsoka Tano', file: 'assets/models/ahsoka.glb', mb: 3.4, src: 'CGTrader', blurb: 'A fully textured, game-ready character.', note: 'Fan art. Ahsoka Tano is a character owned by Lucasfilm and Disney.' },
     { id: 'knight', name: 'Knighty', file: 'assets/models/knight.glb', mb: 1.9, src: 'CGTrader', blurb: 'A high-poly sculpt. For the web it is thinned from about 1.5 million triangles to about 100,000.' },
     { id: 'harpy', name: 'Harpy', file: 'assets/models/harpy.glb', mb: 2.8, src: 'Free3D', blurb: 'A game-ready character with colour and normal maps.' },
-    { id: 'anime', name: 'Anime character', file: 'assets/models/anime.glb', mb: .5, src: 'Free3D', blurb: 'A light anime-style character.' }
+    { id: 'anime', name: 'Anime character', file: 'assets/models/anime.glb', mb: .5, src: 'Free3D', blurb: 'A light anime-style character.' },
+    { id: 'girl', name: 'Girl', file: 'assets/models/girl.glb', mb: 1.8, src: 'Free3D', blurb: 'A stylised character with face, outfit and hair textures.' },
+    { id: 'dress', name: 'Wedding dress girl', file: 'assets/models/dress.glb', mb: 2.4, src: 'CGTrader', blurb: 'A high-poly sculpt. For the web it is thinned from about 970,000 triangles to 90,000, and shown in plain colour because its texture files were not included.' }
   ];
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; }
