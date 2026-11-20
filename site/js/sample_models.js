@@ -7,7 +7,7 @@
   var WA = 'https://wa.me/2348075889359?text=', H = 2.3;
   var MODELS = [
     { id: 'runner', name: 'Rigged runner', file: 'assets/models/runner.glb', mb: 2.5, src: 'CGTrader', blurb: 'A rigged character with four animations. Pick one below.' },
-    { id: 'ahsoka', name: 'Ahsoka Tano', file: 'assets/models/ahsoka.glb', mb: 3.8, src: 'CGTrader', blurb: 'A fully textured, game-ready character.', note: 'Fan art. Ahsoka Tano is a character owned by Lucasfilm and Disney.' },
+    { id: 'ahsoka', name: 'Ahsoka Tano', file: 'assets/models/ahsoka.glb', mb: 3.4, src: 'CGTrader', blurb: 'A fully textured, game-ready character.', note: 'Fan art. Ahsoka Tano is a character owned by Lucasfilm and Disney.' },
     { id: 'knight', name: 'Knighty', file: 'assets/models/knight.glb', mb: 1.9, src: 'CGTrader', blurb: 'A high-poly sculpt. For the web it is thinned from about 1.5 million triangles to about 100,000.' },
     { id: 'harpy', name: 'Harpy', file: 'assets/models/harpy.glb', mb: 2.8, src: 'Free3D', blurb: 'A game-ready character with colour and normal maps.' },
     { id: 'anime', name: 'Anime character', file: 'assets/models/anime.glb', mb: .5, src: 'Free3D', blurb: 'A light anime-style character.' }
