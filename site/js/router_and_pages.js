@@ -16,11 +16,11 @@ box.appendChild(m);L+='<li><a href="#'+d.id+'">'+d.n+'</a></li>'});
 menu.firstElementChild.innerHTML=L;
 function setMenu(o){if(window.LN){o?LN.stop():LN.start()}document.documentElement.style.overflow=o?'hidden':'';menu.classList.toggle('open',o);mb.textContent=o?'Close':'Menu';mb.setAttribute('aria-expanded',o)}
 mb.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
-document.getElementById('ex').addEventListener('click',function(){setMenu(true)});
+var ex=document.getElementById('ex');if(ex)ex.addEventListener('click',function(){setMenu(true)});
 addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
 function raf2(f){requestAnimationFrame(function(){requestAnimationFrame(f)})}
 function on(el){if(document.body.classList.contains('ready'))raf2(function(){el.classList.add('on');window.RV&&RV(el)});else new MutationObserver(function(m,o){if(document.body.classList.contains('ready')){o.disconnect();el.classList.add('on');window.RV&&RV(el)}}).observe(document.body,{attributes:true})}
-function swap(id){var d=PG.filter(function(x){return x.id===id})[0],el=d?document.getElementById('p-'+id):home;if(!d)id='home';now=id;
+function swap(id){var d=PG.filter(function(x){return x.id===id})[0],el=d?document.getElementById('p-'+id):home;if(!d)id='home';now=id;document.documentElement.dataset.page=id;
 document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('cur','on')});el.classList.add('cur');function top2(){scrollTo(0,0);if(window.LN)LN.scrollTo(0,{immediate:true,force:true})}top2();setTimeout(top2,50);setTimeout(function(){top2();window.ScrollTrigger&&ScrollTrigger.refresh();top2()},120);setTimeout(top2,450);
 if(window.IFFY){IFFY.home=!d;IFFY.off=['agents','automation','video','3d','web','projects','samples'].indexOf(id)>-1;var c=d?d.c:[1,.5,.1];IFFY.U.uC.value.setRGB(c[0],c[1],c[2])}
 document.title=(d?d.n+' | ':'')+'Iffy Studio | AI Agents, Automation and 3D';on(el);window.AFTER&&AFTER(id);window.RESETH&&RESETH(id)}

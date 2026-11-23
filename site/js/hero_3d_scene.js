@@ -1,7 +1,5 @@
 (function(){
 var IMG="assets/img/portrait.jpg",cv=document.getElementById('gl'),still=matchMedia('(prefers-reduced-motion:reduce)').matches,lost=false;
-var h=document.querySelector('h1');h.setAttribute('aria-label','I build AI agents, automation, 3D, AI video and more.');
-h.innerHTML='<span class="w" aria-hidden="true"><i style="--i:0">I</i></span> <span class="w" aria-hidden="true"><i style="--i:1">build</i></span><br><span class="rwrap" aria-hidden="true"><span class="rw">AI agents</span></span>.';
 var ld=document.getElementById('ld'),ln=document.getElementById('ln'),lb=document.getElementById('lb'),t0=performance.now(),loaded=document.readyState==='complete',fin=false,shown=false;
 function show(){if(shown)return;shown=true;ld.classList.add('done');document.body.classList.add('ready');setTimeout(function(){ld.style.display='none'},1000)}
 function go2(){if(go2.d)return;go2.d=1;try{window.FORM?FORM(show):show()}catch(e){show()}}addEventListener('load',function(){loaded=true;if(fin)go2()});
@@ -88,7 +86,7 @@ stg.visible=!!ho&&K.z<-6&&(K.vis==null||K.vis>.02);gtg.visible=stg.visible;if(st
 cam.fov=K.fov||50;cam.updateProjectionMatrix();cam.position.set(mx*.6,-my*.4,K.z);cam.lookAt(mx*.15,-my*.1,K.z-9);r.render(sc,cam)}
 addEventListener('resize',size);addEventListener('scroll',function(){if(still)draw()},{passive:true});
 size();
-function loop(now){t=now/1000;mx+=(tx-mx)*.05;my+=(ty-my)*.05;
+function loop(now){if(document.documentElement.dataset.page==='home'){requestAnimationFrame(loop);return}t=now/1000;mx+=(tx-mx)*.05;my+=(ty-my)*.05;
 sv+=(Math.min(Math.abs(scrollY-ly),80)/80-sv)*.08;ly=scrollY;
 U.uT.value=t*.7;
 orb.rotation.y=t*.12+mx;wire.rotation.x=t*.1;pts.rotation.y=-t*.05;

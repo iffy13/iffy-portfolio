@@ -50,6 +50,11 @@
     size();
   }
 
+  // IFFY_SAMPLES.open(id) is used by the home page to open one sample straight away
+  var want = null;
+  function pick() { if (!want) return; for (var i = 0; i < list.length; i++) if (list[i].id === want) { select(i); break; } want = null; }
+  window.IFFY_SAMPLES.open = function (id) { want = id; if (ready) pick(); };
+
   function boot() {
     if (booted || failed) return;
     booted = 1;
@@ -64,7 +69,7 @@
       cv.addEventListener('webglcontextrestored', function () { inst.forEach(function (a) { if (a && a.restore) a.restore(pm); }); lost = false; });
       if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else addEventListener('resize', size);
       ready = true; t0 = performance.now();
-      tabsRender(); if (list.length) select(0);
+      tabsRender(); if (list.length) select(0); pick();
       size();
     } catch (e) {
       failed = 1; stage.classList.add('off'); stage.insertAdjacentHTML('beforeend', '<p class="smp-off">Live samples need WebGL, and this browser does not offer it.</p>');
