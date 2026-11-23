@@ -1,606 +1,353 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Iffy Dev Portfolio</title>
-<meta name="description" content="Iffy Dev builds AI agents, n8n automations, SaaS products, 3D and 2D visuals and AI video for growing businesses.">
-<meta property="og:title" content="Iffy Dev | AI Agents, Automation & Creative Tech">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Iffy Studio | AI Agents, Automation and 3D</title>
+<meta name="description" content="Iffy Studio builds AI agents, n8n automations, SaaS products, 3D visuals and AI video for growing businesses.">
+<link rel="canonical" href="https://iffystudio.site/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iffystudio.site/">
+<meta property="og:title" content="Iffy Studio | AI Agents, Automation and 3D">
 <meta property="og:description" content="AI agents, automation, 3D, AI video and SaaS, built by one developer.">
-<meta property="og:image" content="assets/copperstate.webp">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F2B544'/><text x='16' y='23' font-family='Georgia' font-style='italic' font-size='20' text-anchor='middle' fill='%230B1517'>i</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
-<script>try { var t = localStorage.getItem('iffy-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
-<style>
-/* Layout: deep-teal workshop; text-first hero with framed portrait; squared cards; saffron accent */
-:root {
-  --bg: #0B1517;  --bg-2: #0F1C1F;  --card: #122226;  --card-hi: #172B30;
-  --line: #22383D; --ink: #E8F0EE;  --muted: #93A9A8; --accent: #F2B544; --accent-ink: #1A1203;
-  --glow: rgba(64,180,170,.10);
-  --f-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --gutter: clamp(16px, 4vw, 40px); --max: 1180px; --r: 10px;
-  color-scheme: dark;
-}
-:root[data-theme="light"] {
-  --bg: #EDF2F1; --bg-2: #E2EAE8; --card: #FFFFFF; --card-hi: #F7FAF9;
-  --line: #CFDCDA; --ink: #0E2226; --muted: #4F6668; --accent: #A8670E; --accent-ink: #FFFFFF;
-  --glow: rgba(40,140,130,.10);
-  color-scheme: light;
-}
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.65 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-  background: radial-gradient(900px 520px at 85% -10%, var(--glow), transparent 60%), radial-gradient(700px 500px at -10% 40%, var(--glow), transparent 60%); }
-img { max-width: 100%; display: block; }
-[hidden] { display: none !important; }
-a { color: inherit; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 700; line-height: 1.04; margin: 0; letter-spacing: -0.025em; text-wrap: balance; }
-p { margin: 0; }
-em { font-style: normal; color: var(--accent); }
-.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
-.eyebrow { font: 600 .7rem/1 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-
-.btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 8px; font: 600 .9rem/1 var(--f-body); text-decoration: none; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s, border-color .2s; }
-.btn svg { width: 15px; height: 15px; }
-.btn:hover { border-color: var(--accent); transform: translateY(-1px); }
-.btn-rose { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.btn-rose:hover { box-shadow: 0 10px 30px -10px var(--accent); }
-
-/* Nav */
-.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-.nav-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
-.logo { font: 800 1.3rem/1 var(--f-display); letter-spacing: -0.03em; text-decoration: none; }
-.logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
-.nav-links a { text-decoration: none; font-size: .85rem; color: var(--muted); transition: color .2s; }
-.nav-links a:hover { color: var(--ink); }
-.nav-right { display: flex; gap: 8px; align-items: center; }
-.icon-btn { width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--ink); display: grid; place-items: center; cursor: pointer; }
-.icon-btn:hover { border-color: var(--accent); }
-.icon-btn svg { width: 17px; height: 17px; }
-.theme-btn .sun { display: block; } .theme-btn .moon { display: none; }
-:root[data-theme="light"] .theme-btn .sun { display: none; }
-:root[data-theme="light"] .theme-btn .moon { display: block; }
-.nav .btn { padding: 10px 16px; font-size: .82rem; }
-.menu-btn { display: none; }
-.mobile-menu { margin-block: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); padding: 8px 20px; display: grid; }
-.mobile-menu a { padding: 14px 0; font: 500 1.3rem/1 var(--f-display); text-decoration: none; border-bottom: 1px solid var(--line); }
-.mobile-menu a:last-child { border-bottom: 0; }
-@media (max-width: 860px) { .nav-links, .nav .btn { display: none; } .menu-btn { display: grid; } }
-@media (min-width: 861px) { .mobile-menu { display: none !important; } }
-
-/* Hero */
-.hero { padding-block: clamp(28px, 5vw, 64px) clamp(56px, 8vw, 100px); }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
-.portrait { order: 2; position: relative; aspect-ratio: 4 / 4.6; max-width: 100%; border-radius: 12px; outline: 1px solid var(--accent); outline-offset: 10px; border: 1px solid var(--line); overflow: hidden;
-  background: linear-gradient(160deg, #1E4B4D 0%, #12302F 55%, #0B1D1E 100%); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
-.portrait img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 92%; width: auto; max-width: none; }
-.portrait::after { content: ""; position: absolute; inset: auto 0 0 0; height: 32%; background: linear-gradient(transparent, rgba(8,18,20,.85)); }
-.tag { position: absolute; z-index: 2; font: 600 .62rem/1 var(--f-body); letter-spacing: .18em; text-transform: uppercase; padding: 9px 12px; border-radius: 999px; background: rgba(8,18,20,.72); color: #E8F0EE; border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(6px); }
-.tag.top { top: 16px; right: 16px; }
-.tag.bottom { bottom: 18px; left: 18px; background: transparent; border: 0; padding: 0; color: rgba(232,240,238,.85); }
-.hero-text { display: grid; gap: 22px; min-width: 0; }
-.hero-text .eyebrow { display: flex; align-items: center; gap: 14px; }
-.hero-text .eyebrow::before { content: ""; width: 40px; height: 1px; background: var(--accent); }
-.hero h1 { font-size: clamp(3.2rem, 8.6vw, 6.8rem); line-height: .9; font-weight: 800; letter-spacing: -0.045em; }
-.hero h1 em { display: block; }
-.hero .lede { color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.1rem); max-width: 54ch; }
-.hero .lede strong { color: var(--ink); font-weight: 600; }
-.cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
-.avail { display: inline-flex; align-items: center; gap: 10px; font-size: .85rem; color: var(--muted); }
-.pulse { width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,128,.55); } 70% { box-shadow: 0 0 0 10px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
-@media (max-width: 820px) { .hero-grid { grid-template-columns: 1fr; } .portrait { width: min(100%, 380px); } }
-@media (prefers-reduced-motion: no-preference) {
-  .js .hero-text > *, .js .portrait { opacity: 0; transform: translateY(14px); }
-  .ready .hero-text > *, .ready .portrait { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
-  .ready .hero-text > *:nth-child(2) { transition-delay: .08s; } .ready .hero-text > *:nth-child(3) { transition-delay: .16s; }
-  .ready .hero-text > *:nth-child(4) { transition-delay: .24s; } .ready .hero-text > *:nth-child(5) { transition-delay: .32s; }
-}
-
-/* Sections */
-section.block { padding-block: clamp(64px, 9vw, 112px); }
-.sec-head { display: grid; gap: 14px; margin-bottom: clamp(32px, 4vw, 48px); max-width: 720px; }
-.sec-head h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
-.sec-head p { color: var(--muted); max-width: 56ch; }
-.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); }
-
-/* Featured */
-.featured { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
-.shot { padding: 8px; border-radius: 12px; overflow: hidden; }
-.shot-in { position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: var(--bg-2); }
-.shot-in img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
-.shot:hover .shot-in img { transform: scale(1.04); }
-.feat-side { padding: clamp(22px, 3vw, 32px); display: grid; gap: 16px; align-content: center; background: linear-gradient(160deg, var(--card-hi), var(--card)); }
-.pill { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font: 600 .62rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); padding: 8px 12px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
-.feat-side h3 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
-.feat-side p { color: var(--muted); font-size: .95rem; }
-.feat-side hr { border: 0; border-top: 1px solid var(--line); margin: 4px 0; width: 100%; }
-@media (max-width: 860px) { .featured { grid-template-columns: 1fr; } }
-.shot-in.fit img { object-fit: contain; object-position: center; }
-.case .shot-in { aspect-ratio: auto; }
-.shot-in .play { position: absolute; left: 10px; bottom: 10px; font: 600 .72rem/1 var(--f-body); padding: 7px 10px; border-radius: 5px; background: rgba(8,18,20,.8); color: #E8F0EE; }
-.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-.vgrid figure { margin: 0; display: grid; gap: 6px; }
-.vgrid .wide { grid-column: 1 / -1; }
-.vgrid video { width: 100%; display: block; border-radius: 8px; background: #000; border: 1px solid var(--line); }
-.vgrid .tall video { aspect-ratio: 9 / 16; object-fit: cover; }
-.vgrid figcaption { font-size: .8rem; color: var(--muted); }
-.case.is-video { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
-
-/* Testimonials */
-.tgrid { columns: 3 280px; column-gap: 14px; }
-.tcard { margin: 0 0 14px; break-inside: avoid; padding: 24px; display: grid; gap: 16px; align-content: start; position: relative; }
-.tcard .stars { color: var(--accent); letter-spacing: 2px; font-size: .95rem; }
-.tcard blockquote { margin: 0; font-size: 1.02rem; line-height: 1.6; }
-.tcard blockquote::before { content: "\201C"; display: block; font: 800 3rem/0.6 var(--f-display); color: color-mix(in srgb, var(--accent) 60%, transparent); margin-bottom: 8px; }
-.tcard footer { display: flex; align-items: center; gap: 12px; margin: 0; padding: 14px 0 0; border-top: 1px solid var(--line); }
-.tcard .ava { width: 38px; height: 38px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 16%, var(--card)); color: var(--accent); font: 800 .95rem/1 var(--f-display); flex: none; }
-.tcard .who { min-width: 0; display: grid; gap: 2px; }
-.tcard .who b { font-weight: 600; }
-.tcard .who small { color: var(--muted); font-size: .8rem; }
-.tcard .src { margin-left: auto; font: 600 .62rem/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; white-space: nowrap; }
-.tcard .proj { justify-self: start; font-size: .82rem; }
-.tcard .trans { margin: -6px 0 0; color: var(--muted); font-size: .86rem; font-style: italic; }
-.tcard.sample { border-style: dashed; opacity: .75; }
-.tcard.sample::after { content: "Sample, add your real review"; position: absolute; top: 12px; right: 12px; font: 600 .6rem/1 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-/* Reel strip on home */
-.reel { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
-.reel button { position: relative; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #000; cursor: pointer; aspect-ratio: 9 / 16; max-width: 100%; color: #E8F0EE; font: inherit; text-align: left; }
-.reel video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; }
-.reel button:hover video { transform: scale(1.04); }
-.reel span { position: absolute; left: 10px; right: 10px; bottom: 10px; font: 600 .78rem/1.3 var(--f-body); text-shadow: 0 1px 8px rgba(0,0,0,.7); }
-@media (max-width: 900px) { .reel { grid-template-columns: repeat(3, minmax(0, 1fr)); } .reel button:nth-child(n+4) { display: none; } }
-@media (max-width: 520px) { .reel { grid-template-columns: repeat(2, minmax(0, 1fr)); } .reel button:nth-child(3) { display: none; } }
-
-.case .shot-in img { height: auto; object-fit: contain; }
-
-
-/* Services */
-.svc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.svc { padding: 22px; display: grid; gap: 14px; align-content: start; transition: border-color .25s, transform .25s, background .25s; }
-.svc:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); transform: translateY(-2px); background: var(--card-hi); }
-.svc-top { display: flex; justify-content: space-between; align-items: center; }
-.svc-ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.svc-ico svg { width: 18px; height: 18px; }
-.svc h3 { font-size: 1.22rem; }
-.svc p { color: var(--muted); font-size: .9rem; }
-@media (max-width: 900px) { .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
-
-/* Work categories */
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-.tab { font: 500 .8rem/1 var(--f-body); padding: 10px 16px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--muted); cursor: pointer; transition: all .2s; }
-.tab:hover { color: var(--ink); border-color: var(--accent); }
-.tab[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.cat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.cat { position: relative; text-align: left; font: inherit; color: inherit; padding: clamp(22px, 3vw, 30px); min-height: 220px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; gap: 10px 16px; cursor: pointer; overflow: hidden; transition: border-color .25s, transform .25s; }
-.cat:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); transform: translateY(-2px); }
-.cat.wide { grid-column: 1 / -1; }
-.cat .bgimg { position: absolute; inset: 0; opacity: .07; filter: grayscale(.4); background-size: cover; background-position: top; transition: opacity .4s; }
-.cat:hover .bgimg { opacity: .16; }
-.cat::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--card) 30%, transparent); pointer-events: none; }
-.cat > *:not(.bgimg) { z-index: 1; }
-.cat > *:not(.bgimg) { position: relative; }
-.cat .svc-ico { grid-column: 1; }
-.cat .count { grid-column: 2; font: 800 2.6rem/1 var(--f-display); color: color-mix(in srgb, var(--ink) 18%, transparent); }
-.cat .body { grid-column: 1; grid-row: 3; display: grid; gap: 6px; min-width: 0; }
-.cat .meta { font: 600 .62rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
-.cat h3 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); }
-.cat p { color: var(--muted); font-size: .9rem; max-width: 52ch; }
-.cat .go { grid-column: 2; grid-row: 3; align-self: end; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); transition: background .25s, color .25s, border-color .25s; }
-.cat:hover .go { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.cat .go svg { width: 16px; height: 16px; }
-@media (max-width: 640px) { .cat-grid { grid-template-columns: 1fr; } }
-
-/* Collection overlay */
-.overlay { position: fixed; inset: 0; z-index: 60; background: var(--bg); overflow-y: auto; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
-.ov-head { position: sticky; top: 0; z-index: 2; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.ov-head .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; }
-.crumb { font-size: .85rem; color: var(--muted); min-width: 0; }
-.crumb b { color: var(--ink); font-weight: 600; }
-.ov-intro { padding-block: clamp(36px, 6vw, 64px) 28px; display: grid; gap: 12px; }
-.ov-intro h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
-.ov-intro p { color: var(--muted); max-width: 56ch; }
-.proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding-bottom: 72px; }
-.proj { text-align: left; font: inherit; color: inherit; padding: 10px 10px 20px; display: grid; gap: 14px; cursor: pointer; transition: border-color .25s, transform .25s; }
-.proj:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); transform: translateY(-2px); }
-.proj:hover .shot-in img { transform: scale(1.04); }
-.proj .txt { padding-inline: 10px; display: grid; gap: 6px; }
-.proj .meta { font: 600 .62rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
-.proj h3 { font-size: 1.45rem; }
-.proj p { color: var(--muted); font-size: .92rem; }
-@media (max-width: 700px) { .proj-grid { grid-template-columns: 1fr; } }
-
-/* Case study */
-.case { align-items: start; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); padding-block: clamp(28px, 5vw, 56px) 80px; }
-.case .shots { display: grid; gap: 14px; }
-.case-info { display: grid; gap: 22px; align-content: start; }
-.case-info h2 { font-size: clamp(2rem, 4vw, 3rem); }
-.case-info .tagline { color: var(--muted); font-size: 1.05rem; }
-.case-sec { display: grid; gap: 8px; padding-top: 18px; border-top: 1px solid var(--line); }
-.case-sec h4 { margin: 0; font: 600 .66rem/1 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
-.case-sec p, .case-sec li { color: var(--muted); font-size: .95rem; }
-.case-sec ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
-.chips li { font-size: .76rem; padding: 6px 10px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); background: var(--card); }
-@media (max-width: 860px) { .case { grid-template-columns: 1fr; } }
-
-/* Process */
-.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.step { padding: 24px; display: grid; gap: 10px; align-content: start; }
-.step .n { font: 800 2.6rem/1 var(--f-display); color: color-mix(in srgb, var(--accent) 65%, transparent); }
-.step h3 { font-size: 1.3rem; margin-top: 10px; }
-.step p { color: var(--muted); font-size: .9rem; }
-@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
-
-/* Numbers */
-.numbers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
-.num { padding: 22px 24px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-.num b { font: 800 2.4rem/1 var(--f-display); color: var(--accent); font-variant-numeric: tabular-nums; }
-.num span { color: var(--muted); font-size: .9rem; }
-@media (max-width: 640px) { .numbers { grid-template-columns: 1fr; } }
-
-/* Contact */
-.contact { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 48px); padding: clamp(22px, 4vw, 40px); }
-.contact-side { display: grid; gap: 18px; align-content: start; }
-.contact-side h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
-.contact-side p { color: var(--muted); font-size: .95rem; }
-.reach { display: grid; }
-.reach a { display: grid; gap: 2px; padding: 14px 0; border-top: 1px solid var(--line); text-decoration: none; }
-.reach a:hover span { color: var(--accent); }
-.reach small { font: 600 .62rem/1.6 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-.reach span { font-weight: 500; word-break: break-word; transition: color .2s; }
-form { display: grid; gap: 14px; }
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
-.field { display: grid; gap: 7px; }
-.field label { font-size: .8rem; color: var(--muted); }
-.field input, .field select, .field textarea { width: 100%; font: 400 .95rem/1.4 var(--f-body); color: var(--ink); background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px; }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
-.field textarea { min-height: 120px; resize: vertical; }
-.form-note { font-size: .88rem; color: var(--muted); min-height: 1.3em; }
-.hp { position: absolute; left: -9999px; }
-form .btn-rose { justify-self: start; }
-@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
-
-footer { border-top: 1px solid var(--line); padding-block: 32px; margin-top: clamp(56px, 8vw, 96px); }
-.foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: .85rem; color: var(--muted); }
-.foot b { font: 600 1.1rem/1 var(--f-display); color: var(--ink); display: block; margin-bottom: 6px; }
-.foot nav { display: flex; gap: 18px; flex-wrap: wrap; }
-.foot nav a { text-decoration: none; } .foot nav a:hover { color: var(--accent); }
-</style>
+<meta property="og:image" content="https://iffystudio.site/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#140803" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#e4d6c3" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/home_intro.css">
+<link rel="stylesheet" href="css/home_hero.css">
+<link rel="stylesheet" href="css/home_scroll.css">
+<link rel="stylesheet" href="css/home_fx.css">
+<script>document.documentElement.className='js';var hp=location.hash.slice(1);document.documentElement.dataset.page=(!hp||hp==='home')?'home':hp;try{var th=localStorage.getItem('th');if(th)document.documentElement.dataset.theme=th}catch(e){}</script>
 </head>
 <body>
-
-<header class="nav">
-  <div class="wrap">
-    <div class="nav-in">
-      <a href="#top" class="logo">Iffy<span>.</span>Dev</a>
-      <ul class="nav-links">
-        <li><a href="#top">Home</a></li><li><a href="#services">Services</a></li><li><a href="#work">Portfolio</a></li><li><a href="#process">Process</a></li><li><a href="#contact">Contact</a></li>
-      </ul>
-      <div class="nav-right">
-        <button class="icon-btn theme-btn" id="themeBtn" type="button" aria-label="Switch light or dark mode">
-          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>
-        </button>
-        <a href="#contact" class="btn btn-rose">Hire me</a>
-        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
-        </button>
-      </div>
-    </div>
-    <nav class="mobile-menu" id="mobileMenu" hidden>
-      <a href="#services">Services</a><a href="#work">Portfolio</a><a href="#process">Process</a><a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="portrait">
-        <span class="tag top">Agents · Automation · Visuals</span>
-        <img src="assets/profile.png" alt="Portrait of Iffy smiling with arms crossed" width="306" height="402">
-        <span class="tag bottom">AI &amp; creative developer</span>
-      </div>
-      <div class="hero-text">
-        <p class="eyebrow">AI Agents · Automation · 3D · AI Video · SaaS</p>
-        <h1>Iffy <em>Developer</em></h1>
-        <p class="lede">I'm <strong>Iffy</strong>. I build AI agents and automations that run parts of your business for you, SaaS products, 3D and 2D visuals, and AI-generated video. When you need it, I build the store or website too.</p>
-        <div class="cta-row">
-          <a href="#work" class="btn btn-rose">Explore my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <button type="button" class="btn" onclick="window.iffyChat && window.iffyChat.open()">✦ Ask my AI</button>
+<div id="ld" aria-hidden="true"><canvas id="lcv"></canvas><div class="lc"><div class="lo" id="lt"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span><span style="--i:9"></span></div><p class="ln"><span id="ln">0</span></p></div><p class="lt">IFFY STUDIO</p><div class="bar"><b id="lb"></b></div><p class="lt2">AI agents, automation and 3D</p></div>
+<canvas id="gl" aria-hidden="true"></canvas><div id="sp"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div><div id="cr"></div>
+<nav id="menu" aria-label="Pages" data-lenis-prevent><ul></ul></nav><div id="cur" aria-hidden="true"></div>
+<div class="wrap">
+<header><a class="logo" href="#home">Iffy Studio</a><span class="clab" id="cl"></span>
+<nav><a href="#home">Home</a><a href="#services">Services</a><a href="#projects">Projects</a><a class="nvs" href="#samples">Samples</a><a href="#contact">Contact</a><button class="mbtn" id="tg" type="button">Light</button><button class="mbtn" id="mb" type="button" aria-expanded="false" aria-controls="menu">Menu</button><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%27d%20like%20to%20discuss%20my%20project." target="_blank" rel="noopener">Hire me</a></nav></header>
+<main id="top" class="pg cur">
+<!-- HERO -->
+<div class="e-hero">
+  <div class="e-wrap">
+    <p class="e-meta"><span>Portfolio 2026</span><span>AI, video, 3D and games</span><span>Freelance, working from <b>Nigeria</b></span></p>
+    <h1><span>Agents that work.</span><span>Video that sells.</span><span class="e-o">Worlds you can play.</span></h1>
+    <div class="e-hero-grid">
+      <div class="e-hero-copy">
+        <p class="e-sub">I build AI agents, automation, video ads, 3D characters, games and websites, and <em>you can try the work live</em> below.</p>
+        <div class="e-cta-row">
+          <a class="e-btn e-btn--ember" href="#samples">See live samples
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a class="e-btn e-btn--ghost" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">Order on WhatsApp
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
         </div>
-        <span class="avail"><i class="pulse" aria-hidden="true"></i>Available for new projects · Remote, worldwide</span>
+        <ul class="e-range" aria-label="What I make">
+          <li><span>AI agents and automation</span><span>WhatsApp, CRM, n8n</span></li>
+          <li><span>AI video and UGC ads</span><span>Product spots</span></li>
+          <li><span>3D characters and design</span><span>Rigged, game-ready</span></li>
+          <li><span>Game assets and animation</span><span>Pixel and low-poly</span></li>
+          <li><span>Websites and online stores</span><span>Shopify, Hydrogen</span></li>
+          <li><span>SaaS and games</span><span>Built to launch</span></li>
+        </ul>
       </div>
-    </div>
-  </section>
-
-  <section class="block" id="featured" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Featured work</p><h2 id="featTitle">Systems that run <em>themselves</em>.</h2></div>
-      <div class="featured" id="featured-slot"></div>
-    </div>
-  </section>
-
-  <section class="block" id="reel" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">AI video &amp; animation</p><h2>Ads and stories, <em>generated</em> and edited.</h2><p>UGC-style product ads, 3D-style animated shorts and product spots. Tap one to see the set.</p></div>
-      <div class="reel" id="reelGrid"></div>
-    </div>
-  </section>
-
-  <section class="block" id="services">
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">What I do</p><h2>AI, automation and visuals <em>under one roof</em>.</h2><p>Pick one service or hand me the whole build. You work with one person from the first call to launch.</p></div>
-      <div class="svc-grid" id="svcGrid"></div>
-      <div class="numbers">
-        <div class="panel num"><b>50+</b><span>Projects completed</span></div>
-        <div class="panel num"><b>30+</b><span>Happy clients</span></div>
-        <div class="panel num"><b>5+</b><span>Years of experience</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="work">
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Selected work</p><h2>Explore my work</h2><p>A growing archive of agents, automations, 3D, video and products I've built. Choose a category to open its collection.</p></div>
-      <div class="tabs" id="tabs" role="group" aria-label="Filter categories"></div>
-      <div class="cat-grid" id="catGrid"></div>
-    </div>
-  </section>
-
-  <section class="block" id="process">
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">My process</p><h2>From first call to <em>launch day</em>.</h2></div>
-      <div class="steps">
-        <div class="panel step"><span class="n">01</span><h3>Discover</h3><p>We talk through your goals, your customers and what isn't working today.</p></div>
-        <div class="panel step"><span class="n">02</span><h3>Plan</h3><p>You get a clear scope, timeline and price before any work starts.</p></div>
-        <div class="panel step"><span class="n">03</span><h3>Build</h3><p>I build in stages and share progress links so you can review as we go.</p></div>
-        <div class="panel step"><span class="n">04</span><h3>Launch</h3><p>We go live, I test everything, and I stay on hand for fixes and updates.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="reviews" hidden>
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Client reviews</p><h2>What clients <em>say</em>.</h2><p>Real feedback from real projects.</p></div>
-      <div class="tgrid" id="tgrid"></div>
-    </div>
-  </section>
-
-  <section class="block" id="contact" style="padding-bottom:0">
-    <div class="wrap">
-      <div class="sec-head"><p class="eyebrow">Start a conversation</p><h2>Let's talk about your project</h2><p>Tell me what you want automated, built or brought to life.</p></div>
-      <div class="panel contact">
-        <div class="contact-side">
-          <h3>Let's take the busywork off your plate and make your brand stand out.</h3>
-          <p>Share a few details and I'll reply within a day with next steps.</p>
-          <div class="reach">
-            <a href="mailto:samuelgansallo04@gmail.com"><small>Email</small><span>samuelgansallo04@gmail.com</span></a>
-            <a href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%27d%20like%20to%20discuss%20my%20project." target="_blank" rel="noopener"><small>WhatsApp</small><span>+234 807 588 9359</span></a>
-          </div>
+      <figure class="e-hero-fig">
+        <img fetchpriority="high" class="e-portrait" src="assets/img/portrait.jpg" width="720" height="720" alt="Portrait of Samuel Gansallo against an orange backdrop">
+        <div class="e-stamp" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="hm-stampc" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs>
+            <g class="e-spin"><text><textPath href="#hm-stampc" startOffset="0" textLength="274" lengthAdjust="spacing">IFFY STUDIO · OPEN FOR WORK · </textPath></text></g>
+            <circle class="e-dot" cx="60" cy="60" r="9"/></svg>
         </div>
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
-          <input type="hidden" name="form-name" value="contact">
-          <p class="hp"><label>Leave empty <input name="bot-field" id="bot-field"></label></p>
-          <div class="row2">
-            <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" required autocomplete="name"></div>
-            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
-          </div>
-          <div class="row2">
-            <div class="field"><label for="f-site">Company or website (if any)</label><input id="f-site" name="website" placeholder="yourcompany.com"></div>
-            <div class="field"><label for="f-service">Service needed</label><select id="f-service" name="service" required><option value="" disabled selected>Choose a service</option></select></div>
-          </div>
-          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required placeholder="Tell me about your project, goals and timeline…"></textarea></div>
-          <button class="btn btn-rose" type="submit">Send message <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
-          <p class="form-note" id="formNote" role="status"></p>
-        </form>
-      </div>
+        <figcaption><span>Samuel Gansallo, founder</span><span>400-level industrial design student</span></figcaption>
+      </figure>
     </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap foot">
-    <div><b>Iffy Dev</b>AI agents, automation, 3D, video and SaaS.</div>
-    <nav><a href="#services">Services</a><a href="#work">Portfolio</a><a href="#contact">Contact</a></nav>
-    <span>© <span id="yr">2026</span> Iffy Dev. All rights reserved.</span>
   </div>
-</footer>
-
-<!-- Collection / case-study overlay -->
-<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="ovTitle">
-  <div class="ov-head"><div class="wrap">
-    <span class="crumb" id="crumb"></span>
-    <button class="btn" id="ovBack" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span>Back</span></button>
+  <div class="e-strip"><div class="e-wrap">
+    <span>Clients in the United States, United Kingdom, Cameroon and Argentina</span>
+    <a href="https://www.fiverr.com/samuel_gansallo" target="_blank" rel="noopener">Find me on Fiverr</a>
   </div></div>
-  <div class="wrap" id="ovBody"></div>
 </div>
 
+<!-- 01 SAMPLES -->
+<section id="hm-samples" aria-labelledby="hm-h-samples">
+  <div class="e-wrap">
+    <header class="e-sh">
+      <div class="e-num"><b>01</b><span>Live samples</span></div>
+      <h2 id="hm-h-samples">Open the work, do not just look at it.</h2>
+      <p class="e-lede">Eight working samples that run in your browser. Spin a model, play a game, flip through sprites. This is the fastest way to see my range.</p>
+    </header>
+    <div class="e-rail-ctl">
+      <p aria-hidden="true"><span class="e-live-dot"></span>8 live samples <span>&nbsp;/&nbsp; drag or swipe</span></p>
+      <div>
+        <button class="e-icon-btn" type="button" data-dir="-1" aria-label="Previous samples"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="e-icon-btn" type="button" data-dir="1" aria-label="Next samples"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="e-rail" id="hm-rail" tabindex="0" role="region" aria-label="Live samples, scrollable">
+    <a class="e-sc" href="#samples" data-sample="animation" draggable="false" style="--e-sc:#0b1514">
+      <div class="e-art" style="background:#0e1716"><img loading="lazy" decoding="async" src="assets/img/naija-cast.webp" width="1280" height="720" alt="Six Nigerian 3D characters mid-animation" style="object-position:62% 50%" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Watch</em></span><span class="e-chip">01</span></div><span class="e-ttl">Game animation</span></div>
+      <div class="e-body"><p>Six Naija Life 3D characters on one rig, each with its own animations.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="roblox" draggable="false" style="--e-sc:#0a2b45">
+      <div class="e-art" style="background:linear-gradient(#bfe0f7,#e8f3fb)"><img loading="lazy" decoding="async" class="e-fit" src="assets/home/avatar.svg" width="480" height="600" alt="A blocky, Roblox-style avatar" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Pose</em></span><span class="e-chip">02</span></div><span class="e-ttl">Roblox-style avatar</span></div>
+      <div class="e-body"><p>A blocky avatar built the way Roblox builds them, live in 3D.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="minecraft" draggable="false" style="--e-sc:#4a2808">
+      <div class="e-art" style="background:linear-gradient(#fde3bd,#f9c98e)"><img loading="lazy" decoding="async" class="e-fit" src="assets/home/voxel.svg" width="480" height="600" alt="A small isometric block world with trees and water" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Fly</em></span><span class="e-chip">03</span></div><span class="e-ttl">Minecraft-style voxel world</span></div>
+      <div class="e-body"><p>A world made of blocks that you can fly around and explore.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="assets" draggable="false" style="--e-sc:#14301a">
+      <div class="e-art" style="background:linear-gradient(#d9e6d0,#c3d8bb)"><img loading="lazy" decoding="async" class="e-fit" src="assets/home/kit.svg" width="480" height="600" alt="Low-poly crate, barrel, tree and rock" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Inspect</em></span><span class="e-chip">04</span></div><span class="e-ttl">3D asset kit</span></div>
+      <div class="e-body"><p>Low-poly props ready to drop straight into a game scene.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="game" draggable="false" style="--e-sc:#4a2c00">
+      <div class="e-art" style="background:linear-gradient(#ffe29a,#ffc861)"><img loading="lazy" decoding="async" class="e-fit e-px" src="assets/home/runner.png" width="480" height="600" alt="Pixel art motorbike rider collecting coins" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Play</em></span><span class="e-chip">05</span></div><span class="e-ttl">Mini game &ldquo;Naija Dash&rdquo;</span></div>
+      <div class="e-body"><p>An endless runner. Jump, grab coins and beat your own score.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="models" draggable="false" style="--e-sc:#0b1514">
+      <div class="e-art" style="background:#0e1716"><img loading="lazy" decoding="async" src="assets/img/naija-lineup.webp" width="1600" height="900" alt="Lineup of Nigerian 3D character models" style="object-position:57% 50%" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Spin</em></span><span class="e-chip">06</span></div><span class="e-ttl">3D models</span></div>
+      <div class="e-body"><p>Seven character models you can turn around and inspect.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="sprites" draggable="false" style="--e-sc:#5c2200">
+      <div class="e-art" style="background:#ff8a3a"><img loading="lazy" decoding="async" class="e-fit e-px" src="assets/home/pixels.png" width="480" height="600" alt="A grid of pixel art heroes, monsters and items" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Flip</em></span><span class="e-chip">07</span></div><span class="e-ttl">Pixel sprites</span></div>
+      <div class="e-body"><p>469 original sprites, drawn pixel by pixel and ready to use.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <a class="e-sc" href="#samples" data-sample="capsules" draggable="false" style="--e-sc:#0e1330">
+      <div class="e-art" style="background:#141a3a"><img loading="lazy" decoding="async" class="e-fit e-px" src="assets/home/steam.png" width="480" height="600" alt="Pixel art space shooter store capsule" draggable="false"><div class="e-chips"><span class="e-chip"><i class="e-live-dot"></i>Live <em>Browse</em></span><span class="e-chip">08</span></div><span class="e-ttl">Steam capsules</span></div>
+      <div class="e-body"><p>Sixteen made-up pixel games, shown as store capsule art.</p><span class="e-open">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+  </div>
+  <div class="e-wrap">
+    <div class="e-rail-foot">
+      <p>Also on the 3D models sample: a few of the characters are downloaded files from CGTrader and Free3D, each credited on the page, and one is fan art of a Lucasfilm and Disney character. Want something like these made for your project?</p>
+      <a class="e-btn e-btn--ghost" href="#samples">Browse all samples
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+  </div>
+</section>
 
-<!-- Hidden form so Netlify Forms registers the AI assistant's leads (submitted from chat.js). -->
-<form name="ai-lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input name="name"><input name="email"><input name="service"><input name="budget"><input name="timeline"><input name="escalate"><textarea name="project"></textarea><textarea name="transcript"></textarea><input name="bot-field">
-</form>
-<script src="projects.js"></script>
-<script>
-(function () {
-  var root = document.documentElement;
-  root.classList.add('js');
-  requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('ready'); }); });
-  document.getElementById('yr').textContent = new Date().getFullYear();
+<!-- 02 WORK -->
+<section id="hm-work" aria-labelledby="hm-h-work">
+  <div class="e-wrap">
+    <header class="e-sh">
+      <div class="e-num"><b>02</b><span>Selected work</span></div>
+      <h2 id="hm-h-work">Real projects, real clients.</h2>
+      <p class="e-lede">A few of the sixteen projects in the portfolio. Each one started as a message.</p>
+    </header>
+    <div class="e-work">
+      <a class="e-wk e-wk--8 e-r1" href="#agents" data-t="c-whatsapp-ai-assistant" style="--e-ar:946/516">
+        <div class="e-im"><img loading="lazy" decoding="async" src="assets/img/wa-agent-2.webp" width="946" height="516" alt="n8n workflow for a WhatsApp AI assistant with email, research and calendar agents" style="object-position:0 50%"></div>
+        <div class="e-cap"><span class="e-n">01</span><h3>WhatsApp AI Assistant <span aria-hidden="true">&#8599;</span></h3><p>An assistant that lives in WhatsApp and handles email, calendar, tasks and research by chat.</p><span class="e-tag">AI Agents and Assistants</span></div>
+      </a>
+      <a class="e-wk e-wk--4 e-r1" href="#video" data-t="c-ai-ugc-product-ads" style="--e-ar:1/1">
+        <div class="e-im"><img loading="lazy" decoding="async" src="assets/img/ugc-watch.webp" width="720" height="1280" alt="AI-generated UGC style ad: a woman showing off a smartwatch in a bright kitchen" style="object-position:50% 28%"></div>
+        <div class="e-cap"><span class="e-n">02</span><h3>AI UGC Product Ads <span aria-hidden="true">&#8599;</span></h3><p>Short, creator-style product videos made with AI, ready for TikTok and Reels.</p><span class="e-tag">AI Video Production</span></div>
+      </a>
+      <a class="e-wk e-wk--4 e-r2" href="#automation" data-t="c-crm-sync-fix-phone-leads" style="--e-ar:4/5">
+        <div class="e-im"><img loading="lazy" decoding="async" src="assets/img/crm-sync-card.webp" width="1080" height="1350" alt="Diagram explaining why phone leads showed up blank in a CRM and the fix" style="object-position:50% 0"></div>
+        <div class="e-cap"><span class="e-n">03</span><h3>CRM Sync Fix: Phone Leads <span aria-hidden="true">&#8599;</span></h3><p>Callers were rejected by the sync with no alert. Found, fixed and tested end to end.</p><span class="e-tag">Workflow Automation</span></div>
+      </a>
+      <a class="e-wk e-wk--8 e-r2" href="#video" data-t="c-voltx-fuel-product-spot" style="--e-ar:16/9">
+        <div class="e-im"><img loading="lazy" decoding="async" src="assets/img/voltx.webp" width="1280" height="720" alt="Glowing lightning bolt on a dark energy drink can with the VoltX wordmark" style="object-position:50% 20%"></div>
+        <div class="e-cap"><span class="e-n">04</span><h3>VoltX Fuel Product Spot <span aria-hidden="true">&#8599;</span></h3><p>A moody 10-second hero spot for a pre-workout can, with electric effects and a closing tagline.</p><span class="e-tag">AI Video Production</span></div>
+      </a>
+      <a class="e-wk e-wk--6 e-r3" href="#web" data-t="c-copper-state-tackle" style="--e-ar:1400/702">
+        <div class="e-im"><img loading="lazy" decoding="async" src="assets/img/copperstate.webp" width="1400" height="702" alt="Copper State Tackle online store homepage with a bass boat banner" style="object-position:0 40%"></div>
+        <div class="e-cap"><span class="e-n">05</span><h3>Copper State Tackle <span aria-hidden="true">&#8599;</span></h3><p>A fast headless Shopify storefront on Hydrogen and Oxygen.</p><span class="e-tag">Shopify and Web Builds</span></div>
+      </a>
+      <a class="e-wk e-wk--6 e-r3" href="#3d" data-t="c-pcb-enclosure-design" style="--e-ar:1600/960">
+        <div class="e-im"><img loading="lazy" decoding="async" src="assets/img/pcb-enclosure-1.webp" width="1600" height="960" alt="PCB enclosure design sheet with a black case, a circuit board and print filament" style="object-position:0 30%"></div>
+        <div class="e-cap"><span class="e-n">06</span><h3>PCB Enclosure Design <span aria-hidden="true">&#8599;</span></h3><p>Custom cases for electronics, made for 3D printing and ready for injection molding.</p><span class="e-tag">3D Modeling and Animation</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  var EXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
-  var I = {
-    bag: '<path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>',
-    layers: '<path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/>',
-    wp: '<circle cx="12" cy="12" r="9"/><path d="M5 9l4 11 3-8 3 8 4-11"/>',
-    bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
-    bot: '<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/>',
-    code: '<path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/>',
-    gauge: '<path d="M12 14l4-4"/><path d="M3.5 18a9 9 0 1 1 17 0"/>',
-    wrench: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/>',
-    move: '<path d="M4 12h16M14 6l6 6-6 6M4 6v12"/>',
-    chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',
-    film: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3V9Z"/>',
-    cube: '<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/>',
-    pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"/>',
-    game: '<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/>'
-  };
-  function ico(k) { return '<span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + I[k] + '</svg></span>'; }
-  window.iffyFit = function (img) { var r = img.naturalWidth / img.naturalHeight; if (r > 2.1 || r < 1.2) img.parentNode.classList.add('fit'); };
-  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+<!-- 03 SERVICES -->
+<section id="hm-services" aria-labelledby="hm-h-services">
+  <div class="e-wrap">
+    <header class="e-sh">
+      <div class="e-num"><b>03</b><span>Services</span></div>
+      <h2 id="hm-h-services">Nine services. One studio.</h2>
+      <p class="e-lede">Pick the one that fits, or tell me what you need and I will point you to it.</p>
+    </header>
+    <div class="e-svc">
+      <details class="e-sv"><summary><span class="e-n">01</span><h3>AI Agents and Assistants</h3><span class="e-d">Custom agents that research, write, sort data and act inside your tools.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">Custom agents that research, write, sort data and act inside your tools.</p><p class="e-also"><b>Also:</b> chatbots, private and self hosted AI, Discord and Telegram bots</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20AI%20Agents%20and%20Assistants." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">02</span><h3>AI Receptionist and Chatbots</h3><span class="e-d">WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.</p><p class="e-also"><b>Also:</b> voice agents, WhatsApp and Meta verification, SMS automation</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20an%20AI%20Receptionist%20or%20Chatbot." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">03</span><h3>Workflow Automation</h3><span class="e-d">n8n, Make and Zapier workflows that connect your apps and run on their own.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">n8n, Make and Zapier workflows that connect your apps and run on their own.</p><p class="e-also"><b>Also:</b> web scraping, CRM and business systems, API integrations</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20Workflow%20Automation." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">04</span><h3>AI Video Production</h3><span class="e-d">Short-form ads, faceless channels, trailers and UGC-style videos made with AI.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">Short-form ads, faceless channels, trailers and UGC-style videos made with AI.</p><p class="e-also"><b>Also:</b> AI video and UGC style ads</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20AI%20Video%20Production." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">05</span><h3>3D Modeling and Animation</h3><span class="e-d">Stylised and low-poly characters, rigs, game-ready models and product renders.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">Stylised and low-poly characters, rigs, game-ready models and product renders.</p><p class="e-also"><b>Also:</b> 3D architecture and floor plans, product visuals</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%203D%20Modeling%20and%20Animation." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">06</span><h3>2D Art and Motion</h3><span class="e-d">Illustrations, character sheets, motion graphics and explainer animation.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">Illustrations, character sheets, motion graphics and explainer animation.</p><p class="e-also"><b>Also:</b> infographics, thumbnails, logo and brand identity</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%202D%20Art%20and%20Motion." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">07</span><h3>SaaS Development</h3><span class="e-d">MVPs, dashboards, browser extensions, auth and payments, built to launch fast.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">MVPs, dashboards, browser extensions, auth and payments, built to launch fast.</p><p class="e-also"><b>Also:</b> app rescue for Lovable, Base44, Bolt and Replit</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20SaaS%20Development." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">08</span><h3>Game Development</h3><span class="e-d">Browser and mobile 3D games built with Three.js, from prototype to playable.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">Browser and mobile 3D games built with Three.js, from prototype to playable.</p><p class="e-also"><b>Also:</b> Roblox and FiveM, Minecraft servers, mods and builds</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20Game%20Development." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+      <details class="e-sv"><summary><span class="e-n">09</span><h3>Shopify and Web Builds</h3><span class="e-d">Shopify, Hydrogen and WordPress sites when your product needs a storefront.</span><span class="e-tog" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="e-panel"><div class="e-in"><p class="e-d2">Shopify, Hydrogen and WordPress sites when your product needs a storefront.</p><p class="e-also"><b>Also:</b> web design, WordPress and CMS, ecommerce stores</p><a class="e-ask" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20Shopify%20and%20Web%20Builds." target="_blank" rel="noopener">Ask about this on WhatsApp &#8599;</a></div></div></details>
+    </div>
+    <div class="e-svc-foot">
+      <p>Open any row for the extras I cover and a direct WhatsApp link.</p>
+      <a class="e-btn e-btn--ghost" href="#services">All services in detail
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+  </div>
+</section>
 
-  // Services
-  var SERVICES = window.SERVICES || [];
-  document.getElementById('svcGrid').innerHTML = SERVICES.map(function (s) {
-    return '<article class="panel svc"><div class="svc-top">' + ico(s[0]) + '</div><h3>' + esc(s[1]) + '</h3><p>' + esc(s[2]) + '</p></article>';
-  }).join('');
-  document.getElementById('f-service').insertAdjacentHTML('beforeend', SERVICES.map(function (s) { return '<option>' + esc(s[1]) + '</option>'; }).join('') + '<option>Something else</option>');
+<!-- 04 PROOF -->
+<section id="hm-proof" aria-labelledby="hm-h-proof">
+  <div class="e-wrap">
+    <header class="e-sh">
+      <div class="e-num"><b>04</b><span>Proof</span></div>
+      <h2 id="hm-h-proof">What clients say after the work ships.</h2>
+      <p class="e-lede">Real reviews from Fiverr, quoted word for word.</p>
+    </header>
+    <figure class="e-proof-big">
+      <blockquote class="e-lead">He completely rescued my WhatsApp automation workflow after another dev walked away.</blockquote>
+      <aside>
+        <p class="e-rest">&ldquo;He fixed the data-mapping bugs in minutes and got everything syncing perfectly with my CRM. Super knowledgeable, incredibly fast, and just an awesome guy to work with. I’ll definitely be back for order #4 soon!&rdquo;</p>
+        <figcaption class="e-who"><b>samuel__brian</b><span>United States · repeat client</span><span class="e-src">Fiverr review</span></figcaption>
+      </aside>
+    </figure>
+    <div class="e-small">
+      <figure><blockquote>Absolute pleasure to work with! Samuel was exceptionally communicative, provided accurate business documents promptly, and followed instructions carefully. Navigating Meta verification can be tough, but their cooperation made the process seamless. Looking forward to collaborating on future automation projects!</blockquote><figcaption><b>stanley_j14</b>, United States</figcaption></figure>
+      <figure><blockquote>Despite delays in receiving approval from Meta, Samuel was at no point discouraged. He remained professional and communicative. I’m extremely happy with the outcome and would recommend him at any point.</blockquote><figcaption><b>mo_anong</b>, Cameroon</figcaption></figure>
+      <figure><blockquote>Samual has been very helpful and is good at communicating. I feel like he is a valuable addition to my team and is there for me when I have any questions.</blockquote><figcaption><b>mitch__waters</b>, United Kingdom</figcaption></figure>
+      <figure><blockquote lang="es">Servicio muy profesional y seguimiento en todo momento. Muy recomendable.</blockquote><figcaption><b>marielagrasso</b>, Argentina</figcaption></figure>
+    </div>
+    <div class="e-proof-foot">
+      <p>All five reviews come from my Fiverr profile, where you can read the rest.</p>
+      <a class="e-btn e-btn--ghost" href="https://www.fiverr.com/samuel_gansallo" target="_blank" rel="noopener">Read reviews on Fiverr
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+  </div>
+</section>
 
-  // Data
-  var CATS = (window.CATEGORIES || []).map(function (c) {
-    c.items = (window.PROJECTS || []).filter(function (p) { return p.category === c.id; }); return c;
-  }).filter(function (c) { return c.items.length; });
-  var CAT_ICON = { agents: 'bot', automation: 'bolt', video: 'film', '3d': 'cube', '2d': 'pen', saas: 'layers', games: 'game', web: 'bag' };
+<!-- 05 HOW -->
+<section id="hm-how" aria-labelledby="hm-h-how">
+  <div class="e-wrap">
+    <header class="e-sh">
+      <div class="e-num"><b>05</b><span>How it works</span></div>
+      <h2 id="hm-h-how">From first message to launch day.</h2>
+      <p class="e-lede">No forms and no sales calls. You message me, and the rest is simple.</p>
+    </header>
+    <ol class="e-steps">
+      <li><span class="e-n">1</span><h3>Tell me</h3><p>Send a message about your goals, your customers and what is not working today.</p></li>
+      <li><span class="e-n">2</span><h3>Plan and quote</h3><p>You get a clear scope, timeline and price before any work starts.</p></li>
+      <li><span class="e-n">3</span><h3>Build and review</h3><p>I build in stages and share progress links, so you can review as we go.</p></li>
+      <li><span class="e-n">4</span><h3>Deliver</h3><p>We go live, I test everything, and I stay on hand for fixes.</p></li>
+    </ol>
+  </div>
+</section>
 
-  // Featured
-  var F = (window.PROJECTS || []).find(function (p) { return p.featured; }) || (window.PROJECTS || [])[0];
-  if (F) {
-    document.getElementById('featured-slot').innerHTML =
-      '<button class="panel shot" type="button" data-open="' + esc(F.title) + '" aria-label="Open ' + esc(F.title) + ' case study" style="font:inherit;color:inherit;cursor:pointer"><div class="shot-in"><img src="' + esc(F.images[0]) + '" alt="' + esc(F.title) + ' screenshot" onload="iffyFit(this)"></div></button>' +
-      '<div class="panel feat-side"><span class="pill">★ Featured build</span><h3>' + esc(F.title) + '</h3><p>' + esc(F.tagline) + ' ' + esc(F.result) + '</p><hr>' +
-      '<ul class="chips">' + F.stack.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>' +
-      '<div class="cta-row"><button class="btn btn-rose" type="button" data-open="' + esc(F.title) + '">View case study ' + ARROW + '</button></div></div>';
-  }
+<section class="e-final" id="hm-contact" aria-labelledby="hm-h-contact">
+  <div class="e-wrap">
+    <p class="e-k">06 &nbsp;/&nbsp; Contact</p>
+    <h2 id="hm-h-contact">Tell me what you need.</h2>
+    <div class="e-row">
+      <a class="e-btn e-btn--dark" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">Message on WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <a class="e-mail" href="mailto:samuel@iffystudio.site">samuel@iffystudio.site</a>
+      <a class="e-btn e-btn--line" href="https://www.fiverr.com/samuel_gansallo" target="_blank" rel="noopener">Order on Fiverr
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+    <p class="e-phone">WhatsApp: +234 807 588 9359</p>
+  </div>
+</section>
+<footer class="e-footer">
+  <div class="e-wrap">
+    <div class="e-foot">
+      <div class="e-about">
+        <a class="e-logo" href="#home"><i aria-hidden="true"></i>Iffy Studio</a>
+        <p>AI agents, automation, video, 3D and games by Samuel Gansallo.</p>
+      </div>
+      <nav class="e-c1" aria-label="Footer"><h4>Pages</h4>
+        <ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#samples">Samples</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+      <div class="e-c2"><h4>Say hello</h4>
+        <ul><li><a href="https://wa.me/2348075889359" target="_blank" rel="noopener">WhatsApp +234 807 588 9359</a></li><li><a href="mailto:samuel@iffystudio.site">samuel@iffystudio.site</a></li><li><a href="https://www.fiverr.com/samuel_gansallo" target="_blank" rel="noopener">Fiverr profile</a></li></ul></div>
+    </div>
+    <div class="e-legal"><span>&copy; 2026 Iffy Studio. All rights reserved.</span><span>Made by Samuel Gansallo</span></div>
+  </div>
+</footer>
+</main><div id="pages"><main class="pg" id="p-agents"><div class="hero"><div class="ht"><h1 aria-label="AI agents that do the work."><span class="w" aria-hidden="true"><i style="--i:0">AI</i></span> <span class="w" aria-hidden="true"><i style="--i:1">agents</i></span> <span class="w" aria-hidden="true"><i style="--i:2">that</i></span> <span class="w" aria-hidden="true"><i style="--i:3">do</i></span> <span class="w" aria-hidden="true"><i style="--i:4">the</i></span> <span class="w" aria-hidden="true"><i style="--i:5">work.</i></span></h1><p class="lead">Assistants that answer customers, research, write and take action in your tools.</p><div class="row"><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20AI%20Agents." target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="#projects">All collections</a></div></div><div class="art"><div class="chat"><p class="b u">Hi, can I book a call this week?</p><p class="b a">Sure. Which day suits you?</p><p class="b u">Thursday afternoon</p><p class="b a">Booked for 3pm. Invite sent.</p></div></div></div><div class="flow"><section class="case" id="c-whatsapp-ai-assistant"><div class="ci"><p class="meta">Personal &amp; small-business assistant</p><h3>WhatsApp AI Assistant</h3><p class="tag">One WhatsApp number that reads images, books meetings, manages tasks and answers from your own documents.</p><h4>The challenge</h4><p>Built so a busy owner can run their day from WhatsApp: email, meetings, research and to-dos, without opening five apps.</p><h4>What I did</h4><ul><li>WhatsApp trigger sorts text from media; images are downloaded and analysed by a vision model before the agent replies</li><li>A main AI agent hands work to specialist sub-agents for Gmail, research (web search and Wikipedia), Google Calendar and Google Tasks</li><li>Answers from the client’s own knowledge base through a MongoDB Atlas vector store</li><li>Shows a typing indicator, keeps conversation memory, and saves full chat history to MongoDB</li><li>A lighter version runs on a self-hosted Ollama model and handles personal chats, group chats and a safe fallback route</li></ul><p class="res"><b>Result</b>A working assistant that lives in WhatsApp and handles email, calendar, tasks and research by chat.</p><p class="chips"><span>n8n</span><span>WhatsApp Cloud API</span><span>Multi-agent</span><span>MongoDB Atlas Vector Search</span><span>Google Calendar &amp; Tasks</span><span>Gmail</span><span>Ollama</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20WhatsApp%20AI%20Assistant%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="wa-agent-2" alt="WhatsApp AI Assistant" loading="lazy"><img data-im="wa-agent-ollama" alt="WhatsApp AI Assistant" loading="lazy"></div></section><section class="case" id="c-linkedin-lead-research-outreach-agent"><div class="ci"><p class="meta">B2B sales team</p><h3>LinkedIn Lead Research &amp; Outreach Agent</h3><p class="tag">Describe your ideal customer in a chat. The agent finds, researches, scores and contacts the leads.</p><h4>The challenge</h4><p>The sales team spent hours finding prospects on LinkedIn and reading their company sites before writing a single message.</p><h4>What I did</h4><ul><li>An AI agent turns a plain-English ICP description into LinkedIn search filters and saves every match to Google Sheets</li><li>For each lead, the workflow finds the company website, then summarises the site, the lead’s posts, company news and company posts with AI</li><li>A scoring step rates how likely each company is to need the product, with criteria the team can edit</li><li>On a schedule it sends connection requests to the top-scored leads, capped to stay inside LinkedIn’s weekly limits</li><li>When a connection is accepted, it sends a personalised follow-up message automatically</li></ul><p class="res"><b>Result</b>End-to-end prospecting: from an ICP sentence to researched, scored and contacted leads, all tracked in one sheet.</p><p class="chips"><span>n8n</span><span>OpenAI</span><span>LinkedIn API (HDW)</span><span>Google Sheets</span><span>AI scoring</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20LinkedIn%20Lead%20Research%20%26%20Outreach%20Agent%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="linkedin-agent" alt="LinkedIn Lead Research &amp; Outreach Agent" loading="lazy"></div></section><section class="case" id="c-whatsapp-business-api-setup"><div class="ci"><p class="meta">Client businesses</p><h3>WhatsApp Business API Setup</h3><p class="tag">Meta business verification and WhatsApp Cloud API onboarding, ready for bots and broadcasts.</p><h4>The challenge</h4><p>Clients needed an official WhatsApp Business API number for their chatbots, but kept getting stuck on Meta’s business verification.</p><h4>What I did</h4><ul><li>Set up the business portfolio, app and WhatsApp account in Meta Business Manager</li><li>Prepared and submitted business verification for the right use case until it was approved</li><li>Connected the verified number to the client’s automation and AI agent</li></ul><p class="res"><b>Result</b>Verified businesses. One account’s limit was raised to 100,000 business-initiated conversations every 24 hours.</p><p class="chips"><span>Meta Business Manager</span><span>WhatsApp Cloud API</span><span>Meta for Developers</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20WhatsApp%20Business%20API%20Setup%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="wa-api-limits" alt="WhatsApp Business API Setup" loading="lazy"><img data-im="wa-api-verified" alt="WhatsApp Business API Setup" loading="lazy"></div></section></div></main><main class="pg" id="p-automation"><div class="hero"><div class="ht"><h1 aria-label="Workflows that run themselves."><span class="w" aria-hidden="true"><i style="--i:0">Workflows</i></span> <span class="w" aria-hidden="true"><i style="--i:1">that</i></span> <span class="w" aria-hidden="true"><i style="--i:2">run</i></span> <span class="w" aria-hidden="true"><i style="--i:3">themselves.</i></span></h1><p class="lead">Workflows that create content, move data and publish on autopilot.</p><div class="row"><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20AI%20Automation." target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="#projects">All collections</a></div></div><div class="art"><svg class="fl2" viewBox="0 0 400 300" role="img" aria-label="Automation flow"><path id="p1" d="M120 50C150 50 120 150 145 150"/><path id="p2" d="M255 150C285 150 250 50 280 50"/><path id="p3" d="M255 150C285 150 250 250 280 250"/><rect x="10" y="28" width="110" height="44" rx="12"/><rect x="145" y="128" width="110" height="44" rx="12"/><rect x="280" y="28" width="110" height="44" rx="12"/><rect x="280" y="228" width="110" height="44" rx="12"/><text x="40" y="56">New lead</text><text x="185" y="156">CRM</text><text x="312" y="56">Email</text><text x="318" y="256">Sheet</text><circle r="5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M120 50C150 50 120 150 145 150"/></circle><circle r="5"><animateMotion dur="2.4s" begin=".8s" repeatCount="indefinite" path="M255 150C285 150 250 50 280 50"/></circle><circle r="5"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M255 150C285 150 250 250 280 250"/></circle></svg></div></div><div class="flow"><section class="case" id="c-competitor-ad-research-bot"><div class="ci"><p class="meta">E-commerce product research</p><h3>Competitor Ad Research Bot</h3><p class="tag">Finds stores running proven Meta ads and logs them to a sheet. I took it from 7 ads found to 404.</p><h4>The challenge</h4><p>The client’s product research workflow kept reporting almost no active ads, so winning products were being missed.</p><h4>What I did</h4><ul><li>Traced the problem to the Ad Library link having no country, so results used the server’s region</li><li>Added the country to the request, which took the same 6 stores from 7 active ads found to 404</li><li>Fixed a second bug: the workflow counted Facebook pages, not brands, so one brand with 4 pages was filtered out as 4 competitors</li><li>Kept only stores with 80+ active ads and at least one ad live for 30+ days, dropped apps, and wrote to Google Sheets with no duplicates</li></ul><p class="res"><b>Result</b>Reliable daily product research with about 58× more ads detected on the same stores.</p><p class="chips"><span>n8n</span><span>Apify</span><span>Meta Ad Library</span><span>JavaScript</span><span>Google Sheets</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20Competitor%20Ad%20Research%20Bot%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="ad-research-card" alt="Competitor Ad Research Bot" loading="lazy"><img data-im="ad-research-flow" alt="Competitor Ad Research Bot" loading="lazy"></div></section><section class="case" id="c-crm-sync-fix-phone-leads"><div class="ci"><p class="meta">Home services company</p><h3>CRM Sync Fix: Phone Leads</h3><p class="tag">Customers who phoned in were reaching installers as blank records. I found out why and fixed it.</p><h4>The challenge</h4><p>Contacts created from phone calls had no email, and the installer software silently rejected the whole record with &quot;email must be an email&quot;.</p><h4>What I did</h4><ul><li>Followed one record from the dispatch app through GoHighLevel to the installer software to find where data was lost</li><li>Fixed the mapping so a valid email is always present, and the record now syncs in full</li><li>Tested new jobs, reschedules, cancellations and technician assignment end to end</li></ul><p class="res"><b>Result</b>Installers now see the name, email and phone on every job, including leads that phoned in.</p><p class="chips"><span>Zapier</span><span>GoHighLevel</span><span>Job dispatch app</span><span>Installer software</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20CRM%20Sync%20Fix%3A%20Phone%20Leads%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="crm-sync-card" alt="CRM Sync Fix: Phone Leads" loading="lazy"></div></section><section class="case" id="c-won-deal-client-onboarding"><div class="ci"><p class="meta">Software company · Brazil</p><h3>Won-Deal Client Onboarding</h3><p class="tag">A closed deal in HubSpot sets up the customer across six systems with no manual entry.</p><h4>The challenge</h4><p>Every new customer was being typed into finance, operations and support tools by hand, which caused delays and typos.</p><h4>What I did</h4><ul><li>Triggered on a HubSpot won deal; pulls the contact, the SDR and the account executive</li><li>Validates the postcode with ViaCEP and looks up the city through IBGE</li><li>Builds the product list, MRR and licences, then creates the store and credentials</li><li>Creates the records in Airtable, Pipefy (finance, key-account and CD pipes), Conta Azul and Coda</li><li>Writes a success or error note back to the HubSpot deal at every step</li></ul><p class="res"><b>Result</b>Onboarding starts the moment a deal closes, and every step is logged on the deal.</p><p class="chips"><span>HubSpot</span><span>Airtable</span><span>Pipefy</span><span>Conta Azul</span><span>Coda</span><span>ViaCEP &amp; IBGE APIs</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20Won-Deal%20Client%20Onboarding%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="hubspot-onboarding" alt="Won-Deal Client Onboarding" loading="lazy"></div></section><section class="case" id="c-lead-generation-scrapers"><div class="ci"><p class="meta">Agencies &amp; outbound teams</p><h3>Lead Generation Scrapers</h3><p class="tag">Search-based lead scraping that cleans, splits and logs contacts into ready-to-use sheets.</p><h4>The challenge</h4><p>Clients needed steady, deduplicated lead lists without paying for an expensive data tool.</p><h4>What I did</h4><ul><li>Google Search lead gen routes each query type to its own scraper loop and appends the results to a sheet</li><li>A sheet-triggered version picks up new search requests, calls the scraper, parses the results with code and splits leads into batches of 50 across sheets</li><li>Marks each request as done so nothing runs twice</li></ul><p class="res"><b>Result</b>Self-serve lead lists: add a row to a sheet and get organised leads back.</p><p class="chips"><span>n8n</span><span>Google Search scraping</span><span>JavaScript</span><span>Google Sheets</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20Lead%20Generation%20Scrapers%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="leadgen-google" alt="Lead Generation Scrapers" loading="lazy"><img data-im="leadgen-sheets" alt="Lead Generation Scrapers" loading="lazy"></div></section><section class="case" id="c-ai-content-video-pipeline"><div class="ci"><p class="meta">Content creator · Social media</p><h3>AI Content &amp; Video Pipeline</h3><p class="tag">Ideas to published short videos on three platforms with no manual steps.</p><h4>The challenge</h4><p>Posting short-form video every day across three platforms was taking hours of manual work.</p><h4>What I did</h4><ul><li>Idea agent pulls past topics from Google Sheets and generates fresh concepts</li><li>Prompt agent writes video prompts and sends them to a video generation API</li><li>Workflow polls for the finished render and handles errors and retries</li><li>Final videos are captioned and auto-posted to YouTube, TikTok and Instagram</li></ul><p class="res"><b>Result</b>A hands-off pipeline that keeps all three channels posting on schedule.</p><p class="chips"><span>n8n</span><span>OpenAI</span><span>Video generation API</span><span>YouTube / TikTok / Instagram</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20AI%20Content%20%26%20Video%20Pipeline%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="n8n-video-automation" alt="AI Content &amp; Video Pipeline" loading="lazy"></div></section><section class="case" id="c-ai-seo-article-publisher"><div class="ci"><p class="meta">Content site · SEO</p><h3>AI SEO Article Publisher</h3><p class="tag">Keyword-targeted articles written by AI agents and published to the CMS.</p><h4>The challenge</h4><p>The client needed a steady flow of SEO articles without paying for every draft by hand.</p><h4>What I did</h4><ul><li>AI agents research keywords and write structured, optimised articles</li><li>Outputs are validated and formatted into CMS-ready posts</li><li>Articles publish straight to the CMS on a schedule</li></ul><p class="res"><b>Result</b>Consistent SEO publishing with minimal manual input.</p><p class="chips"><span>n8n</span><span>AI agents</span><span>CMS API</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20AI%20SEO%20Article%20Publisher%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="n8n-seo-automation" alt="AI SEO Article Publisher" loading="lazy"></div></section></div></main><main class="pg" id="p-video"><div class="hero"><div class="ht"><h1 aria-label="AI video that stops the scroll."><span class="w" aria-hidden="true"><i style="--i:0">AI</i></span> <span class="w" aria-hidden="true"><i style="--i:1">video</i></span> <span class="w" aria-hidden="true"><i style="--i:2">that</i></span> <span class="w" aria-hidden="true"><i style="--i:3">stops</i></span> <span class="w" aria-hidden="true"><i style="--i:4">the</i></span> <span class="w" aria-hidden="true"><i style="--i:5">scroll.</i></span></h1><p class="lead">Scroll-stopping ads and animated stories made with AI generation and editing.</p><div class="row"><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20AI%20Video%20%26%20Animation." target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="#projects">All collections</a></div></div><div class="art"><div class="strip"><div class="track"><img data-im="ugc-icecream" alt="" loading="lazy" decoding="async"><img data-im="anim-terrace" alt="" loading="lazy" decoding="async"><img data-im="ugc-watch" alt="" loading="lazy" decoding="async"><img data-im="anim-breakfast" alt="" loading="lazy" decoding="async"><img data-im="naija-cast" alt="" loading="lazy" decoding="async"><img data-im="ugc-yogurt" alt="" loading="lazy" decoding="async"><img data-im="ugc-icecream" alt="" loading="lazy" decoding="async"><img data-im="anim-terrace" alt="" loading="lazy" decoding="async"><img data-im="ugc-watch" alt="" loading="lazy" decoding="async"><img data-im="anim-breakfast" alt="" loading="lazy" decoding="async"><img data-im="naija-cast" alt="" loading="lazy" decoding="async"><img data-im="ugc-yogurt" alt="" loading="lazy" decoding="async"></div></div></div></div><div class="flow"><section class="case" id="c-ai-ugc-product-ads"><div class="ci"><p class="meta">DTC and e-commerce brands (spec ads)</p><h3>AI UGC Product Ads</h3><p class="tag">Creator-style ads with AI presenters: hook, demo, benefit and call to action, ready for TikTok, Reels and Meta.</p><h4>The challenge</h4><p>Brands need a steady flow of fresh UGC-style creatives to test, but booking real creators for every variation is slow and expensive.</p><h4>What I did</h4><ul><li>Wrote hook-first scripts for each product and audience</li><li>Generated consistent AI presenters and product shots across multiple scenes</li><li>Added voice, pacing, close-ups of the product in use, and on-screen text</li><li>Exported in vertical 9:16 for Reels and TikTok, plus landscape cuts</li></ul><p class="res"><b>Result</b>Ad-ready creatives in days, so brands can test many angles without booking a shoot.</p><p class="chips"><span>AI video generation</span><span>AI voice</span><span>Script writing</span><span>Editing &amp; captions</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20AI%20UGC%20Product%20Ads%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm v"><div class=""><video data-vd="ugc-watch" data-im="ugc-watch" muted loop playsinline preload="none" aria-label="Smartwatch · 10s"></video></div><div class=""><video data-vd="ugc-icecream" data-im="ugc-icecream" muted loop playsinline preload="none" aria-label="Ice cream tub · 16s"></video></div><div class=""><video data-vd="ugc-yogurt" data-im="ugc-yogurt" muted loop playsinline preload="none" aria-label="Breakfast bowl · 40s"></video></div><div class="wv"><video data-vd="ugc-bottle" data-im="ugc-bottle" muted loop playsinline preload="none" aria-label="Fitness water bottle · 40s"></video></div><img data-im="ugc-watch" alt="AI UGC Product Ads" loading="lazy"></div></section><section class="case" id="c-voltx-fuel-product-spot"><div class="ci"><p class="meta">Energy drink concept</p><h3>VoltX Fuel Product Spot</h3><p class="tag">A moody 10-second hero spot for a pre-workout can, with electric effects and a closing tagline.</p><h4>The challenge</h4><p>Create a premium product reveal for a new drink brand without a studio shoot.</p><h4>What I did</h4><ul><li>Designed the can and a gym-floor setting with dramatic rim light</li><li>Built the reveal around the lightning logo: sparks, glow and a push-in</li><li>Closed on the line &quot;Unleash the Surge.&quot; for social and pre-roll</li></ul><p class="res"><b>Result</b>A studio-quality product spot made without a camera crew.</p><p class="chips"><span>AI video generation</span><span>Motion graphics</span><span>Sound design</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20VoltX%20Fuel%20Product%20Spot%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm v"><div class="wv"><video data-vd="voltx" data-im="voltx" muted loop playsinline preload="none" aria-label="VoltX Fuel · 10s"></video></div><img data-im="voltx" alt="VoltX Fuel Product Spot" loading="lazy"></div></section><section class="case" id="c-animated-story-shorts"><div class="ci"><p class="meta">Brands and storytellers</p><h3>Animated Story Shorts</h3><p class="tag">3D-style animated scenes with expressive characters, warm lighting and story beats.</p><h4>The challenge</h4><p>Tell short, emotional stories in an animated-film style for social media and brand content.</p><h4>What I did</h4><ul><li>Designed original characters and kept them consistent from shot to shot</li><li>Planned each scene as a mini storyboard: setup, reaction, payoff</li><li>Graded and cut the shots into a smooth sequence</li></ul><p class="res"><b>Result</b>Shareable animated shorts with a big-studio look on a small budget.</p><p class="chips"><span>AI animation</span><span>Character consistency</span><span>Editing</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20Animated%20Story%20Shorts%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm v"><div class="wv"><video data-vd="anim-breakfast" data-im="anim-breakfast" muted loop playsinline preload="none" aria-label="Morning routine · 10s"></video></div><div class="wv"><video data-vd="anim-terrace" data-im="anim-terrace" muted loop playsinline preload="none" aria-label="Terrace proposal · 38s"></video></div><img data-im="anim-breakfast" alt="Animated Story Shorts" loading="lazy"></div></section></div></main><main class="pg" id="p-3d"><div class="hero"><div class="ht"><h1 aria-label="3D that sells the product."><span class="w" aria-hidden="true"><i style="--i:0">3D</i></span> <span class="w" aria-hidden="true"><i style="--i:1">that</i></span> <span class="w" aria-hidden="true"><i style="--i:2">sells</i></span> <span class="w" aria-hidden="true"><i style="--i:3">the</i></span> <span class="w" aria-hidden="true"><i style="--i:4">product.</i></span></h1><p class="lead">Rigged game characters, product enclosures and renders.</p><div class="row"><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%203D%20Characters%20%26%20Design." target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="#projects">All collections</a></div></div><div class="art"><div class="stage"><div class="cube"><img data-im="naija-lineup" alt="" loading="lazy" decoding="async"><img data-im="pcb-enclosure-1" alt="" loading="lazy" decoding="async"><img data-im="pcb-enclosure-2" alt="" loading="lazy" decoding="async"><img data-im="naija-cast" alt="" loading="lazy" decoding="async"></div></div></div></div><div class="flow"><section class="case" id="c-naija-life-3d-game-characters"><div class="ci"><p class="meta">Mobile life-sim game (in development)</p><h3>Naija Life: 3D Game Characters</h3><p class="tag">Six Nigerian city characters on one shared rig, with 10 animations each, light enough for budget phones.</p><h4>The challenge</h4><p>A phone-first 3D life-sim set in Lagos, Abuja, Port Harcourt, Ibadan, Kano and Enugu needed a cast that looks local and still runs smoothly on low-end Android.</p><h4>What I did</h4><ul><li>Built six characters: a Lagos danfo conductor, a Yaba tech designer, an Ibadan market trader, a Kano textile trader, a Port Harcourt oil technician and an Abuja NYSC corps member</li><li>Put every character on the same 22-bone skeleton, so all clips and future outfits fit every body</li><li>Animated 10 shared clips: idle, walk, run, wave, talk, dance, celebrate, wahala, phone call and greet</li><li>Kept each model to about 7–8k triangles, around 500 KB, and a single draw call</li><li>Built a Three.js viewer so the team can preview every character and animation in the browser</li></ul><p class="res"><b>Result</b>A game-ready cast that a crowd of 30 can share on a budget phone.</p><p class="chips"><span>Blender (Python)</span><span>glTF / GLB</span><span>Three.js</span><span>Rigging &amp; animation</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20Naija%20Life%3A%203D%20Game%20Characters%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm v"><div class="wv"><video data-vd="naija-cast" data-im="naija-cast" muted loop playsinline preload="none" aria-label="The cast in motion · 6s"></video></div><img data-im="naija-lineup" alt="Naija Life: 3D Game Characters" loading="lazy"></div></section><section class="case" id="c-pcb-enclosure-design"><div class="ci"><p class="meta">Hardware &amp; IoT makers</p><h3>PCB Enclosure Design</h3><p class="tag">Custom enclosures for PCBs and electronics, ready for 3D printing or injection moulding.</p><h4>The challenge</h4><p>Makers needed enclosures that fit their exact boards, print cleanly and can scale to manufacturing.</p><h4>What I did</h4><ul><li>Designed cases around the PCB with screw bosses, brass inserts and port cut-outs</li><li>Made snap-fit and screw-down variants for PLA, PETG and translucent light-pipe builds</li><li>Covered Raspberry Pi cases, Arduino boxes, handheld IoT devices and wall-mounted sensors</li><li>Delivered 2D technical drawings plus STL, STEP and 3MF files</li></ul><p class="res"><b>Result</b>Print-ready, manufacturable enclosures from a board outline to the final files.</p><p class="chips"><span>Fusion 360</span><span>SolidWorks</span><span>STL</span><span>STEP</span><span>3MF</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20PCB%20Enclosure%20Design%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="pcb-enclosure-1" alt="PCB Enclosure Design" loading="lazy"><img data-im="pcb-enclosure-2" alt="PCB Enclosure Design" loading="lazy"></div></section></div></main><main class="pg" id="p-web"><div class="hero"><div class="ht"><h1 aria-label="Sites and stores that convert."><span class="w" aria-hidden="true"><i style="--i:0">Sites</i></span> <span class="w" aria-hidden="true"><i style="--i:1">and</i></span> <span class="w" aria-hidden="true"><i style="--i:2">stores</i></span> <span class="w" aria-hidden="true"><i style="--i:3">that</i></span> <span class="w" aria-hidden="true"><i style="--i:4">convert.</i></span></h1><p class="lead">Fast storefronts and sites when the product needs a home.</p><div class="row"><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20would%20like%20to%20discuss%20Shopify%20%26%20Websites." target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="#projects">All collections</a></div></div><div class="art"><div class="bw"><div class="bar"><i></i><i></i><i></i></div><div class="bd"><b></b><b></b><b></b><img data-im="copperstate" alt="" loading="lazy" decoding="async"></div></div></div></div><div class="flow"><section class="case" id="c-copper-state-tackle"><div class="ci"><p class="meta">Fishing tackle retailer · USA</p><h3>Copper State Tackle</h3><p class="tag">A fast headless Shopify storefront on Hydrogen and Oxygen.</p><h4>The challenge</h4><p>The brand needed a storefront that could hold a large tackle catalogue and still load quickly for shoppers on mobile.</p><h4>What I did</h4><ul><li>Built a custom Hydrogen storefront and deployed it on Shopify Oxygen hosting</li><li>Set up the headless architecture against the Storefront API</li><li>Customised navigation, collections and product pages for a deep catalogue</li><li>Tuned performance so pages stay fast as the range grows</li></ul><p class="res"><b>Result</b>A scalable headless store the team can keep growing without a rebuild.</p><p class="chips"><span>Shopify Hydrogen</span><span>Oxygen</span><span>React</span><span>Storefront API</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20Copper%20State%20Tackle%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="copperstate" alt="Copper State Tackle" loading="lazy"></div></section><section class="case" id="c-bagups"><div class="ci"><p class="meta">Eco trash-bag brand · USA</p><h3>BagUps</h3><p class="tag">Theme customisation and UX polish for a subscription-style Shopify store.</p><h4>The challenge</h4><p>BagUps wanted their product story and the &quot;Help me choose&quot; journey to feel clearer, with a smoother route to checkout.</p><h4>What I did</h4><ul><li>Made tailored Liquid theme modifications across key templates</li><li>Optimised layouts and product presentation</li><li>Improved site performance and the overall shopping flow</li></ul><p class="res"><b>Result</b>A cleaner storefront that guides shoppers to the right product faster.</p><p class="chips"><span>Shopify</span><span>Liquid</span><span>Theme customisation</span></p><a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%20saw%20your%20BagUps%20work%20and%20want%20something%20similar." target="_blank" rel="noopener">Discuss a similar project</a></div><div class="cm"><img data-im="bagups" alt="BagUps" loading="lazy"></div></section></div></main><main class="pg" id="p-samples"><div class="flow"><section class="open" id="smp"><p class="chap">Samples</p><h2>Live samples.</h2><p class="intro">Small pieces I built in code for this site. Play with them: they are samples, not client projects.</p><div class="smp-tabs" id="smp-tabs" role="tablist" aria-label="Samples" hidden></div><div class="smp"><div class="smp-stage" id="smp-stage"><span class="smp-badge">Sample</span><span class="smp-hint" id="smp-hint"></span></div><aside class="smp-side" id="smp-side"><p class="tag">Starting the sample...</p></aside></div></section></div></main><main class="pg" id="p-services"><div class="flow"><section class="open"><p class="chap">Services</p><h2>Nine services. One studio.</h2><p class="intro">Pick the one that fits, or tell me what you need and I will point you to it.</p></section><section class="sv"><div class="sn">01</div><div class="sb"><h2>AI Agents and Assistants</h2><p class="lead2">Custom agents that research, write, sort data and act inside your tools.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="AI agents and chatbots">AI agents and chatbots</a><a href="#contact" data-s="Private and self hosted AI">Private and self hosted AI</a><a href="#contact" data-s="Meta Muse setup and AI connectors">Meta Muse setup and AI connectors</a><a href="#contact" data-s="Trading bots and market alerts">Trading bots and market alerts</a><a href="#contact" data-s="Discord and Telegram bots">Discord and Telegram bots</a></p><h4>Recent work</h4><p class="wk"><a href="#agents" data-t="c-whatsapp-ai-assistant">WhatsApp AI Assistant</a><a href="#agents" data-t="c-linkedin-lead-research-outreach-agent">LinkedIn Lead Research &amp; Outreach Agent</a></p><a class="btn" data-s="AI Agents and Assistants" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">02</div><div class="sb"><h2>AI Receptionist and Chatbots</h2><p class="lead2">WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="AI voice agents and receptionists">AI voice agents and receptionists</a><a href="#contact" data-s="WhatsApp automation and Meta verification">WhatsApp automation and Meta verification</a><a href="#contact" data-s="SMS automation and A2P registration">SMS automation and A2P registration</a></p><h4>Recent work</h4><p class="wk"><a href="#agents" data-t="c-whatsapp-business-api-setup">WhatsApp Business API Setup</a><a href="#agents" data-t="c-whatsapp-ai-assistant">WhatsApp AI Assistant</a></p><a class="btn" data-s="AI Receptionist and Chatbots" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">03</div><div class="sb"><h2>Workflow Automation</h2><p class="lead2">n8n, Make and Zapier workflows that connect your apps and run on their own.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="AI automation and workflows">AI automation and workflows</a><a href="#contact" data-s="Web scraping and data extraction">Web scraping and data extraction</a><a href="#contact" data-s="CRM and business systems">CRM and business systems</a><a href="#contact" data-s="API integrations and payments">API integrations and payments</a></p><h4>Recent work</h4><p class="wk"><a href="#automation" data-t="c-competitor-ad-research-bot">Competitor Ad Research Bot</a><a href="#automation" data-t="c-crm-sync-fix-phone-leads">CRM Sync Fix: Phone Leads</a><a href="#automation" data-t="c-won-deal-client-onboarding">Won-Deal Client Onboarding</a><a href="#automation" data-t="c-lead-generation-scrapers">Lead Generation Scrapers</a></p><a class="btn" data-s="Workflow Automation" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">04</div><div class="sb"><h2>AI Video Production</h2><p class="lead2">Short-form ads, faceless channels, trailers and UGC-style videos made with AI.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="AI video and UGC style ads">AI video and UGC style ads</a></p><h4>Recent work</h4><p class="wk"><a href="#video" data-t="c-ai-ugc-product-ads">AI UGC Product Ads</a><a href="#video" data-t="c-voltx-fuel-product-spot">VoltX Fuel Product Spot</a><a href="#video" data-t="c-animated-story-shorts">Animated Story Shorts</a></p><a class="btn" data-s="AI Video Production" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">05</div><div class="sb"><h2>3D Modeling and Animation</h2><p class="lead2">Stylised and low-poly characters, rigs, game-ready models and product renders.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="3D architecture and floor plans">3D architecture and floor plans</a><a href="#contact" data-s="3D product visuals and animation">3D product visuals and animation</a></p><h4>Recent work</h4><p class="wk"><a href="#3d" data-t="c-naija-life-3d-game-characters">Naija Life: 3D Game Characters</a><a href="#3d" data-t="c-pcb-enclosure-design">PCB Enclosure Design</a></p><a class="btn" data-s="3D Modeling and Animation" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">06</div><div class="sb"><h2>2D Art and Motion</h2><p class="lead2">Illustrations, character sheets, motion graphics and explainer animation.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="Illustration and character design">Illustration and character design</a><a href="#contact" data-s="Infographics">Infographics</a><a href="#contact" data-s="Social media post design">Social media post design</a><a href="#contact" data-s="YouTube thumbnails">YouTube thumbnails</a><a href="#contact" data-s="Logo and brand identity">Logo and brand identity</a><a href="#contact" data-s="Packaging and label design">Packaging and label design</a><a href="#contact" data-s="Pitch decks and presentations">Pitch decks and presentations</a></p><a class="btn" data-s="2D Art and Motion" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">07</div><div class="sb"><h2>SaaS Development</h2><p class="lead2">MVPs, dashboards, browser extensions, auth and payments, built to launch fast.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="App development">App development</a><a href="#contact" data-s="App rescue for Lovable, Base44, Bolt and Replit">App rescue for Lovable, Base44, Bolt and Replit</a><a href="#contact" data-s="Browser extensions">Browser extensions</a><a href="#contact" data-s="Mobile app UI and UX">Mobile app UI and UX</a><a href="#contact" data-s="Online learning platforms and tutoring">Online learning platforms and tutoring</a></p><a class="btn" data-s="SaaS Development" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">08</div><div class="sb"><h2>Game Development</h2><p class="lead2">Browser and mobile 3D games built with Three.js, from prototype to playable.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="Roblox and FiveM development">Roblox and FiveM development</a><a href="#contact" data-s="Minecraft servers, mods and builds">Minecraft servers, mods and builds</a></p><a class="btn" data-s="Game Development" href="#contact">Start this project</a></div></section><section class="sv"><div class="sn">09</div><div class="sb"><h2>Shopify and Web Builds</h2><p class="lead2">Shopify, Hydrogen and WordPress sites when your product needs a storefront.</p><h4>Also available</h4><p class="chips lk"><a href="#contact" data-s="Web design">Web design</a><a href="#contact" data-s="Web development">Web development</a><a href="#contact" data-s="WordPress and CMS sites">WordPress and CMS sites</a><a href="#contact" data-s="Ecommerce and Shopify stores">Ecommerce and Shopify stores</a></p><h4>Recent work</h4><p class="wk"><a href="#web" data-t="c-copper-state-tackle">Copper State Tackle</a><a href="#web" data-t="c-bagups">BagUps</a></p><a class="btn" data-s="Shopify and Web Builds" href="#contact">Start this project</a></div></section></div></main><main class="pg" id="p-projects"><div class="flow"><section class="open" id="ring"><p class="chap">The work</p><h2>Sixteen projects. Pick one.</h2><div class="chips" id="flt"></div><div class="pj"><div class="ringbox"><canvas id="rg" aria-label="3D ring of projects"></canvas></div><aside class="info"><p class="meta" id="ic"></p><h3 id="it"></h3><p class="tag" id="ig"></p><p class="res"><b>Result</b><span id="ir"></span></p><a class="btn" id="il" href="#agents">Open case study</a></aside></div><div class="rcap"><button class="mbtn" id="rp" type="button">Prev</button><span id="rn2"></span><button class="mbtn" id="rn" type="button">Next</button></div></section></div></main><main class="pg" id="p-process"><div class="flow"><section id="process">
+<h2>From first message to launch day.</h2>
+<ol class="steps">
+<li><b>Discover</b><span>We talk through your goals, your customers and what isn’t working today.</span></li>
+<li><b>Plan</b><span>You get a clear scope, timeline and price before any work starts.</span></li>
+<li><b>Build</b><span>I build in stages and share progress links so you can review as we go.</span></li>
+<li><b>Launch</b><span>We go live, I test everything, and I stay on hand for fixes.</span></li>
+</ol>
+</section><section id="faq">
+<h2>Questions people ask first.</h2>
+<details><summary>What projects do you take on?</summary><p>Websites, apps, AI agents, automations, bots, games, 3D work and design. If a task is slow, manual or scattered, it is probably a fit.</p></details>
+<details><summary>Can you fix an app I built with Lovable, Base44, Bolt or Replit?</summary><p>Yes. I secure the sign in and data layer, fix what breaks under real use, and deploy it properly for real users.</p></details>
+<details><summary>How much does a project cost?</summary><p>It depends on scope. You get a clear scope, timeline and price before any work starts.</p></details>
+<details><summary>Do you work with clients outside Nigeria?</summary><p>Yes. All work is remote and I work with clients worldwide.</p></details>
+<details><summary>What happens after launch?</summary><p>I test everything before we go live and stay on hand for fixes and updates.</p></details>
+</section></div></main><main class="pg" id="p-contact"><div class="flow"><section id="plan">
+<div class="cta">
+<h2>Plan your project in one minute.</h2>
+<p>Fill this in and it opens WhatsApp with your brief already written.</p>
+<div class="f">
+<label>Service<select id="svc" name="svc"><option>Not sure yet</option></select></label>
+<label>Your name<input id="nm" autocomplete="name"></label>
+<label>Budget<select id="bud"><option>Not sure yet</option><option>Under $200</option><option>$200 to $500</option><option>$500 to $1,500</option><option>$1,500 and above</option></select></label>
+<label>Timeline<select id="tl"><option>Flexible</option><option>This week</option><option>Within 2 weeks</option><option>Within a month</option></select></label>
+<label class="w">What should I build or fix?<textarea id="ms" rows="4"></textarea></label>
+</div>
+<p></p>
+<a class="btn" id="send" href="#contact" target="_blank" rel="noopener">Send brief on WhatsApp</a>
+</div>
+</section><section id="contact">
+<div class="cta">
+<h2>Tell me what you want automated, built or brought to life.</h2>
+<p>Send a few details on WhatsApp and I’ll reply within a day with next steps.</p>
+<a class="btn" href="https://wa.me/2348075889359?text=Hi%20Iffy%2C%20I%27d%20like%20to%20discuss%20my%20project." target="_blank" rel="noopener">Start on WhatsApp</a> <a class="btn ghost" href="mailto:samuel@iffystudio.site">Email me</a>
+</div>
+</section></div></main></div>
+<footer>© 2026 Iffy Studio. <a href="mailto:samuel@iffystudio.site">samuel@iffystudio.site</a></footer>
+</div>
+<script src="js/media.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/three.min.js"></script>
+<script src="js/cast_3d.js"></script>
+<script src="js/hero_3d_scene.js"></script>
 
-
-  // Reel strip
-  var REEL = window.REEL || [];
-  var rg = document.getElementById('reelGrid');
-  rg.innerHTML = REEL.map(function (r) { return '<button type="button" data-open="' + esc(r.project) + '" aria-label="Open ' + esc(r.project) + '"><video muted loop playsinline preload="none" poster="' + esc(r.poster) + '"><source src="' + esc(r.src) + '" type="video/mp4"></video><span>' + esc(r.label) + '</span></button>'; }).join('');
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause(); }); }, { threshold: 0.35 });
-    rg.querySelectorAll('video').forEach(function (v) { io.observe(v); });
-  }
-
-
-  // Testimonials (only real ones, from window.TESTIMONIALS)
-  (function () {
-    var T = (window.TESTIMONIALS || []).filter(function (t) { return t && t.quote && t.name; });
-    var sample = false;
-    if (!T.length && window.IFFY_PREVIEW) { sample = true; T = [1, 2, 3].map(function () { return { quote: 'Your client\'s review goes here: what you built, how it went, the result they got.', name: 'Client name', role: 'Business, Country', source: 'Upwork', rating: 5 }; }); }
-    if (!T.length) return;
-    document.getElementById('reviews').hidden = false;
-    document.getElementById('tgrid').innerHTML = T.map(function (t) {
-      var r = Math.max(0, Math.min(5, Math.round(t.rating || 0)));
-      return '<figure class="panel tcard' + (sample ? ' sample' : '') + '">' + (r ? '<div class="stars" aria-label="' + r + ' out of 5 stars">' + '★★★★★'.slice(0, r) + '</div>' : '') +
-        '<blockquote>' + esc(t.quote) + '</blockquote>' + (t.translation ? '<p class="trans">Translated: ' + esc(t.translation) + '</p>' : '') +
-        (t.project ? '<button type="button" class="link-arrow proj" data-open="' + esc(t.project) + '" style="background:none;border:0;border-bottom:1px solid currentColor;color:inherit;cursor:pointer;padding:0 0 2px">See the project</button>' : '') +
-        '<footer><span class="ava" aria-hidden="true">' + esc(t.name.trim().charAt(0).toUpperCase()) + '</span><span class="who"><b>' + esc(t.name) + '</b>' + (t.role ? '<small>' + esc(t.role) + '</small>' : '') + '</span>' + (t.source ? '<span class="src">' + esc(t.source) + '</span>' : '') + '</footer></figure>';
-    }).join('');
-    var L = window.REVIEWS_LINK;
-    if (L && L.url && !sample) document.getElementById('tgrid').insertAdjacentHTML('afterend', '<p style="margin-top:22px"><a class="link-arrow" href="' + esc(L.url) + '" target="_blank" rel="noopener">' + esc(L.label || 'See all reviews') + ' ↗</a></p>');
-  })();
-
-  // Tabs + category cards
-  var tabs = document.getElementById('tabs'), grid = document.getElementById('catGrid');
-  tabs.innerHTML = '<button class="tab" type="button" data-t="all" aria-pressed="true">All</button>' + CATS.map(function (c) { return '<button class="tab" type="button" data-t="' + c.id + '" aria-pressed="false">' + esc(c.title) + '</button>'; }).join('');
-  function renderCats(filter) {
-    var list = CATS.filter(function (c) { return filter === 'all' || c.id === filter; });
-    grid.innerHTML = list.map(function (c, i) {
-      var wide = list.length === 1 || (list.length % 2 === 1 && i === 0);
-      return '<button class="panel cat' + (wide ? ' wide' : '') + '" type="button" data-cat="' + c.id + '">' +
-        '<span class="bgimg" style="background-image:url(\'' + esc(c.items[0].images[0]) + '\')"></span>' +
-        ico(CAT_ICON[c.id] || 'code') + '<span class="count">' + String(c.items.length).padStart(2, '0') + '</span>' +
-        '<span class="body"><span class="meta">' + esc(c.meta) + ' · ' + c.items.length + ' project' + (c.items.length > 1 ? 's' : '') + '</span><h3>' + esc(c.title) + '</h3><p>' + esc(c.blurb) + '</p></span>' +
-        '<span class="go">' + ARROW + '</span></button>';
-    }).join('');
-  }
-  renderCats('all');
-  tabs.addEventListener('click', function (e) {
-    var b = e.target.closest('.tab'); if (!b) return;
-    tabs.querySelectorAll('.tab').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-    renderCats(b.dataset.t);
-  });
-
-  // Overlay
-  var ov = document.getElementById('overlay'), body = document.getElementById('ovBody'), crumb = document.getElementById('crumb'), back = document.getElementById('ovBack');
-  var state = { cat: null, proj: null }, lastFocus = null;
-  function projCard(p) {
-    var c = CATS.find(function (x) { return x.id === p.category; });
-    return '<button class="panel proj" type="button" data-open="' + esc(p.title) + '"><div class="shot-in"><img src="' + esc(p.images[0]) + '" alt="" loading="lazy" onload="iffyFit(this)">' + (p.videos ? '<span class="play">▶ ' + p.videos.length + ' video' + (p.videos.length > 1 ? 's' : '') + '</span>' : '') + '</div>' +
-      '<div class="txt"><span class="meta">' + esc(c ? c.title : '') + ' · ' + esc(p.client) + '</span><h3>' + esc(p.title) + '</h3><p>' + esc(p.tagline) + '</p></div></button>';
-  }
-  function showCat(id) {
-    var c = CATS.find(function (x) { return x.id === id; }); state = { cat: id, proj: null };
-    crumb.innerHTML = 'Portfolio / <b>' + esc(c.title) + '</b>'; back.lastChild.textContent = 'Back to portfolio';
-    body.innerHTML = '<div class="ov-intro"><p class="eyebrow">' + esc(c.meta) + '</p><h2 id="ovTitle">' + esc(c.title) + '</h2><p>' + esc(c.blurb) + '</p></div><div class="proj-grid">' + c.items.map(projCard).join('') + '</div>';
-  }
-  function showProj(title) {
-    var p = window.PROJECTS.find(function (x) { return x.title === title; }); if (!p) return;
-    var c = CATS.find(function (x) { return x.id === p.category; });
-    state.proj = title; if (!state.cat) state.cat = null;
-    crumb.innerHTML = 'Portfolio / ' + (state.cat ? esc(c.title) + ' / ' : '') + '<b>' + esc(p.title) + '</b>';
-    back.lastChild.textContent = state.cat ? 'Back to ' + c.title : 'Back to portfolio';
-    var media = p.videos && p.videos.length
-      ? '<div class="vgrid">' + p.videos.map(function (v) { return '<figure class="v' + (v.tall ? ' tall' : ' wide') + '"><video controls playsinline preload="none" poster="' + esc(v.poster) + '"><source src="' + esc(v.src) + '" type="video/mp4"></video>' + (v.label ? '<figcaption>' + esc(v.label) + '</figcaption>' : '') + '</figure>'; }).join('') + '</div>'
-      : p.images.map(function (src, i) { return '<div class="panel shot"><div class="shot-in"><img src="' + esc(src) + '" alt="' + esc(p.title) + ' screenshot ' + (i + 1) + '"></div></div>'; }).join('');
-    body.innerHTML = '<div class="case' + (p.videos ? ' is-video' : '') + '"><div class="shots">' + media + '</div>' +
-      '<div class="case-info"><span class="pill">' + esc(c ? c.title : '') + '</span><h2 id="ovTitle">' + esc(p.title) + '</h2><p class="tagline">' + esc(p.tagline) + '</p>' +
-      '<div class="case-sec"><h4>Client</h4><p>' + esc(p.client) + '</p></div>' +
-      '<div class="case-sec"><h4>The brief</h4><p>' + esc(p.challenge) + '</p></div>' +
-      '<div class="case-sec"><h4>What I did</h4><ul>' + p.work.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>' +
-      '<div class="case-sec"><h4>Outcome</h4><p>' + esc(p.result) + '</p></div>' +
-      '<div class="case-sec"><h4>Stack</h4><ul class="chips">' + p.stack.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>' +
-      '<div class="cta-row">' + (p.url ? '<a class="btn btn-rose" href="' + esc(p.url) + '" target="_blank" rel="noopener">Visit live site ' + EXT + '</a>' : '') + '<a class="btn" href="#contact" data-close>Start a similar project</a></div></div></div>';
-  }
-  function open() { if (ov.hidden) { lastFocus = document.activeElement; ov.hidden = false; document.body.style.overflow = 'hidden'; } ov.scrollTop = 0; back.focus(); }
-  function close() { ov.querySelectorAll('video').forEach(function (v) { v.pause(); }); ov.hidden = true; document.body.style.overflow = ''; state = { cat: null, proj: null }; if (lastFocus) lastFocus.focus(); }
-  document.addEventListener('click', function (e) {
-    var cat = e.target.closest('[data-cat]'); if (cat) { showCat(cat.dataset.cat); open(); return; }
-    var pr = e.target.closest('[data-open]'); if (pr) { if (ov.hidden) state.cat = null; showProj(pr.dataset.open); open(); return; }
-    if (e.target.closest('[data-close]')) close();
-  });
-  back.addEventListener('click', function () { if (state.proj && state.cat) { showCat(state.cat); ov.scrollTop = 0; } else close(); });
-  addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ov.hidden) back.click(); });
-
-  // Theme
-  document.getElementById('themeBtn').addEventListener('click', function () {
-    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('iffy-theme', next); } catch (e) {}
-  });
-
-  // Mobile menu
-  var mb = document.getElementById('menuBtn'), mm = document.getElementById('mobileMenu');
-  mb.addEventListener('click', function () { var o = mm.hidden; mm.hidden = !o; mb.setAttribute('aria-expanded', String(o)); });
-  mm.addEventListener('click', function (e) { if (e.target.tagName === 'A') { mm.hidden = true; mb.setAttribute('aria-expanded', 'false'); } });
-
-  // Contact form (Netlify Forms)
-  var form = document.getElementById('contactForm'), note = document.getElementById('formNote');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (window.IFFY_PREVIEW) { note.textContent = 'Preview only. The form sends for real once the site is live on Netlify.'; return; }
-    note.textContent = 'Sending…';
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
-      .then(function (r) { if (!r.ok) throw 0; form.reset(); note.textContent = 'Thanks! Your message is in. I\'ll reply within a day.'; })
-      .catch(function () { note.textContent = 'That didn\'t send. Please email samuelgansallo04@gmail.com or message me on WhatsApp.'; });
-  });
-})();
-</script>
-<script src="chat.js" defer></script>
-<script src="fx.js" defer></script>
+<script src="js/router_and_pages.js"></script>
+<script src="js/cast_page.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/sample_animation.js"></script>
+<script src="js/sample_roblox.js"></script>
+<script src="js/sample_minecraft.js"></script>
+<script src="js/sample_assets.js"></script>
+<script src="js/sample_game.js"></script>
+<script src="js/sample_models.js"></script>
+<script src="js/sample_sprites.js"></script>
+<script src="js/sample_capsules.js"></script>
+<script src="js/theme_toggle.js"></script>
+<script src="js/planner_form.js"></script>
+<script src="js/media_fill_and_video.js"></script>
+<script src="js/scroll_journey.js"></script>
+<script src="js/home.js"></script>
+<script src="js/home_intro.js"></script>
+<script src="js/home_hero.js"></script>
+<script src="js/home_scroll.js"></script>
+<script src="js/home_fx.js"></script>
+<script src="js/loader_name_particles.js"></script>
 </body>
 </html>
