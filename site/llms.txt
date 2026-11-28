@@ -1,0 +1,40 @@
+# Iffy Studio
+
+> Iffy Studio is a one person studio run by Samuel Gansallo. It builds AI agents, n8n automations, SaaS products, 3D visuals and AI video for clients worldwide. Work is remote. Every project starts with a clear scope, timeline and price.
+
+## Pages
+
+- [Home](https://iffystudio.site/): Iffy Studio is a one person studio building AI agents, n8n automations, SaaS products, 3D visuals and AI video for clients worldwide.
+- [Live Samples](https://iffystudio.site/samples/): Playable samples built in code: a mini game, game animation, 3D models and asset kit, Minecraft and Roblox style builds, Steam capsules and pixel sprites.
+- [Services](https://iffystudio.site/services/): Nine services from one studio: AI agents, workflow automation, AI video, 3D, 2D art, SaaS, games and Shopify or web builds. Remote, worldwide.
+- [Projects](https://iffystudio.site/projects/): Sixteen real projects: WhatsApp AI assistants, n8n automations, AI product ads, 3D game characters, stores and more, with the challenge and the result.
+- [Process and FAQ](https://iffystudio.site/process/): How a project runs with Iffy Studio: discover, plan, build, launch. Plus answers about AI agents, automation, WhatsApp API, pricing and support.
+- [Contact](https://iffystudio.site/contact/): Plan your project in one minute and send the brief on WhatsApp, or email Iffy Studio. Remote work for clients worldwide.
+- [AI Agents](https://iffystudio.site/agents/): Custom AI agents and chatbots that answer customers, qualify leads and complete tasks inside your tools. WhatsApp, LinkedIn and more.
+- [Automation](https://iffystudio.site/automation/): n8n workflows that move data between your tools: ad research bots, CRM sync, client onboarding, lead scrapers and AI content pipelines.
+- [AI Video](https://iffystudio.site/video/): AI product ads, UGC style clips and animated story shorts, edited and ready to post on TikTok, Reels and YouTube.
+- [3D Visuals](https://iffystudio.site/3d/): 3D characters, product renders and enclosure design built in Blender, for games, ads and physical products.
+- [Websites and Stores](https://iffystudio.site/web/): Fast, clean Shopify stores and websites built around one clear action. See Copper State Tackle and BagUps.
+
+## Services
+
+- AI Agents and Assistants: Custom agents that research, write, sort data and act inside your tools.
+- AI Receptionist and Chatbots: WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.
+- Workflow Automation: n8n, Make and Zapier workflows that connect your apps and run on their own.
+- AI Video Production: Short-form ads, faceless channels, trailers and UGC-style videos made with AI.
+- 3D Modeling and Animation: Stylised and low-poly characters, rigs, game-ready models and product renders.
+- 2D Art and Motion: Illustrations, character sheets, motion graphics and explainer animation.
+- SaaS Development: MVPs, dashboards, browser extensions, auth and payments, built to launch fast.
+- Game Development: Browser and mobile 3D games built with Three.js, from prototype to playable.
+- Shopify and Web Builds: Shopify, Hydrogen and WordPress sites when your product needs a storefront.
+
+## Contact and profiles
+
+- Email: samuel@iffystudio.site
+- WhatsApp: https://wa.me/2348075889359
+- Fiverr reviews: https://www.fiverr.com/samuel_gansallo
+- GitHub: https://github.com/iffy13
+
+## More detail
+
+- [Full text of services, projects and FAQ](https://iffystudio.site/llms-full.txt)

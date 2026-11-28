@@ -9,10 +9,10 @@ var PG=[
 var still=matchMedia('(prefers-reduced-motion:reduce)').matches,E='cubic-bezier(.7,0,.2,1)',WA='https://wa.me/2348075889359?text=';
 var box=document.getElementById('pages'),home=document.getElementById('top'),menu=document.getElementById('menu'),mb=document.getElementById('mb'),cv=document.getElementById('cur'),now='home';
 function words(t){return t.split(' ').map(function(w,i){return '<span class="w" aria-hidden="true"><i style="--i:'+i+'">'+w+'</i></span>'}).join(' ')}
-var L='<li><a href="#home">Home</a></li>';
-PG.forEach(function(d){if(document.getElementById('p-'+d.id)){L+='<li><a href="#'+d.id+'">'+d.n+'</a></li>';return}var m=document.createElement('main');m.className='pg';m.id='p-'+d.id;
-m.innerHTML='<div class="hero"><div class="ht"><h1 aria-label="'+d.h+'">'+words(d.h)+'</h1><p class="lead">'+d.p+'</p><div class="row"><a class="btn" href="'+WA+encodeURIComponent('Hi Iffy, I would like to discuss '+d.n+'.')+'" target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="#home">Back home</a></div></div></div>';
-box.appendChild(m);L+='<li><a href="#'+d.id+'">'+d.n+'</a></li>'});
+var L='<li><a href="/">Home</a></li>';
+PG.forEach(function(d){if(document.getElementById('p-'+d.id)){L+='<li><a href="/'+d.id+'/">'+d.n+'</a></li>';return}var m=document.createElement('main');m.className='pg';m.id='p-'+d.id;
+m.innerHTML='<div class="hero"><div class="ht"><h1 aria-label="'+d.h+'">'+words(d.h)+'</h1><p class="lead">'+d.p+'</p><div class="row"><a class="btn" href="'+WA+encodeURIComponent('Hi Iffy, I would like to discuss '+d.n+'.')+'" target="_blank" rel="noopener">Discuss this project</a><a class="btn ghost" href="/">Back home</a></div></div></div>';
+box.appendChild(m);L+='<li><a href="/'+d.id+'/">'+d.n+'</a></li>'});
 menu.firstElementChild.innerHTML=L;
 function setMenu(o){if(window.LN){o?LN.stop():LN.start()}document.documentElement.style.overflow=o?'hidden':'';menu.classList.toggle('open',o);mb.textContent=o?'Close':'Menu';mb.setAttribute('aria-expanded',o)}
 mb.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
@@ -23,13 +23,14 @@ function on(el){if(document.body.classList.contains('ready'))raf2(function(){el.
 function swap(id){var d=PG.filter(function(x){return x.id===id})[0],el=d?document.getElementById('p-'+id):home;if(!d)id='home';now=id;
 document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('cur','on')});el.classList.add('cur');function top2(){scrollTo(0,0);if(window.LN)LN.scrollTo(0,{immediate:true,force:true})}top2();setTimeout(top2,50);setTimeout(function(){top2();window.ScrollTrigger&&ScrollTrigger.refresh();top2()},120);setTimeout(top2,450);
 if(window.IFFY){IFFY.home=!d;IFFY.off=['agents','automation','video','3d','web','projects','samples'].indexOf(id)>-1;var c=d?d.c:[1,.5,.1];IFFY.U.uC.value.setRGB(c[0],c[1],c[2])}
-document.title=(d?d.n+' | ':'')+'Iffy Studio | AI Agents, Automation and 3D';on(el);window.AFTER&&AFTER(id);window.RESETH&&RESETH(id)}
-function go(){var id=location.hash.slice(1)||'home';if(id===now)return;setMenu(false);
+var TT=window.TITLES&&TITLES[id];document.title=TT||((d?d.n+' | ':'')+'Iffy Studio | AI Agents, Automation and 3D');if(window.DESCS&&DESCS[id]){var md=document.querySelector('meta[name=description]');md&&md.setAttribute('content',DESCS[id])}var cu=(id==='home'?'/':'/'+id+'/'),cl=document.querySelector('link[rel=canonical]');cl&&cl.setAttribute('href','https://iffystudio.site'+cu);var ou=document.querySelector('meta[property="og:url"]');ou&&ou.setAttribute('content','https://iffystudio.site'+cu);on(el);window.AFTER&&AFTER(id);window.RESETH&&RESETH(id)}
+function go(){var id=location.hash.slice(1)||window.START||'home';if(id===now)return;setMenu(false);
 if(still){swap(id);return}
 var a=cv.animate([{transform:'translateY(100%)'},{transform:'translateY(0)'}],{duration:550,easing:E,fill:'forwards'});
 a.onfinish=function(){swap(id);var b=cv.animate([{transform:'translateY(0)'},{transform:'translateY(-100%)'}],{duration:550,easing:E,fill:'forwards'});b.onfinish=function(){a.cancel();b.cancel()}}}
 addEventListener('hashchange',go);
 function up(){if(window.LN&&!still)LN.scrollTo(0);else scrollTo(0,0)}
 addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;if(a.getAttribute('href').slice(1)!==now)return;e.preventDefault();setMenu(false);up()});
-var first=location.hash.slice(1)||'home';if(first!=='home')swap(first);else on(home);
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a||e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button||a.target==='_blank')return;var u;try{u=new URL(a.href,location.href)}catch(x){return}if(u.origin!==location.origin)return;var p=u.pathname.replace(/^\/|\/$/g,'');if(p!==''&&!PG.some(function(d){return d.id===p}))return;e.preventDefault();var t=p||u.hash.slice(1)||'home';if(t===now){setMenu(false);scrollTo(0,0);if(window.LN)LN.scrollTo(0,{immediate:true});return}location.hash=t});
+var first=location.hash.slice(1)||window.START||'home';if(first!=='home')swap(first);else on(home);
 })();

@@ -1,0 +1,230 @@
+# Iffy Studio: full reference
+
+Iffy Studio is a one person studio run by Samuel Gansallo. It builds AI agents, n8n automations, SaaS products, 3D visuals and AI video for clients worldwide.
+Website: https://iffystudio.site/  Email: samuel@iffystudio.site  Fiverr: https://www.fiverr.com/samuel_gansallo
+
+## Services
+
+### AI Agents and Assistants
+Custom agents that research, write, sort data and act inside your tools.
+
+### AI Receptionist and Chatbots
+WhatsApp, web and voice assistants that answer, book and qualify leads 24/7.
+
+### Workflow Automation
+n8n, Make and Zapier workflows that connect your apps and run on their own.
+
+### AI Video Production
+Short-form ads, faceless channels, trailers and UGC-style videos made with AI.
+
+### 3D Modeling and Animation
+Stylised and low-poly characters, rigs, game-ready models and product renders.
+
+### 2D Art and Motion
+Illustrations, character sheets, motion graphics and explainer animation.
+
+### SaaS Development
+MVPs, dashboards, browser extensions, auth and payments, built to launch fast.
+
+### Game Development
+Browser and mobile 3D games built with Three.js, from prototype to playable.
+
+### Shopify and Web Builds
+Shopify, Hydrogen and WordPress sites when your product needs a storefront.
+
+## Projects and case studies
+
+### WhatsApp AI Assistant
+Category: Personal & small-business assistant
+One WhatsApp number that reads images, books meetings, manages tasks and answers from your own documents.
+Challenge: Built so a busy owner can run their day from WhatsApp: email, meetings, research and to-dos, without opening five apps.
+What was built:
+- WhatsApp trigger sorts text from media; images are downloaded and analysed by a vision model before the agent replies
+- A main AI agent hands work to specialist sub-agents for Gmail, research (web search and Wikipedia), Google Calendar and Google Tasks
+- Answers from the client’s own knowledge base through a MongoDB Atlas vector store
+- Shows a typing indicator, keeps conversation memory, and saves full chat history to MongoDB
+- A lighter version runs on a self-hosted Ollama model and handles personal chats, group chats and a safe fallback route
+
+### LinkedIn Lead Research & Outreach Agent
+Category: B2B sales team
+Describe your ideal customer in a chat. The agent finds, researches, scores and contacts the leads.
+Challenge: The sales team spent hours finding prospects on LinkedIn and reading their company sites before writing a single message.
+What was built:
+- An AI agent turns a plain-English ICP description into LinkedIn search filters and saves every match to Google Sheets
+- For each lead, the workflow finds the company website, then summarises the site, the lead’s posts, company news and company posts with AI
+- A scoring step rates how likely each company is to need the product, with criteria the team can edit
+- On a schedule it sends connection requests to the top-scored leads, capped to stay inside LinkedIn’s weekly limits
+- When a connection is accepted, it sends a personalised follow-up message automatically
+
+### WhatsApp Business API Setup
+Category: Client businesses
+Meta business verification and WhatsApp Cloud API onboarding, ready for bots and broadcasts.
+Challenge: Clients needed an official WhatsApp Business API number for their chatbots, but kept getting stuck on Meta’s business verification.
+What was built:
+- Set up the business portfolio, app and WhatsApp account in Meta Business Manager
+- Prepared and submitted business verification for the right use case until it was approved
+- Connected the verified number to the client’s automation and AI agent
+
+### Competitor Ad Research Bot
+Category: E-commerce product research
+Finds stores running proven Meta ads and logs them to a sheet. I took it from 7 ads found to 404.
+Challenge: The client’s product research workflow kept reporting almost no active ads, so winning products were being missed.
+What was built:
+- Traced the problem to the Ad Library link having no country, so results used the server’s region
+- Added the country to the request, which took the same 6 stores from 7 active ads found to 404
+- Fixed a second bug: the workflow counted Facebook pages, not brands, so one brand with 4 pages was filtered out as 4 competitors
+- Kept only stores with 80+ active ads and at least one ad live for 30+ days, dropped apps, and wrote to Google Sheets with no duplicates
+
+### CRM Sync Fix: Phone Leads
+Category: Home services company
+Customers who phoned in were reaching installers as blank records. I found out why and fixed it.
+Challenge: Contacts created from phone calls had no email, and the installer software silently rejected the whole record with "email must be an email".
+What was built:
+- Followed one record from the dispatch app through GoHighLevel to the installer software to find where data was lost
+- Fixed the mapping so a valid email is always present, and the record now syncs in full
+- Tested new jobs, reschedules, cancellations and technician assignment end to end
+
+### Won-Deal Client Onboarding
+Category: Software company · Brazil
+A closed deal in HubSpot sets up the customer across six systems with no manual entry.
+Challenge: Every new customer was being typed into finance, operations and support tools by hand, which caused delays and typos.
+What was built:
+- Triggered on a HubSpot won deal; pulls the contact, the SDR and the account executive
+- Validates the postcode with ViaCEP and looks up the city through IBGE
+- Builds the product list, MRR and licences, then creates the store and credentials
+- Creates the records in Airtable, Pipefy (finance, key-account and CD pipes), Conta Azul and Coda
+- Writes a success or error note back to the HubSpot deal at every step
+
+### Lead Generation Scrapers
+Category: Agencies & outbound teams
+Search-based lead scraping that cleans, splits and logs contacts into ready-to-use sheets.
+Challenge: Clients needed steady, deduplicated lead lists without paying for an expensive data tool.
+What was built:
+- Google Search lead gen routes each query type to its own scraper loop and appends the results to a sheet
+- A sheet-triggered version picks up new search requests, calls the scraper, parses the results with code and splits leads into batches of 50 across sheets
+- Marks each request as done so nothing runs twice
+
+### AI Content & Video Pipeline
+Category: Content creator · Social media
+Ideas to published short videos on three platforms with no manual steps.
+Challenge: Posting short-form video every day across three platforms was taking hours of manual work.
+What was built:
+- Idea agent pulls past topics from Google Sheets and generates fresh concepts
+- Prompt agent writes video prompts and sends them to a video generation API
+- Workflow polls for the finished render and handles errors and retries
+- Final videos are captioned and auto-posted to YouTube, TikTok and Instagram
+
+### AI SEO Article Publisher
+Category: Content site · SEO
+Keyword-targeted articles written by AI agents and published to the CMS.
+Challenge: The client needed a steady flow of SEO articles without paying for every draft by hand.
+What was built:
+- AI agents research keywords and write structured, optimised articles
+- Outputs are validated and formatted into CMS-ready posts
+- Articles publish straight to the CMS on a schedule
+
+### AI UGC Product Ads
+Category: DTC and e-commerce brands (spec ads)
+Creator-style ads with AI presenters: hook, demo, benefit and call to action, ready for TikTok, Reels and Meta.
+Challenge: Brands need a steady flow of fresh UGC-style creatives to test, but booking real creators for every variation is slow and expensive.
+What was built:
+- Wrote hook-first scripts for each product and audience
+- Generated consistent AI presenters and product shots across multiple scenes
+- Added voice, pacing, close-ups of the product in use, and on-screen text
+- Exported in vertical 9:16 for Reels and TikTok, plus landscape cuts
+
+### VoltX Fuel Product Spot
+Category: Energy drink concept
+A moody 10-second hero spot for a pre-workout can, with electric effects and a closing tagline.
+Challenge: Create a premium product reveal for a new drink brand without a studio shoot.
+What was built:
+- Designed the can and a gym-floor setting with dramatic rim light
+- Built the reveal around the lightning logo: sparks, glow and a push-in
+- Closed on the line "Unleash the Surge." for social and pre-roll
+
+### Animated Story Shorts
+Category: Brands and storytellers
+3D-style animated scenes with expressive characters, warm lighting and story beats.
+Challenge: Tell short, emotional stories in an animated-film style for social media and brand content.
+What was built:
+- Designed original characters and kept them consistent from shot to shot
+- Planned each scene as a mini storyboard: setup, reaction, payoff
+- Graded and cut the shots into a smooth sequence
+
+### Naija Life: 3D Game Characters
+Category: Mobile life-sim game (in development)
+Six Nigerian city characters on one shared rig, with 10 animations each, light enough for budget phones.
+Challenge: A phone-first 3D life-sim set in Lagos, Abuja, Port Harcourt, Ibadan, Kano and Enugu needed a cast that looks local and still runs smoothly on low-end Android.
+What was built:
+- Built six characters: a Lagos danfo conductor, a Yaba tech designer, an Ibadan market trader, a Kano textile trader, a Port Harcourt oil technician and an Abuja NYSC corps member
+- Put every character on the same 22-bone skeleton, so all clips and future outfits fit every body
+- Animated 10 shared clips: idle, walk, run, wave, talk, dance, celebrate, wahala, phone call and greet
+- Kept each model to about 7–8k triangles, around 500 KB, and a single draw call
+- Built a Three.js viewer so the team can preview every character and animation in the browser
+
+### PCB Enclosure Design
+Category: Hardware & IoT makers
+Custom enclosures for PCBs and electronics, ready for 3D printing or injection moulding.
+Challenge: Makers needed enclosures that fit their exact boards, print cleanly and can scale to manufacturing.
+What was built:
+- Designed cases around the PCB with screw bosses, brass inserts and port cut-outs
+- Made snap-fit and screw-down variants for PLA, PETG and translucent light-pipe builds
+- Covered Raspberry Pi cases, Arduino boxes, handheld IoT devices and wall-mounted sensors
+- Delivered 2D technical drawings plus STL, STEP and 3MF files
+
+### Copper State Tackle
+Category: Fishing tackle retailer · USA
+A fast headless Shopify storefront on Hydrogen and Oxygen.
+Challenge: The brand needed a storefront that could hold a large tackle catalogue and still load quickly for shoppers on mobile.
+What was built:
+- Built a custom Hydrogen storefront and deployed it on Shopify Oxygen hosting
+- Set up the headless architecture against the Storefront API
+- Customised navigation, collections and product pages for a deep catalogue
+- Tuned performance so pages stay fast as the range grows
+
+### BagUps
+Category: Eco trash-bag brand · USA
+Theme customisation and UX polish for a subscription-style Shopify store.
+Challenge: BagUps wanted their product story and the "Help me choose" journey to feel clearer, with a smoother route to checkout.
+What was built:
+- Made tailored Liquid theme modifications across key templates
+- Optimised layouts and product presentation
+- Improved site performance and the overall shopping flow
+
+## Frequently asked questions
+
+### Who is Iffy Studio?
+Iffy Studio is a one person studio run by Samuel Gansallo. It builds AI agents, n8n automations, SaaS products, 3D visuals and AI video for clients worldwide, working directly with each client from the first message to launch.
+
+### What is an AI agent and how can it help my business?
+An AI agent is an assistant that completes tasks for you, not only answers questions. For example, a WhatsApp assistant can answer customers, research, write and take action inside your tools such as email, calendar and your CRM.
+
+### Do you build n8n automations?
+Yes. I build n8n workflows that move leads, orders and reports between your tools so nobody has to retype anything. Recent examples include a competitor ad research bot, a CRM sync fix for phone leads and a won deal client onboarding flow.
+
+### Can you set up the WhatsApp Business API?
+Yes. I set up WhatsApp Business API accounts, including number verification and higher messaging limits. One verified business account was raised to 100,000 business initiated conversations every 24 hours.
+
+### Do you make AI video ads and UGC style product videos?
+Yes. I produce AI generated product ads, UGC style clips and animated story shorts, edited and delivered ready to post on TikTok, Reels and YouTube.
+
+### Do you build Shopify stores and websites?
+Yes. I build fast, clean websites and online stores around one clear action, such as buying or booking. Examples include Copper State Tackle and BagUps.
+
+### How do I hire Iffy Studio?
+Message me on WhatsApp or email samuel@iffystudio.site with what you want built. You get a clear scope, timeline and price before any work starts. Client reviews are also on Fiverr at fiverr.com/samuel_gansallo.
+
+### What projects do you take on?
+Websites, apps, AI agents, automations, bots, games, 3D work and design. If a task is slow, manual or scattered, it is probably a fit.
+
+### Can you fix an app I built with Lovable, Base44, Bolt or Replit?
+Yes. I secure the sign in and data layer, fix what breaks under real use, and deploy it properly for real users.
+
+### How much does a project cost?
+It depends on scope. You get a clear scope, timeline and price before any work starts.
+
+### Do you work with clients outside Nigeria?
+Yes. All work is remote and I work with clients worldwide.
+
+### What happens after launch?
+I test everything before we go live and stay on hand for fixes and updates.

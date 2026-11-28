@@ -9,7 +9,7 @@ var j=document.getElementById('jny'),jp=j.parentElement.classList.contains('pin-
 B.forEach(function(r,i){var f=(scrollY+innerHeight*.4-r[0])/Math.max(1,r[1]-r[0]);segs[i].style.transform='scaleX('+Math.min(1,Math.max(0,f))+')';if(scrollY+innerHeight*.45>=r[0])a=i});setLab(a)}
 addEventListener('scroll',upd,{passive:true});addEventListener('hashchange',function(){setTimeout(upd,900)});setTimeout(upd,300);
 try{history.scrollRestoration='manual'}catch(e){}
-document.querySelectorAll('.pg:not(#top)').forEach(function(m){var a=document.createElement('a');a.className='back';a.href='#home';a.textContent='Back to home';m.insertBefore(a,m.firstChild)});
+document.querySelectorAll('.pg:not(#top)').forEach(function(m){var a=document.createElement('a');a.className='back';a.href='/';a.textContent='Back to home';m.insertBefore(a,m.firstChild)});
 if(!window.gsap||!window.Lenis||!window.ScrollTrigger){cr.style.display='none';return}
 gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
 if(!calm){var L=new Lenis({lerp:.09});window.LN=L;L.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){L.raf(t*1000)});gsap.ticker.lagSmoothing(0)}
