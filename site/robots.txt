@@ -1,0 +1,69 @@
+User-agent: *
+Allow: /
+Disallow: /.netlify/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /.netlify/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: CCBot
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /.netlify/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /.netlify/
+
+Sitemap: https://iffystudio.site/sitemap.xml
